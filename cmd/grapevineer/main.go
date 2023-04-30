@@ -6,7 +6,9 @@ import (
 	"esh2n/grapevineer/internal/config"
 	v1 "esh2n/grapevineer/internal/grpc/v1"
 	"fmt"
+	"log"
 	"net"
+	"net/http"
 
 	"golang.org/x/xerrors"
 	"google.golang.org/grpc"
@@ -14,6 +16,14 @@ import (
 )
 
 func main() {
+	port := "8080"
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprint(w, "Discord bot is active now \n")
+	})
+	log.Printf("Server listening on port %v", port)
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatal(err)
+	}
 	cfg := config.NewConfig()
 	listen, err := net.Listen("tcp", fmt.Sprintf(":%d", cfg.GRPCPort))
 	if err != nil {
