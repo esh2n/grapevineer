@@ -10,6 +10,7 @@ import (
 
 	"golang.org/x/xerrors"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func main() {
@@ -22,6 +23,8 @@ func main() {
 
 	service := application.NewGrapevineerService(*cfg)
 	grapevineer.RegisterGrapevineerServer(server, v1.NewV1(service))
+
+	reflection.Register(server)
 
 	if err := server.Serve(listen); err != nil {
 		xerrors.Errorf("failed to start server: %w", err)
