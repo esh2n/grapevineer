@@ -2,6 +2,9 @@
 
 BIN = $(GOPATH)/bin
 
+go-build:
+	go build -o grapevineer cmd/grapevineer/main.go
+
 generate-go:
 	protoc -I ./proto/v1/grapevineer \
 		--go_out=./gen/go/grapevineer \
