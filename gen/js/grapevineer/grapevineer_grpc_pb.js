@@ -3,6 +3,7 @@
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var grapevineer_pb = require('./grapevineer_pb.js');
+var google_api_annotations_pb = require('./google/api/annotations_pb.js');
 
 function serialize_grapevineer_GetOGImageRequest(arg) {
   if (!(arg instanceof grapevineer_pb.GetOGImageRequest)) {

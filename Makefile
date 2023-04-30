@@ -20,3 +20,11 @@ generate-ts:
 		--grpc_out=grpc_js:./gen/js/grapevineer \
 		--ts_out=grpc_js:./gen/ts/grapevineer \
 		./proto/v1/grapevineer/grapevineer.proto
+
+generate-gateway-go:
+	protoc -I ./proto/v1/grapevineer \
+		--grpc-gateway_out=./gen/go/grapevineer \
+		--grpc-gateway_opt logtostderr=true \
+		--grpc-gateway_opt paths=source_relative \
+		--grpc-gateway_opt generate_unbound_methods=true \
+		./proto/v1/grapevineer/grapevineer.proto

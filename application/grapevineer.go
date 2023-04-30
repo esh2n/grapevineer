@@ -29,6 +29,7 @@ func NewGrapevineerService(cfg config.Config) GrapevineerService {
 }
 
 func (s *grapevineerService) GetOGImage(ctx context.Context, req *grapevineer.GetOGImageRequest) (*grapevineer.GetOGImageResponse, error) {
+	fmt.Println("GetOGImage")
 	var tags string
 	if len(req.Tags) > 0 {
 		tags = strings.Join(req.Tags, ",")

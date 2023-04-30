@@ -2,10 +2,16 @@ syntax = "proto3";
 
 package grapevineer;
 
+import "google/api/annotations.proto";
+
 option go_package = "github.com/esh2n/grapevineer/gen/go/grapevineer";
 
 service Grapevineer {
-    rpc GetOGImage(GetOGImageRequest) returns (GetOGImageResponse) {}
+    rpc GetOGImage(GetOGImageRequest) returns (GetOGImageResponse) {
+        option (google.api.http) = {
+            get: "/v1/og_image"
+        };
+    }
 }
 
 message GetOGImageRequest {
