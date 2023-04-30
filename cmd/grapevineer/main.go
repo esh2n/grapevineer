@@ -47,7 +47,7 @@ func runGRPCServer(cfg config.Config) error {
 
 	reflection.Register(server)
 
-	fmt.Println("run grpc server")
+	fmt.Printf("run grpc server with port: %d\n", cfg.GRPCPort)
 
 	return server.Serve(listen)
 }
@@ -62,7 +62,7 @@ func runHTTPServer(cfg config.Config) error {
 		return err
 	}
 
-	fmt.Println("run http server")
+	fmt.Printf("run grpc gateway server with port: %d\n", cfg.GRPCGatewayPort)
 
 	return http.ListenAndServe(fmt.Sprintf(":%d", cfg.GRPCGatewayPort), grpcGateway)
 }
