@@ -1,0 +1,13 @@
+{
+  "name": "grapevineer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "esh2n <esh2n.bz@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.8.14",
+    "google-protobuf": "^3.21.2",
+    "grpc-tools": "^1.12.4",
+    "ts-protoc-gen": "^0.15.0"
+  }
+}
