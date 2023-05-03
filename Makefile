@@ -1,9 +1,10 @@
 .PHONY: gen-proto
 
-BIN = $(GOPATH)/bin
+BIN := $(abspath ./bin)
+TAG := v0.0.2
 
 go-build:
-	go build -o grapevineer cmd/grapevineer/main.go
+	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer/main.go
 
 generate-go:
 	protoc -I ./proto/v1/grapevineer \
@@ -28,3 +29,18 @@ generate-gateway-go:
 		--grpc-gateway_opt paths=source_relative \
 		--grpc-gateway_opt generate_unbound_methods=true \
 		./proto/v1/grapevineer/grapevineer.proto
+
+evans:
+	$(BIN)/evans -r --port 8050
+
+docker-build-grpc:
+	docker build --platform linux/amd64 . -f ./build/grapevineer-grpc/Dockerfile -t esh2n/grapevineer-grpc:latest
+	@docker tag esh2n/grapevineer-grpc:latest esh2n/grapevineer-grpc:${TAG}
+	docker push esh2n/grapevineer-grpc:${TAG}
+	docker push esh2n/grapevineer-grpc:latest
+
+docker-build-grpc-gateway:
+	docker build --platform linux/amd64 . -f ./build/grapevineer-grpc-gateway/Dockerfile -t esh2n/grapevineer-grpc-gateway:latest
+	@docker tag esh2n/grapevineer-grpc-gateway:latest esh2n/grapevineer-grpc-gateway:${TAG}
+	docker push esh2n/grapevineer-grpc-gateway:${TAG}
+	docker push esh2n/grapevineer-grpc-gateway:latest

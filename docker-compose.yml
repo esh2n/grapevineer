@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  grpc:
+    container_name: grpc
+    image: esh2n/grapevineer-grpc:latest
+    ports:
+      - "8050:8050"
+    env_file:
+      - ".env"
+  grpc-gateway:
+    container_name: grpc-gateway
+    image: esh2n/grapevineer-grpc-gateway:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - ".env"

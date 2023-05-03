@@ -10,9 +10,9 @@ import (
 const configPath = ".env"
 
 type Config struct {
-	GRPCPort        int    `envconfig:"GRPC_PORT" default:"50051"`
+	GRPCPort        int    `envconfig:"GRPC_PORT" default:"8050"`
 	GRPCGatewayPort int    `envconfig:"GRPC_GATEWAY_PORT" default:"8080"`
-	ServerAddress   string `envconfig:"SERVER_ADDRESS" default:"localhost:50051"`
+	ServerAddress   string `envconfig:"SERVER_ADDRESS" default:"localhost:8050"`
 }
 
 func NewConfig() *Config {

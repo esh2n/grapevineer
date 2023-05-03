@@ -1,0 +1,19 @@
+app = "grapevineer-grpc"
+primary_region = "nrt"
+
+[build]
+  image = "esh2n/grapevineer-grpc:latest"
+
+[env]
+  GRPC_PORT = "8050"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8050
+  processes = ["app"]
+
+  [[services.ports]]
+    port = 443
+    handlers = []
+  [services.ports.tls_options]
+      alpn = ["h2"]
