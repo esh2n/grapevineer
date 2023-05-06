@@ -17,8 +17,8 @@ generate-go:
 generate-ts:
 	grpc_tools_node_protoc -I ./proto/v1/grapevineer \
 		--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts \
-		--js_out=import_style=commonjs,binary:./gen/js/grapevineer \
-		--grpc_out=grpc_js:./gen/js/grapevineer \
+		--js_out=import_style=commonjs,binary:./gen/ts/grapevineer \
+		--grpc_out=grpc_js:./gen/ts/grapevineer \
 		--ts_out=grpc_js:./gen/ts/grapevineer \
 		./proto/v1/grapevineer/grapevineer.proto
 
