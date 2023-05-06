@@ -1,0 +1,14 @@
+{
+  "name": "gene-image-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": " ts-node -r tsconfig-paths/register index.ts"
+  },
+  "dependencies": {
+    "grapevineer": "git+https://github.com/esh2n/grapevineer.git",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.4"
+  }
+}
