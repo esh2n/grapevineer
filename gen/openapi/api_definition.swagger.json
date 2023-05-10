@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/v1/flower_meaning": {
+    "/v1/flower_meaning/{date}": {
       "get": {
         "operationId": "Grapevineer_GetFlowerMeaningByDate",
         "responses": {
@@ -30,8 +30,8 @@
         "parameters": [
           {
             "name": "date",
-            "in": "query",
-            "required": false,
+            "in": "path",
+            "required": true,
             "type": "string"
           }
         ],

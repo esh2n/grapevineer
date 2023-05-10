@@ -1,7 +1,7 @@
 .PHONY: gen-proto
 
 BIN := $(abspath ./bin)
-TAG := v0.0.4
+TAG := v0.0.5
 
 go-build:
 	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer/main.go
@@ -34,6 +34,16 @@ generate-google-ts:
 		--ts_out=service=grpc-web,grpc_js:./gen/ts/grapevineer \
 		./proto/v1/grapevineer/google/api/*.proto
 
+generate-dart:
+	protoc -I ./proto/v1/grapevineer \
+		--dart_out=grpc:./gen/dart/grapevineer \
+		./proto/v1/grapevineer/grapevineer.proto
+
+generate-rust:
+	protoc -I ./proto/v1/grapevineer \
+		--tonic_out=./gen/rust/grapevineer \
+		--tonic_opt=no_include \
+		./proto/v1/grapevineer/grapevineer.proto
 generate-gateway-go:
 	protoc -I ./proto/v1/grapevineer \
 		--grpc-gateway_out=./gen/go/grapevineer \
