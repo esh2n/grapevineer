@@ -22,3 +22,11 @@ func (x *V1) GetOGImage(ctx context.Context, req *grapevineer.GetOGImageRequest)
 		return got, nil
 	}
 }
+
+func (x *V1) GetFlowerMeaningByDate(ctx context.Context, req *grapevineer.GetFlowerMeaningByDateRequest) (*grapevineer.GetFlowerMeaningByDateResponse, error) {
+	if got, err := x.app.GetFlowerMeaningByDate(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}

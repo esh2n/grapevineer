@@ -1,7 +1,7 @@
 .PHONY: gen-proto
 
 BIN := $(abspath ./bin)
-TAG := v0.0.2
+TAG := v0.0.4
 
 go-build:
 	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer/main.go
@@ -41,6 +41,11 @@ generate-gateway-go:
 		--grpc-gateway_opt paths=source_relative \
 		--grpc-gateway_opt generate_unbound_methods=true \
 		./proto/v1/grapevineer/grapevineer.proto
+generate-swagger:
+	protoc -I ./proto/v1/grapevineer --openapiv2_out ./gen/openapi --openapiv2_opt logtostderr=true \
+		--openapiv2_opt disable_default_errors=true \
+		--openapiv2_opt allow_merge=true \
+		--openapiv2_opt merge_file_name="api_definition.yml" ./proto/v1/grapevineer/grapevineer.proto
 
 evans:
 	$(BIN)/evans -r --port 8050
@@ -56,3 +61,16 @@ docker-build-grpc-gateway:
 	@docker tag esh2n/grapevineer-grpc-gateway:latest esh2n/grapevineer-grpc-gateway:${TAG}
 	docker push esh2n/grapevineer-grpc-gateway:${TAG}
 	docker push esh2n/grapevineer-grpc-gateway:latest
+
+docker-compose-up:
+	docker compose -f docker-compose.yml up -d
+
+docker-compose-down:
+	docker compose -f docker-compose.yml down
+
+deploy:
+ifeq (,$(shell which fly))
+	$(error "fly CLI is not installed, please install it to deploy to fly.io")
+endif
+	./script/deploy-grpc.sh
+	./script/deploy-grpc-gateway.sh

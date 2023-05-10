@@ -1,0 +1,148 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "grapevineer.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Grapevineer"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/flower_meaning": {
+      "get": {
+        "operationId": "Grapevineer_GetFlowerMeaningByDate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grapevineerGetFlowerMeaningByDateResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
+    "/v1/og_image": {
+      "get": {
+        "operationId": "Grapevineer_GetOGImage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grapevineerGetOGImageResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "baseUrl",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "body",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "colorCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "grapevineerFlower": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "hanakotoba": {
+          "type": "string"
+        },
+        "origin": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "imageSource": {
+          "type": "string"
+        }
+      }
+    },
+    "grapevineerGetFlowerMeaningByDateResponse": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string"
+        },
+        "sumamry": {
+          "type": "string"
+        },
+        "flowers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/grapevineerFlower"
+          }
+        }
+      }
+    },
+    "grapevineerGetOGImageResponse": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    }
+  }
+}

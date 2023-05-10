@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Grapevineer_GetOGImage_FullMethodName = "/grapevineer.Grapevineer/GetOGImage"
+	Grapevineer_GetOGImage_FullMethodName             = "/grapevineer.Grapevineer/GetOGImage"
+	Grapevineer_GetFlowerMeaningByDate_FullMethodName = "/grapevineer.Grapevineer/GetFlowerMeaningByDate"
 )
 
 // GrapevineerClient is the client API for Grapevineer service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GrapevineerClient interface {
 	GetOGImage(ctx context.Context, in *GetOGImageRequest, opts ...grpc.CallOption) (*GetOGImageResponse, error)
+	GetFlowerMeaningByDate(ctx context.Context, in *GetFlowerMeaningByDateRequest, opts ...grpc.CallOption) (*GetFlowerMeaningByDateResponse, error)
 }
 
 type grapevineerClient struct {
@@ -46,11 +48,21 @@ func (c *grapevineerClient) GetOGImage(ctx context.Context, in *GetOGImageReques
 	return out, nil
 }
 
+func (c *grapevineerClient) GetFlowerMeaningByDate(ctx context.Context, in *GetFlowerMeaningByDateRequest, opts ...grpc.CallOption) (*GetFlowerMeaningByDateResponse, error) {
+	out := new(GetFlowerMeaningByDateResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_GetFlowerMeaningByDate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GrapevineerServer is the server API for Grapevineer service.
 // All implementations must embed UnimplementedGrapevineerServer
 // for forward compatibility
 type GrapevineerServer interface {
 	GetOGImage(context.Context, *GetOGImageRequest) (*GetOGImageResponse, error)
+	GetFlowerMeaningByDate(context.Context, *GetFlowerMeaningByDateRequest) (*GetFlowerMeaningByDateResponse, error)
 	mustEmbedUnimplementedGrapevineerServer()
 }
 
@@ -60,6 +72,9 @@ type UnimplementedGrapevineerServer struct {
 
 func (UnimplementedGrapevineerServer) GetOGImage(context.Context, *GetOGImageRequest) (*GetOGImageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOGImage not implemented")
+}
+func (UnimplementedGrapevineerServer) GetFlowerMeaningByDate(context.Context, *GetFlowerMeaningByDateRequest) (*GetFlowerMeaningByDateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFlowerMeaningByDate not implemented")
 }
 func (UnimplementedGrapevineerServer) mustEmbedUnimplementedGrapevineerServer() {}
 
@@ -92,6 +107,24 @@ func _Grapevineer_GetOGImage_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Grapevineer_GetFlowerMeaningByDate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFlowerMeaningByDateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).GetFlowerMeaningByDate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_GetFlowerMeaningByDate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).GetFlowerMeaningByDate(ctx, req.(*GetFlowerMeaningByDateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Grapevineer_ServiceDesc is the grpc.ServiceDesc for Grapevineer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -102,6 +135,10 @@ var Grapevineer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOGImage",
 			Handler:    _Grapevineer_GetOGImage_Handler,
+		},
+		{
+			MethodName: "GetFlowerMeaningByDate",
+			Handler:    _Grapevineer_GetFlowerMeaningByDate_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

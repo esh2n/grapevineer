@@ -13,9 +13,19 @@ type GrapevineerGetOGImage = {
   readonly responseType: typeof grapevineer_pb.GetOGImageResponse;
 };
 
+type GrapevineerGetFlowerMeaningByDate = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof grapevineer_pb.GetFlowerMeaningByDateRequest;
+  readonly responseType: typeof grapevineer_pb.GetFlowerMeaningByDateResponse;
+};
+
 export class Grapevineer {
   static readonly serviceName: string;
   static readonly GetOGImage: GrapevineerGetOGImage;
+  static readonly GetFlowerMeaningByDate: GrapevineerGetFlowerMeaningByDate;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -58,6 +68,15 @@ export class GrapevineerClient {
   getOGImage(
     requestMessage: grapevineer_pb.GetOGImageRequest,
     callback: (error: ServiceError|null, responseMessage: grapevineer_pb.GetOGImageResponse|null) => void
+  ): UnaryResponse;
+  getFlowerMeaningByDate(
+    requestMessage: grapevineer_pb.GetFlowerMeaningByDateRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.GetFlowerMeaningByDateResponse|null) => void
+  ): UnaryResponse;
+  getFlowerMeaningByDate(
+    requestMessage: grapevineer_pb.GetFlowerMeaningByDateRequest,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.GetFlowerMeaningByDateResponse|null) => void
   ): UnaryResponse;
 }
 
