@@ -41,7 +41,7 @@
       }
     },
     "/v1/line_message": {
-      "post": {
+      "get": {
         "operationId": "Grapevineer_SendLineMessage",
         "responses": {
           "200": {
@@ -129,7 +129,7 @@
       }
     },
     "/v1/openai_message": {
-      "post": {
+      "get": {
         "operationId": "Grapevineer_SendOpenAIMessage",
         "responses": {
           "200": {

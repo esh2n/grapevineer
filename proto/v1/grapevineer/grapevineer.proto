@@ -19,12 +19,12 @@ service Grapevineer {
     }
     rpc SendLineMessage(SendLineMessageRequest) returns (SendLineMessageResponse) {
         option (google.api.http) = {
-            post: "/v1/line_message"
+            get: "/v1/line_message"
         };
     }
     rpc SendOpenAIMessage(SendOpenAIMessageRequest) returns (SendOpenAIMessageResponse) {
         option (google.api.http) = {
-            post: "/v1/openai_message"
+            get: "/v1/openai_message"
         };
     }
 }
