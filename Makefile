@@ -1,7 +1,7 @@
 .PHONY: gen-proto
 
 BIN := $(abspath ./bin)
-TAG := v0.0.10
+TAG := v0.0.11
 
 go-build:
 	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer/main.go
