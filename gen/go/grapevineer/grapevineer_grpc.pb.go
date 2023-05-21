@@ -21,6 +21,8 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	Grapevineer_GetOGImage_FullMethodName             = "/grapevineer.Grapevineer/GetOGImage"
 	Grapevineer_GetFlowerMeaningByDate_FullMethodName = "/grapevineer.Grapevineer/GetFlowerMeaningByDate"
+	Grapevineer_SendLineMessage_FullMethodName        = "/grapevineer.Grapevineer/SendLineMessage"
+	Grapevineer_SendOpenAIMessage_FullMethodName      = "/grapevineer.Grapevineer/SendOpenAIMessage"
 )
 
 // GrapevineerClient is the client API for Grapevineer service.
@@ -29,6 +31,8 @@ const (
 type GrapevineerClient interface {
 	GetOGImage(ctx context.Context, in *GetOGImageRequest, opts ...grpc.CallOption) (*GetOGImageResponse, error)
 	GetFlowerMeaningByDate(ctx context.Context, in *GetFlowerMeaningByDateRequest, opts ...grpc.CallOption) (*GetFlowerMeaningByDateResponse, error)
+	SendLineMessage(ctx context.Context, in *SendLineMessageRequest, opts ...grpc.CallOption) (*SendLineMessageResponse, error)
+	SendOpenAIMessage(ctx context.Context, in *SendOpenAIMessageRequest, opts ...grpc.CallOption) (*SendOpenAIMessageResponse, error)
 }
 
 type grapevineerClient struct {
@@ -57,12 +61,32 @@ func (c *grapevineerClient) GetFlowerMeaningByDate(ctx context.Context, in *GetF
 	return out, nil
 }
 
+func (c *grapevineerClient) SendLineMessage(ctx context.Context, in *SendLineMessageRequest, opts ...grpc.CallOption) (*SendLineMessageResponse, error) {
+	out := new(SendLineMessageResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_SendLineMessage_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *grapevineerClient) SendOpenAIMessage(ctx context.Context, in *SendOpenAIMessageRequest, opts ...grpc.CallOption) (*SendOpenAIMessageResponse, error) {
+	out := new(SendOpenAIMessageResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_SendOpenAIMessage_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GrapevineerServer is the server API for Grapevineer service.
 // All implementations must embed UnimplementedGrapevineerServer
 // for forward compatibility
 type GrapevineerServer interface {
 	GetOGImage(context.Context, *GetOGImageRequest) (*GetOGImageResponse, error)
 	GetFlowerMeaningByDate(context.Context, *GetFlowerMeaningByDateRequest) (*GetFlowerMeaningByDateResponse, error)
+	SendLineMessage(context.Context, *SendLineMessageRequest) (*SendLineMessageResponse, error)
+	SendOpenAIMessage(context.Context, *SendOpenAIMessageRequest) (*SendOpenAIMessageResponse, error)
 	mustEmbedUnimplementedGrapevineerServer()
 }
 
@@ -75,6 +99,12 @@ func (UnimplementedGrapevineerServer) GetOGImage(context.Context, *GetOGImageReq
 }
 func (UnimplementedGrapevineerServer) GetFlowerMeaningByDate(context.Context, *GetFlowerMeaningByDateRequest) (*GetFlowerMeaningByDateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFlowerMeaningByDate not implemented")
+}
+func (UnimplementedGrapevineerServer) SendLineMessage(context.Context, *SendLineMessageRequest) (*SendLineMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendLineMessage not implemented")
+}
+func (UnimplementedGrapevineerServer) SendOpenAIMessage(context.Context, *SendOpenAIMessageRequest) (*SendOpenAIMessageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendOpenAIMessage not implemented")
 }
 func (UnimplementedGrapevineerServer) mustEmbedUnimplementedGrapevineerServer() {}
 
@@ -125,6 +155,42 @@ func _Grapevineer_GetFlowerMeaningByDate_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Grapevineer_SendLineMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendLineMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).SendLineMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_SendLineMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).SendLineMessage(ctx, req.(*SendLineMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Grapevineer_SendOpenAIMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendOpenAIMessageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).SendOpenAIMessage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_SendOpenAIMessage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).SendOpenAIMessage(ctx, req.(*SendOpenAIMessageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Grapevineer_ServiceDesc is the grpc.ServiceDesc for Grapevineer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -139,6 +205,14 @@ var Grapevineer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFlowerMeaningByDate",
 			Handler:    _Grapevineer_GetFlowerMeaningByDate_Handler,
+		},
+		{
+			MethodName: "SendLineMessage",
+			Handler:    _Grapevineer_SendLineMessage_Handler,
+		},
+		{
+			MethodName: "SendOpenAIMessage",
+			Handler:    _Grapevineer_SendOpenAIMessage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

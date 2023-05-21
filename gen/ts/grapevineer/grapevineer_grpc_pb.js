@@ -49,6 +49,50 @@ function deserialize_grapevineer_GetOGImageResponse(buffer_arg) {
   return grapevineer_pb.GetOGImageResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_grapevineer_SendLineMessageRequest(arg) {
+  if (!(arg instanceof grapevineer_pb.SendLineMessageRequest)) {
+    throw new Error('Expected argument of type grapevineer.SendLineMessageRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_grapevineer_SendLineMessageRequest(buffer_arg) {
+  return grapevineer_pb.SendLineMessageRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_grapevineer_SendLineMessageResponse(arg) {
+  if (!(arg instanceof grapevineer_pb.SendLineMessageResponse)) {
+    throw new Error('Expected argument of type grapevineer.SendLineMessageResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_grapevineer_SendLineMessageResponse(buffer_arg) {
+  return grapevineer_pb.SendLineMessageResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_grapevineer_SendOpenAIMessageRequest(arg) {
+  if (!(arg instanceof grapevineer_pb.SendOpenAIMessageRequest)) {
+    throw new Error('Expected argument of type grapevineer.SendOpenAIMessageRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_grapevineer_SendOpenAIMessageRequest(buffer_arg) {
+  return grapevineer_pb.SendOpenAIMessageRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_grapevineer_SendOpenAIMessageResponse(arg) {
+  if (!(arg instanceof grapevineer_pb.SendOpenAIMessageResponse)) {
+    throw new Error('Expected argument of type grapevineer.SendOpenAIMessageResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_grapevineer_SendOpenAIMessageResponse(buffer_arg) {
+  return grapevineer_pb.SendOpenAIMessageResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 
 var GrapevineerService = exports.GrapevineerService = {
   getOGImage: {
@@ -72,6 +116,28 @@ var GrapevineerService = exports.GrapevineerService = {
     requestDeserialize: deserialize_grapevineer_GetFlowerMeaningByDateRequest,
     responseSerialize: serialize_grapevineer_GetFlowerMeaningByDateResponse,
     responseDeserialize: deserialize_grapevineer_GetFlowerMeaningByDateResponse,
+  },
+  sendLineMessage: {
+    path: '/grapevineer.Grapevineer/SendLineMessage',
+    requestStream: false,
+    responseStream: false,
+    requestType: grapevineer_pb.SendLineMessageRequest,
+    responseType: grapevineer_pb.SendLineMessageResponse,
+    requestSerialize: serialize_grapevineer_SendLineMessageRequest,
+    requestDeserialize: deserialize_grapevineer_SendLineMessageRequest,
+    responseSerialize: serialize_grapevineer_SendLineMessageResponse,
+    responseDeserialize: deserialize_grapevineer_SendLineMessageResponse,
+  },
+  sendOpenAIMessage: {
+    path: '/grapevineer.Grapevineer/SendOpenAIMessage',
+    requestStream: false,
+    responseStream: false,
+    requestType: grapevineer_pb.SendOpenAIMessageRequest,
+    responseType: grapevineer_pb.SendOpenAIMessageResponse,
+    requestSerialize: serialize_grapevineer_SendOpenAIMessageRequest,
+    requestDeserialize: deserialize_grapevineer_SendOpenAIMessageRequest,
+    responseSerialize: serialize_grapevineer_SendOpenAIMessageResponse,
+    responseDeserialize: deserialize_grapevineer_SendOpenAIMessageResponse,
   },
 };
 

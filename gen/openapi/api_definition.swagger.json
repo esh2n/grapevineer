@@ -40,6 +40,42 @@
         ]
       }
     },
+    "/v1/line_message": {
+      "post": {
+        "operationId": "Grapevineer_SendLineMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grapevineerSendLineMessageResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "message",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
     "/v1/og_image": {
       "get": {
         "operationId": "Grapevineer_GetOGImage",
@@ -82,6 +118,36 @@
           },
           {
             "name": "colorCode",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
+    "/v1/openai_message": {
+      "post": {
+        "operationId": "Grapevineer_SendOpenAIMessage",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grapevineerSendOpenAIMessageResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "systemPrompt",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userPrompt",
             "in": "query",
             "required": false,
             "type": "string"
@@ -141,6 +207,23 @@
         "image": {
           "type": "string",
           "format": "byte"
+        }
+      }
+    },
+    "grapevineerSendLineMessageResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "grapevineerSendOpenAIMessageResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
         }
       }
     }

@@ -68,3 +68,46 @@ const Flower$json = const {
 
 /// Descriptor for `Flower`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List flowerDescriptor = $convert.base64Decode('CgZGbG93ZXISEgoEbmFtZRgBIAEoCVIEbmFtZRIeCgpoYW5ha290b2JhGAIgASgJUgpoYW5ha290b2JhEhYKBm9yaWdpbhgDIAMoCVIGb3JpZ2luEiEKDGltYWdlX3NvdXJjZRgEIAEoCVILaW1hZ2VTb3VyY2U=');
+@$core.Deprecated('Use sendLineMessageRequestDescriptor instead')
+const SendLineMessageRequest$json = const {
+  '1': 'SendLineMessageRequest',
+  '2': const [
+    const {'1': 'to', '3': 1, '4': 1, '5': 9, '10': 'to'},
+    const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'message', '3': 3, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `SendLineMessageRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendLineMessageRequestDescriptor = $convert.base64Decode('ChZTZW5kTGluZU1lc3NhZ2VSZXF1ZXN0Eg4KAnRvGAEgASgJUgJ0bxISCgRuYW1lGAIgASgJUgRuYW1lEhgKB21lc3NhZ2UYAyABKAlSB21lc3NhZ2U=');
+@$core.Deprecated('Use sendLineMessageResponseDescriptor instead')
+const SendLineMessageResponse$json = const {
+  '1': 'SendLineMessageResponse',
+  '2': const [
+    const {'1': 'status', '3': 1, '4': 1, '5': 5, '10': 'status'},
+  ],
+};
+
+/// Descriptor for `SendLineMessageResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendLineMessageResponseDescriptor = $convert.base64Decode('ChdTZW5kTGluZU1lc3NhZ2VSZXNwb25zZRIWCgZzdGF0dXMYASABKAVSBnN0YXR1cw==');
+@$core.Deprecated('Use sendOpenAIMessageRequestDescriptor instead')
+const SendOpenAIMessageRequest$json = const {
+  '1': 'SendOpenAIMessageRequest',
+  '2': const [
+    const {'1': 'system_prompt', '3': 1, '4': 1, '5': 9, '10': 'systemPrompt'},
+    const {'1': 'user_prompt', '3': 2, '4': 1, '5': 9, '10': 'userPrompt'},
+  ],
+};
+
+/// Descriptor for `SendOpenAIMessageRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendOpenAIMessageRequestDescriptor = $convert.base64Decode('ChhTZW5kT3BlbkFJTWVzc2FnZVJlcXVlc3QSIwoNc3lzdGVtX3Byb21wdBgBIAEoCVIMc3lzdGVtUHJvbXB0Eh8KC3VzZXJfcHJvbXB0GAIgASgJUgp1c2VyUHJvbXB0');
+@$core.Deprecated('Use sendOpenAIMessageResponseDescriptor instead')
+const SendOpenAIMessageResponse$json = const {
+  '1': 'SendOpenAIMessageResponse',
+  '2': const [
+    const {'1': 'message', '3': 1, '4': 1, '5': 9, '10': 'message'},
+  ],
+};
+
+/// Descriptor for `SendOpenAIMessageResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List sendOpenAIMessageResponseDescriptor = $convert.base64Decode('ChlTZW5kT3BlbkFJTWVzc2FnZVJlc3BvbnNlEhgKB21lc3NhZ2UYASABKAlSB21lc3NhZ2U=');

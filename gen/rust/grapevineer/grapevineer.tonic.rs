@@ -109,6 +109,44 @@ pub mod grapevineer_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        pub async fn send_line_message(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SendLineMessageRequest>,
+        ) -> Result<tonic::Response<super::SendLineMessageResponse>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/SendLineMessage",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        pub async fn send_open_ai_message(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SendOpenAiMessageRequest>,
+        ) -> Result<tonic::Response<super::SendOpenAiMessageResponse>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/SendOpenAIMessage",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -129,6 +167,14 @@ pub mod grapevineer_server {
             tonic::Response<super::GetFlowerMeaningByDateResponse>,
             tonic::Status,
         >;
+        async fn send_line_message(
+            &self,
+            request: tonic::Request<super::SendLineMessageRequest>,
+        ) -> Result<tonic::Response<super::SendLineMessageResponse>, tonic::Status>;
+        async fn send_open_ai_message(
+            &self,
+            request: tonic::Request<super::SendOpenAiMessageRequest>,
+        ) -> Result<tonic::Response<super::SendOpenAiMessageResponse>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct GrapevineerServer<T: Grapevineer> {
@@ -258,6 +304,86 @@ pub mod grapevineer_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = GetFlowerMeaningByDateSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/SendLineMessage" => {
+                    #[allow(non_camel_case_types)]
+                    struct SendLineMessageSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<super::SendLineMessageRequest>
+                    for SendLineMessageSvc<T> {
+                        type Response = super::SendLineMessageResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SendLineMessageRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).send_line_message(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SendLineMessageSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/SendOpenAIMessage" => {
+                    #[allow(non_camel_case_types)]
+                    struct SendOpenAIMessageSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<super::SendOpenAiMessageRequest>
+                    for SendOpenAIMessageSvc<T> {
+                        type Response = super::SendOpenAiMessageResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SendOpenAiMessageRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).send_open_ai_message(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SendOpenAIMessageSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

@@ -28,6 +28,24 @@ Grapevineer.GetFlowerMeaningByDate = {
   responseType: grapevineer_pb.GetFlowerMeaningByDateResponse
 };
 
+Grapevineer.SendLineMessage = {
+  methodName: "SendLineMessage",
+  service: Grapevineer,
+  requestStream: false,
+  responseStream: false,
+  requestType: grapevineer_pb.SendLineMessageRequest,
+  responseType: grapevineer_pb.SendLineMessageResponse
+};
+
+Grapevineer.SendOpenAIMessage = {
+  methodName: "SendOpenAIMessage",
+  service: Grapevineer,
+  requestStream: false,
+  responseStream: false,
+  requestType: grapevineer_pb.SendOpenAIMessageRequest,
+  responseType: grapevineer_pb.SendOpenAIMessageResponse
+};
+
 exports.Grapevineer = Grapevineer;
 
 function GrapevineerClient(serviceHost, options) {
@@ -71,6 +89,68 @@ GrapevineerClient.prototype.getFlowerMeaningByDate = function getFlowerMeaningBy
     callback = arguments[1];
   }
   var client = grpc.unary(Grapevineer.GetFlowerMeaningByDate, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrapevineerClient.prototype.sendLineMessage = function sendLineMessage(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(Grapevineer.SendLineMessage, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrapevineerClient.prototype.sendOpenAIMessage = function sendOpenAIMessage(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(Grapevineer.SendOpenAIMessage, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

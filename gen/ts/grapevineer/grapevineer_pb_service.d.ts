@@ -22,10 +22,30 @@ type GrapevineerGetFlowerMeaningByDate = {
   readonly responseType: typeof grapevineer_pb.GetFlowerMeaningByDateResponse;
 };
 
+type GrapevineerSendLineMessage = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof grapevineer_pb.SendLineMessageRequest;
+  readonly responseType: typeof grapevineer_pb.SendLineMessageResponse;
+};
+
+type GrapevineerSendOpenAIMessage = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof grapevineer_pb.SendOpenAIMessageRequest;
+  readonly responseType: typeof grapevineer_pb.SendOpenAIMessageResponse;
+};
+
 export class Grapevineer {
   static readonly serviceName: string;
   static readonly GetOGImage: GrapevineerGetOGImage;
   static readonly GetFlowerMeaningByDate: GrapevineerGetFlowerMeaningByDate;
+  static readonly SendLineMessage: GrapevineerSendLineMessage;
+  static readonly SendOpenAIMessage: GrapevineerSendOpenAIMessage;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -77,6 +97,24 @@ export class GrapevineerClient {
   getFlowerMeaningByDate(
     requestMessage: grapevineer_pb.GetFlowerMeaningByDateRequest,
     callback: (error: ServiceError|null, responseMessage: grapevineer_pb.GetFlowerMeaningByDateResponse|null) => void
+  ): UnaryResponse;
+  sendLineMessage(
+    requestMessage: grapevineer_pb.SendLineMessageRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.SendLineMessageResponse|null) => void
+  ): UnaryResponse;
+  sendLineMessage(
+    requestMessage: grapevineer_pb.SendLineMessageRequest,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.SendLineMessageResponse|null) => void
+  ): UnaryResponse;
+  sendOpenAIMessage(
+    requestMessage: grapevineer_pb.SendOpenAIMessageRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.SendOpenAIMessageResponse|null) => void
+  ): UnaryResponse;
+  sendOpenAIMessage(
+    requestMessage: grapevineer_pb.SendOpenAIMessageRequest,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.SendOpenAIMessageResponse|null) => void
   ): UnaryResponse;
 }
 

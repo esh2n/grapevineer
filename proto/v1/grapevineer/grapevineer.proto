@@ -17,6 +17,16 @@ service Grapevineer {
             get: "/v1/flower_meaning/{date}"
         };
     }
+    rpc SendLineMessage(SendLineMessageRequest) returns (SendLineMessageResponse) {
+        option (google.api.http) = {
+            post: "/v1/line_message"
+        };
+    }
+    rpc SendOpenAIMessage(SendOpenAIMessageRequest) returns (SendOpenAIMessageResponse) {
+        option (google.api.http) = {
+            post: "/v1/openai_message"
+        };
+    }
 }
 
 message GetOGImageRequest {
@@ -43,8 +53,27 @@ message GetFlowerMeaningByDateResponse {
 }
 
 message Flower {
-  string name = 1;
-  string hanakotoba = 2;
-  repeated string origin = 3;
-  string image_source = 4;
+    string name = 1;
+    string hanakotoba = 2;
+    repeated string origin = 3;
+    string image_source = 4;
+}
+
+message SendLineMessageRequest {
+    string to = 1;
+    string name = 2;
+    string message = 3;
+}
+
+message SendLineMessageResponse {
+    int32 status = 1;
+}
+
+message SendOpenAIMessageRequest {
+    string system_prompt = 1;
+    string user_prompt = 2;
+}
+
+message SendOpenAIMessageResponse {
+    string message = 1;
 }

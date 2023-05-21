@@ -366,3 +366,233 @@ class Flower extends $pb.GeneratedMessage {
   void clearImageSource() => clearField(4);
 }
 
+class SendLineMessageRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SendLineMessageRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grapevineer'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'to')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  SendLineMessageRequest._() : super();
+  factory SendLineMessageRequest({
+    $core.String? to,
+    $core.String? name,
+    $core.String? message,
+  }) {
+    final _result = create();
+    if (to != null) {
+      _result.to = to;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (message != null) {
+      _result.message = message;
+    }
+    return _result;
+  }
+  factory SendLineMessageRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SendLineMessageRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SendLineMessageRequest clone() => SendLineMessageRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SendLineMessageRequest copyWith(void Function(SendLineMessageRequest) updates) => super.copyWith((message) => updates(message as SendLineMessageRequest)) as SendLineMessageRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SendLineMessageRequest create() => SendLineMessageRequest._();
+  SendLineMessageRequest createEmptyInstance() => create();
+  static $pb.PbList<SendLineMessageRequest> createRepeated() => $pb.PbList<SendLineMessageRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SendLineMessageRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendLineMessageRequest>(create);
+  static SendLineMessageRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get to => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set to($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasTo() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearTo() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get name => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set name($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => clearField(3);
+}
+
+class SendLineMessageResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SendLineMessageResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grapevineer'), createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  SendLineMessageResponse._() : super();
+  factory SendLineMessageResponse({
+    $core.int? status,
+  }) {
+    final _result = create();
+    if (status != null) {
+      _result.status = status;
+    }
+    return _result;
+  }
+  factory SendLineMessageResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SendLineMessageResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SendLineMessageResponse clone() => SendLineMessageResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SendLineMessageResponse copyWith(void Function(SendLineMessageResponse) updates) => super.copyWith((message) => updates(message as SendLineMessageResponse)) as SendLineMessageResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SendLineMessageResponse create() => SendLineMessageResponse._();
+  SendLineMessageResponse createEmptyInstance() => create();
+  static $pb.PbList<SendLineMessageResponse> createRepeated() => $pb.PbList<SendLineMessageResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SendLineMessageResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendLineMessageResponse>(create);
+  static SendLineMessageResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get status => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set status($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasStatus() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearStatus() => clearField(1);
+}
+
+class SendOpenAIMessageRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SendOpenAIMessageRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grapevineer'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'systemPrompt')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userPrompt')
+    ..hasRequiredFields = false
+  ;
+
+  SendOpenAIMessageRequest._() : super();
+  factory SendOpenAIMessageRequest({
+    $core.String? systemPrompt,
+    $core.String? userPrompt,
+  }) {
+    final _result = create();
+    if (systemPrompt != null) {
+      _result.systemPrompt = systemPrompt;
+    }
+    if (userPrompt != null) {
+      _result.userPrompt = userPrompt;
+    }
+    return _result;
+  }
+  factory SendOpenAIMessageRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SendOpenAIMessageRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SendOpenAIMessageRequest clone() => SendOpenAIMessageRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SendOpenAIMessageRequest copyWith(void Function(SendOpenAIMessageRequest) updates) => super.copyWith((message) => updates(message as SendOpenAIMessageRequest)) as SendOpenAIMessageRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SendOpenAIMessageRequest create() => SendOpenAIMessageRequest._();
+  SendOpenAIMessageRequest createEmptyInstance() => create();
+  static $pb.PbList<SendOpenAIMessageRequest> createRepeated() => $pb.PbList<SendOpenAIMessageRequest>();
+  @$core.pragma('dart2js:noInline')
+  static SendOpenAIMessageRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendOpenAIMessageRequest>(create);
+  static SendOpenAIMessageRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get systemPrompt => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set systemPrompt($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasSystemPrompt() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearSystemPrompt() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get userPrompt => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set userPrompt($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasUserPrompt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearUserPrompt() => clearField(2);
+}
+
+class SendOpenAIMessageResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SendOpenAIMessageResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grapevineer'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  SendOpenAIMessageResponse._() : super();
+  factory SendOpenAIMessageResponse({
+    $core.String? message,
+  }) {
+    final _result = create();
+    if (message != null) {
+      _result.message = message;
+    }
+    return _result;
+  }
+  factory SendOpenAIMessageResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory SendOpenAIMessageResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  SendOpenAIMessageResponse clone() => SendOpenAIMessageResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  SendOpenAIMessageResponse copyWith(void Function(SendOpenAIMessageResponse) updates) => super.copyWith((message) => updates(message as SendOpenAIMessageResponse)) as SendOpenAIMessageResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static SendOpenAIMessageResponse create() => SendOpenAIMessageResponse._();
+  SendOpenAIMessageResponse createEmptyInstance() => create();
+  static $pb.PbList<SendOpenAIMessageResponse> createRepeated() => $pb.PbList<SendOpenAIMessageResponse>();
+  @$core.pragma('dart2js:noInline')
+  static SendOpenAIMessageResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<SendOpenAIMessageResponse>(create);
+  static SendOpenAIMessageResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get message => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set message($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasMessage() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearMessage() => clearField(1);
+}
+

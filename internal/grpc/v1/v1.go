@@ -30,3 +30,19 @@ func (x *V1) GetFlowerMeaningByDate(ctx context.Context, req *grapevineer.GetFlo
 		return got, nil
 	}
 }
+
+func (x *V1) SendLineMessage(ctx context.Context, req *grapevineer.SendLineMessageRequest) (*grapevineer.SendLineMessageResponse, error) {
+	if got, err := x.app.SendLineMessage(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}
+
+func (x *V1) SendOpenAIMessage(ctx context.Context, req *grapevineer.SendOpenAIMessageRequest) (*grapevineer.SendOpenAIMessageResponse, error) {
+	if got, err := x.app.SendOpenAIMessage(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}

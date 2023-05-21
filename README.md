@@ -25,3 +25,7 @@ To get the flower meaning using a specific date using gRPC-gateway, run the foll
 ```sh
 curl -v 'grapevineer-grpc-gateway.fly.dev:8080/v1/flower_meaning/1215'
 ```
+
+curl -v 'grapevineer-grpc-gateway.fly.dev:8080/v1/openai_message?system_prompt=test&user_prompt=example'
+
+grpcurl -plaintext -d '{"system_prompt": "https://cached-og-sigma.vercel.app", "user_prompt": "example"}' grapevineer-grpc.fly.dev:443 grapevineer.Grapevineer/SendOpenAIMessage

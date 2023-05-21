@@ -1,10 +1,12 @@
 .PHONY: gen-proto
 
 BIN := $(abspath ./bin)
-TAG := v0.0.5
+TAG := v0.0.10
 
 go-build:
 	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer/main.go
+
+generate: generate-go generate-gateway-go generate-ts generate-dart generate-rust generate-swagger
 
 generate-go:
 	protoc -I ./proto/v1/grapevineer \
@@ -59,6 +61,8 @@ generate-swagger:
 
 evans:
 	$(BIN)/evans -r --port 8050
+
+docker-build: docker-build-grpc docker-build-grpc-gateway
 
 docker-build-grpc:
 	docker build --platform linux/amd64 . -f ./build/grapevineer-grpc/Dockerfile -t esh2n/grapevineer-grpc:latest

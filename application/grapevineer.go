@@ -1,7 +1,9 @@
 package application
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"esh2n/grapevineer/gen/go/grapevineer"
 	"esh2n/grapevineer/internal/config"
 	"fmt"
@@ -16,11 +18,14 @@ import (
 	"google.golang.org/grpc/status"
 
 	"github.com/PuerkitoBio/goquery"
+	openai "github.com/sashabaranov/go-openai"
 )
 
 type GrapevineerService interface {
 	GetOGImage(ctx context.Context, req *grapevineer.GetOGImageRequest) (*grapevineer.GetOGImageResponse, error)
 	GetFlowerMeaningByDate(ctx context.Context, req *grapevineer.GetFlowerMeaningByDateRequest) (*grapevineer.GetFlowerMeaningByDateResponse, error)
+	SendLineMessage(ctx context.Context, req *grapevineer.SendLineMessageRequest) (*grapevineer.SendLineMessageResponse, error)
+	SendOpenAIMessage(ctx context.Context, req *grapevineer.SendOpenAIMessageRequest) (*grapevineer.SendOpenAIMessageResponse, error)
 }
 
 type grapevineerService struct {
@@ -169,4 +174,74 @@ func getToday() (Date, error) {
 	targetDates.DOM = fmt.Sprintf("%d%d", int(month), date)
 
 	return targetDates, nil
+}
+
+func (s *grapevineerService) SendLineMessage(ctx context.Context, req *grapevineer.SendLineMessageRequest) (*grapevineer.SendLineMessageResponse, error) {
+	message := struct {
+		To       string `json:"to"`
+		Messages []struct {
+			Type string `json:"type"`
+			Text string `json:"text"`
+		} `json:"messages"`
+	}{
+		To: req.To,
+		Messages: []struct {
+			Type string `json:"type"`
+			Text string `json:"text"`
+		}{
+			{
+				Type: "text",
+				Text: req.Name + "「" + req.Message + "」",
+			},
+		},
+	}
+
+	requestBody, err := json.Marshal(message)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to marshal message: %v", err)
+	}
+
+	request, err := http.NewRequest("POST", "https://api.line.me/v2/bot/message/push", bytes.NewBuffer(requestBody))
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to create HTTP request: %v", err)
+	}
+	request.Header.Set("Content-Type", "application/json")
+	request.Header.Set("Authorization", "Bearer "+s.cfg.LineChannelAccessToken)
+
+	client := &http.Client{}
+	resp, err := client.Do(request)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to send HTTP request: %v", err)
+	}
+	defer resp.Body.Close()
+
+	return &grapevineer.SendLineMessageResponse{
+		Status: int32(resp.StatusCode),
+	}, nil
+}
+
+func (s *grapevineerService) SendOpenAIMessage(ctx context.Context, req *grapevineer.SendOpenAIMessageRequest) (*grapevineer.SendOpenAIMessageResponse, error) {
+	client := openai.NewClient(s.cfg.OpenAIAPIKey)
+	resp, err := client.CreateChatCompletion(
+		context.Background(),
+		openai.ChatCompletionRequest{
+			Model: openai.GPT3Dot5Turbo,
+			Messages: []openai.ChatCompletionMessage{
+				{
+					Role:    openai.ChatMessageRoleSystem,
+					Content: req.SystemPrompt,
+				},
+				{
+					Role:    openai.ChatMessageRoleUser,
+					Content: req.UserPrompt,
+				},
+			},
+		},
+	)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to send HTTP request: %v", err)
+	}
+	return &grapevineer.SendOpenAIMessageResponse{
+		Message: resp.Choices[0].Message.Content,
+	}, nil
 }

@@ -26,6 +26,18 @@ class GrapevineerClient extends $grpc.Client {
       ($0.GetFlowerMeaningByDateRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $0.GetFlowerMeaningByDateResponse.fromBuffer(value));
+  static final _$sendLineMessage =
+      $grpc.ClientMethod<$0.SendLineMessageRequest, $0.SendLineMessageResponse>(
+          '/grapevineer.Grapevineer/SendLineMessage',
+          ($0.SendLineMessageRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $0.SendLineMessageResponse.fromBuffer(value));
+  static final _$sendOpenAIMessage = $grpc.ClientMethod<
+          $0.SendOpenAIMessageRequest, $0.SendOpenAIMessageResponse>(
+      '/grapevineer.Grapevineer/SendOpenAIMessage',
+      ($0.SendOpenAIMessageRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.SendOpenAIMessageResponse.fromBuffer(value));
 
   GrapevineerClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -43,6 +55,18 @@ class GrapevineerClient extends $grpc.Client {
           {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getFlowerMeaningByDate, request,
         options: options);
+  }
+
+  $grpc.ResponseFuture<$0.SendLineMessageResponse> sendLineMessage(
+      $0.SendLineMessageRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$sendLineMessage, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.SendOpenAIMessageResponse> sendOpenAIMessage(
+      $0.SendOpenAIMessageRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$sendOpenAIMessage, request, options: options);
   }
 }
 
@@ -66,6 +90,24 @@ abstract class GrapevineerServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.GetFlowerMeaningByDateRequest.fromBuffer(value),
         ($0.GetFlowerMeaningByDateResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SendLineMessageRequest,
+            $0.SendLineMessageResponse>(
+        'SendLineMessage',
+        sendLineMessage_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.SendLineMessageRequest.fromBuffer(value),
+        ($0.SendLineMessageResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.SendOpenAIMessageRequest,
+            $0.SendOpenAIMessageResponse>(
+        'SendOpenAIMessage',
+        sendOpenAIMessage_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.SendOpenAIMessageRequest.fromBuffer(value),
+        ($0.SendOpenAIMessageResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.GetOGImageResponse> getOGImage_Pre($grpc.ServiceCall call,
@@ -79,8 +121,24 @@ abstract class GrapevineerServiceBase extends $grpc.Service {
     return getFlowerMeaningByDate(call, await request);
   }
 
+  $async.Future<$0.SendLineMessageResponse> sendLineMessage_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.SendLineMessageRequest> request) async {
+    return sendLineMessage(call, await request);
+  }
+
+  $async.Future<$0.SendOpenAIMessageResponse> sendOpenAIMessage_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.SendOpenAIMessageRequest> request) async {
+    return sendOpenAIMessage(call, await request);
+  }
+
   $async.Future<$0.GetOGImageResponse> getOGImage(
       $grpc.ServiceCall call, $0.GetOGImageRequest request);
   $async.Future<$0.GetFlowerMeaningByDateResponse> getFlowerMeaningByDate(
       $grpc.ServiceCall call, $0.GetFlowerMeaningByDateRequest request);
+  $async.Future<$0.SendLineMessageResponse> sendLineMessage(
+      $grpc.ServiceCall call, $0.SendLineMessageRequest request);
+  $async.Future<$0.SendOpenAIMessageResponse> sendOpenAIMessage(
+      $grpc.ServiceCall call, $0.SendOpenAIMessageRequest request);
 }
