@@ -157,9 +157,168 @@
           "Grapevineer"
         ]
       }
+    },
+    "/v1/player": {
+      "post": {
+        "operationId": "Grapevineer_SetPlayer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grapevineerSetPlayerResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      },
+      "put": {
+        "operationId": "Grapevineer_UpdatePlayer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grapevineerUpdatePlayerResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "playerId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
+    "/v1/player_info": {
+      "get": {
+        "operationId": "Grapevineer_GetPlayerInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grapevineerGetPlayerInfoResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
+    "/v1/players": {
+      "get": {
+        "operationId": "Grapevineer_GetAllPlayers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/grapevineerGetAllPlayersResponse"
+            }
+          }
+        },
+        "tags": [
+          "Grapevineer"
+        ]
+      }
     }
   },
   "definitions": {
+    "grapevineerAllPlayerInMatch": {
+      "type": "object",
+      "properties": {
+        "puuid": {
+          "type": "string"
+        },
+        "team": {
+          "type": "string"
+        },
+        "stats": {
+          "$ref": "#/definitions/grapevineerPlayerStats"
+        },
+        "character": {
+          "type": "string"
+        },
+        "currenttierPatched": {
+          "type": "string"
+        },
+        "damageMade": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "damageReceived": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "assets": {
+          "$ref": "#/definitions/grapevineerPlayerAssets"
+        }
+      }
+    },
     "grapevineerFlower": {
       "type": "object",
       "properties": {
@@ -177,6 +336,18 @@
         },
         "imageSource": {
           "type": "string"
+        }
+      }
+    },
+    "grapevineerGetAllPlayersResponse": {
+      "type": "object",
+      "properties": {
+        "players": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/grapevineerPlayer"
+          }
         }
       }
     },
@@ -210,6 +381,124 @@
         }
       }
     },
+    "grapevineerGetPlayerInfoResponse": {
+      "type": "object",
+      "properties": {
+        "player": {
+          "$ref": "#/definitions/grapevineerPlayer"
+        },
+        "recentMatches": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/grapevineerMatch"
+          }
+        }
+      }
+    },
+    "grapevineerMatch": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/grapevineerMatchMetadata"
+        },
+        "players": {
+          "$ref": "#/definitions/grapevineerPlayerInMatch"
+        },
+        "red": {
+          "$ref": "#/definitions/grapevineerTeam"
+        },
+        "blue": {
+          "$ref": "#/definitions/grapevineerTeam"
+        }
+      }
+    },
+    "grapevineerMatchMetadata": {
+      "type": "object",
+      "properties": {
+        "map": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "gameStartPatched": {
+          "type": "string"
+        }
+      }
+    },
+    "grapevineerPlayer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "playerId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        }
+      }
+    },
+    "grapevineerPlayerAssets": {
+      "type": "object",
+      "properties": {
+        "card": {
+          "$ref": "#/definitions/grapevineerPlayerCard"
+        }
+      }
+    },
+    "grapevineerPlayerCard": {
+      "type": "object",
+      "properties": {
+        "small": {
+          "type": "string"
+        },
+        "large": {
+          "type": "string"
+        },
+        "wide": {
+          "type": "string"
+        }
+      }
+    },
+    "grapevineerPlayerInMatch": {
+      "type": "object",
+      "properties": {
+        "allPlayers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/grapevineerAllPlayerInMatch"
+          }
+        }
+      }
+    },
+    "grapevineerPlayerStats": {
+      "type": "object",
+      "properties": {
+        "kills": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "deaths": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "assists": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "score": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "grapevineerSendLineMessageResponse": {
       "type": "object",
       "properties": {
@@ -224,6 +513,40 @@
       "properties": {
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "grapevineerSetPlayerResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "grapevineerTeam": {
+      "type": "object",
+      "properties": {
+        "hasWon": {
+          "type": "boolean"
+        },
+        "roundsWon": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "roundsLost": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "grapevineerUpdatePlayerResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     }

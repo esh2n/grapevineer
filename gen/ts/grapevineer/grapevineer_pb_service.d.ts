@@ -40,12 +40,52 @@ type GrapevineerSendOpenAIMessage = {
   readonly responseType: typeof grapevineer_pb.SendOpenAIMessageResponse;
 };
 
+type GrapevineerSetPlayer = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof grapevineer_pb.SetPlayerRequest;
+  readonly responseType: typeof grapevineer_pb.SetPlayerResponse;
+};
+
+type GrapevineerGetAllPlayers = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof grapevineer_pb.GetAllPlayersRequest;
+  readonly responseType: typeof grapevineer_pb.GetAllPlayersResponse;
+};
+
+type GrapevineerUpdatePlayer = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof grapevineer_pb.UpdatePlayerRequest;
+  readonly responseType: typeof grapevineer_pb.UpdatePlayerResponse;
+};
+
+type GrapevineerGetPlayerInfo = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof grapevineer_pb.GetPlayerInfoRequest;
+  readonly responseType: typeof grapevineer_pb.GetPlayerInfoResponse;
+};
+
 export class Grapevineer {
   static readonly serviceName: string;
   static readonly GetOGImage: GrapevineerGetOGImage;
   static readonly GetFlowerMeaningByDate: GrapevineerGetFlowerMeaningByDate;
   static readonly SendLineMessage: GrapevineerSendLineMessage;
   static readonly SendOpenAIMessage: GrapevineerSendOpenAIMessage;
+  static readonly SetPlayer: GrapevineerSetPlayer;
+  static readonly GetAllPlayers: GrapevineerGetAllPlayers;
+  static readonly UpdatePlayer: GrapevineerUpdatePlayer;
+  static readonly GetPlayerInfo: GrapevineerGetPlayerInfo;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -115,6 +155,42 @@ export class GrapevineerClient {
   sendOpenAIMessage(
     requestMessage: grapevineer_pb.SendOpenAIMessageRequest,
     callback: (error: ServiceError|null, responseMessage: grapevineer_pb.SendOpenAIMessageResponse|null) => void
+  ): UnaryResponse;
+  setPlayer(
+    requestMessage: grapevineer_pb.SetPlayerRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.SetPlayerResponse|null) => void
+  ): UnaryResponse;
+  setPlayer(
+    requestMessage: grapevineer_pb.SetPlayerRequest,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.SetPlayerResponse|null) => void
+  ): UnaryResponse;
+  getAllPlayers(
+    requestMessage: grapevineer_pb.GetAllPlayersRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.GetAllPlayersResponse|null) => void
+  ): UnaryResponse;
+  getAllPlayers(
+    requestMessage: grapevineer_pb.GetAllPlayersRequest,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.GetAllPlayersResponse|null) => void
+  ): UnaryResponse;
+  updatePlayer(
+    requestMessage: grapevineer_pb.UpdatePlayerRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.UpdatePlayerResponse|null) => void
+  ): UnaryResponse;
+  updatePlayer(
+    requestMessage: grapevineer_pb.UpdatePlayerRequest,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.UpdatePlayerResponse|null) => void
+  ): UnaryResponse;
+  getPlayerInfo(
+    requestMessage: grapevineer_pb.GetPlayerInfoRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.GetPlayerInfoResponse|null) => void
+  ): UnaryResponse;
+  getPlayerInfo(
+    requestMessage: grapevineer_pb.GetPlayerInfoRequest,
+    callback: (error: ServiceError|null, responseMessage: grapevineer_pb.GetPlayerInfoResponse|null) => void
   ): UnaryResponse;
 }
 

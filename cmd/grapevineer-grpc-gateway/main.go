@@ -16,7 +16,7 @@ func main() {
 	errc := make(chan error, 1)
 
 	go func() {
-		errc <- runHTTPServer(*cfg)
+		errc <- runHTTPServer(cfg)
 	}()
 
 	for i := 0; i < 1; i++ {

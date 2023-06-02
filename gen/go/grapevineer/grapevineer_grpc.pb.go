@@ -23,6 +23,10 @@ const (
 	Grapevineer_GetFlowerMeaningByDate_FullMethodName = "/grapevineer.Grapevineer/GetFlowerMeaningByDate"
 	Grapevineer_SendLineMessage_FullMethodName        = "/grapevineer.Grapevineer/SendLineMessage"
 	Grapevineer_SendOpenAIMessage_FullMethodName      = "/grapevineer.Grapevineer/SendOpenAIMessage"
+	Grapevineer_SetPlayer_FullMethodName              = "/grapevineer.Grapevineer/SetPlayer"
+	Grapevineer_GetAllPlayers_FullMethodName          = "/grapevineer.Grapevineer/GetAllPlayers"
+	Grapevineer_UpdatePlayer_FullMethodName           = "/grapevineer.Grapevineer/UpdatePlayer"
+	Grapevineer_GetPlayerInfo_FullMethodName          = "/grapevineer.Grapevineer/GetPlayerInfo"
 )
 
 // GrapevineerClient is the client API for Grapevineer service.
@@ -33,6 +37,10 @@ type GrapevineerClient interface {
 	GetFlowerMeaningByDate(ctx context.Context, in *GetFlowerMeaningByDateRequest, opts ...grpc.CallOption) (*GetFlowerMeaningByDateResponse, error)
 	SendLineMessage(ctx context.Context, in *SendLineMessageRequest, opts ...grpc.CallOption) (*SendLineMessageResponse, error)
 	SendOpenAIMessage(ctx context.Context, in *SendOpenAIMessageRequest, opts ...grpc.CallOption) (*SendOpenAIMessageResponse, error)
+	SetPlayer(ctx context.Context, in *SetPlayerRequest, opts ...grpc.CallOption) (*SetPlayerResponse, error)
+	GetAllPlayers(ctx context.Context, in *GetAllPlayersRequest, opts ...grpc.CallOption) (*GetAllPlayersResponse, error)
+	UpdatePlayer(ctx context.Context, in *UpdatePlayerRequest, opts ...grpc.CallOption) (*UpdatePlayerResponse, error)
+	GetPlayerInfo(ctx context.Context, in *GetPlayerInfoRequest, opts ...grpc.CallOption) (*GetPlayerInfoResponse, error)
 }
 
 type grapevineerClient struct {
@@ -79,6 +87,42 @@ func (c *grapevineerClient) SendOpenAIMessage(ctx context.Context, in *SendOpenA
 	return out, nil
 }
 
+func (c *grapevineerClient) SetPlayer(ctx context.Context, in *SetPlayerRequest, opts ...grpc.CallOption) (*SetPlayerResponse, error) {
+	out := new(SetPlayerResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_SetPlayer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *grapevineerClient) GetAllPlayers(ctx context.Context, in *GetAllPlayersRequest, opts ...grpc.CallOption) (*GetAllPlayersResponse, error) {
+	out := new(GetAllPlayersResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_GetAllPlayers_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *grapevineerClient) UpdatePlayer(ctx context.Context, in *UpdatePlayerRequest, opts ...grpc.CallOption) (*UpdatePlayerResponse, error) {
+	out := new(UpdatePlayerResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_UpdatePlayer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *grapevineerClient) GetPlayerInfo(ctx context.Context, in *GetPlayerInfoRequest, opts ...grpc.CallOption) (*GetPlayerInfoResponse, error) {
+	out := new(GetPlayerInfoResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_GetPlayerInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GrapevineerServer is the server API for Grapevineer service.
 // All implementations must embed UnimplementedGrapevineerServer
 // for forward compatibility
@@ -87,6 +131,10 @@ type GrapevineerServer interface {
 	GetFlowerMeaningByDate(context.Context, *GetFlowerMeaningByDateRequest) (*GetFlowerMeaningByDateResponse, error)
 	SendLineMessage(context.Context, *SendLineMessageRequest) (*SendLineMessageResponse, error)
 	SendOpenAIMessage(context.Context, *SendOpenAIMessageRequest) (*SendOpenAIMessageResponse, error)
+	SetPlayer(context.Context, *SetPlayerRequest) (*SetPlayerResponse, error)
+	GetAllPlayers(context.Context, *GetAllPlayersRequest) (*GetAllPlayersResponse, error)
+	UpdatePlayer(context.Context, *UpdatePlayerRequest) (*UpdatePlayerResponse, error)
+	GetPlayerInfo(context.Context, *GetPlayerInfoRequest) (*GetPlayerInfoResponse, error)
 	mustEmbedUnimplementedGrapevineerServer()
 }
 
@@ -105,6 +153,18 @@ func (UnimplementedGrapevineerServer) SendLineMessage(context.Context, *SendLine
 }
 func (UnimplementedGrapevineerServer) SendOpenAIMessage(context.Context, *SendOpenAIMessageRequest) (*SendOpenAIMessageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendOpenAIMessage not implemented")
+}
+func (UnimplementedGrapevineerServer) SetPlayer(context.Context, *SetPlayerRequest) (*SetPlayerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetPlayer not implemented")
+}
+func (UnimplementedGrapevineerServer) GetAllPlayers(context.Context, *GetAllPlayersRequest) (*GetAllPlayersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllPlayers not implemented")
+}
+func (UnimplementedGrapevineerServer) UpdatePlayer(context.Context, *UpdatePlayerRequest) (*UpdatePlayerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePlayer not implemented")
+}
+func (UnimplementedGrapevineerServer) GetPlayerInfo(context.Context, *GetPlayerInfoRequest) (*GetPlayerInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPlayerInfo not implemented")
 }
 func (UnimplementedGrapevineerServer) mustEmbedUnimplementedGrapevineerServer() {}
 
@@ -191,6 +251,78 @@ func _Grapevineer_SendOpenAIMessage_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Grapevineer_SetPlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPlayerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).SetPlayer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_SetPlayer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).SetPlayer(ctx, req.(*SetPlayerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Grapevineer_GetAllPlayers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllPlayersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).GetAllPlayers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_GetAllPlayers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).GetAllPlayers(ctx, req.(*GetAllPlayersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Grapevineer_UpdatePlayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePlayerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).UpdatePlayer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_UpdatePlayer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).UpdatePlayer(ctx, req.(*UpdatePlayerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Grapevineer_GetPlayerInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPlayerInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).GetPlayerInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_GetPlayerInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).GetPlayerInfo(ctx, req.(*GetPlayerInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Grapevineer_ServiceDesc is the grpc.ServiceDesc for Grapevineer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -213,6 +345,22 @@ var Grapevineer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendOpenAIMessage",
 			Handler:    _Grapevineer_SendOpenAIMessage_Handler,
+		},
+		{
+			MethodName: "SetPlayer",
+			Handler:    _Grapevineer_SetPlayer_Handler,
+		},
+		{
+			MethodName: "GetAllPlayers",
+			Handler:    _Grapevineer_GetAllPlayers_Handler,
+		},
+		{
+			MethodName: "UpdatePlayer",
+			Handler:    _Grapevineer_UpdatePlayer_Handler,
+		},
+		{
+			MethodName: "GetPlayerInfo",
+			Handler:    _Grapevineer_GetPlayerInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
