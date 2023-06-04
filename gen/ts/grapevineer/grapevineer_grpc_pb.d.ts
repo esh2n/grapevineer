@@ -4,7 +4,7 @@
 // file: grapevineer.proto
 
 import * as grapevineer_pb from "./grapevineer_pb";
-import * as grpc from "grpc";
+import * as grpc from "@grpc/grpc-js";
 
 interface IGrapevineerService extends grpc.ServiceDefinition<grpc.UntypedServiceImplementation> {
   getOGImage: grpc.MethodDefinition<grapevineer_pb.GetOGImageRequest, grapevineer_pb.GetOGImageResponse>;

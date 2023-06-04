@@ -34,7 +34,7 @@ generate-grapevineer-ts-node:
 		--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts \
 		--js_out=import_style=commonjs,binary:./gen/ts/grapevineer \
 		--grpc_out=grpc_js:./gen/ts/grapevineer \
-		--ts_out=service=grpc-node,grpc_js:./gen/ts/grapevineer \
+		--ts_out=service=grpc-node,mode=grpc-js:./gen/ts/grapevineer \
 		./proto/v1/grapevineer/grapevineer.proto
 
 generate-google-ts:
