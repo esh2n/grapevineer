@@ -17,15 +17,24 @@ generate-go:
 		./proto/v1/grapevineer/grapevineer.proto
 
 generate-ts:
-	@make generate-grapevineer-ts
+	@make generate-grapevineer-ts-node
+	@make generate-grapevineer-ts-web
 	@make generate-google-ts
 
-generate-grapevineer-ts:
+generate-grapevineer-ts-web:
 	grpc_tools_node_protoc -I ./proto/v1/grapevineer \
 		--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts \
 		--js_out=import_style=commonjs,binary:./gen/ts/grapevineer \
 		--grpc_out=grpc_js:./gen/ts/grapevineer \
 		--ts_out=service=grpc-web,grpc_js:./gen/ts/grapevineer \
+		./proto/v1/grapevineer/grapevineer.proto
+
+generate-grapevineer-ts-node:
+	grpc_tools_node_protoc -I ./proto/v1/grapevineer \
+		--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts \
+		--js_out=import_style=commonjs,binary:./gen/ts/grapevineer \
+		--grpc_out=grpc_js:./gen/ts/grapevineer \
+		--ts_out=service=grpc-node,grpc_js:./gen/ts/grapevineer \
 		./proto/v1/grapevineer/grapevineer.proto
 
 generate-google-ts:
