@@ -147,6 +147,82 @@ pub mod grapevineer_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        pub async fn set_player(
+            &mut self,
+            request: impl tonic::IntoRequest<super::SetPlayerRequest>,
+        ) -> Result<tonic::Response<super::SetPlayerResponse>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/SetPlayer",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        pub async fn get_all_players(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetAllPlayersRequest>,
+        ) -> Result<tonic::Response<super::GetAllPlayersResponse>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/GetAllPlayers",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        pub async fn update_player(
+            &mut self,
+            request: impl tonic::IntoRequest<super::UpdatePlayerRequest>,
+        ) -> Result<tonic::Response<super::UpdatePlayerResponse>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/UpdatePlayer",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        pub async fn get_player_info(
+            &mut self,
+            request: impl tonic::IntoRequest<super::GetPlayerInfoRequest>,
+        ) -> Result<tonic::Response<super::GetPlayerInfoResponse>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/GetPlayerInfo",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -175,6 +251,22 @@ pub mod grapevineer_server {
             &self,
             request: tonic::Request<super::SendOpenAiMessageRequest>,
         ) -> Result<tonic::Response<super::SendOpenAiMessageResponse>, tonic::Status>;
+        async fn set_player(
+            &self,
+            request: tonic::Request<super::SetPlayerRequest>,
+        ) -> Result<tonic::Response<super::SetPlayerResponse>, tonic::Status>;
+        async fn get_all_players(
+            &self,
+            request: tonic::Request<super::GetAllPlayersRequest>,
+        ) -> Result<tonic::Response<super::GetAllPlayersResponse>, tonic::Status>;
+        async fn update_player(
+            &self,
+            request: tonic::Request<super::UpdatePlayerRequest>,
+        ) -> Result<tonic::Response<super::UpdatePlayerResponse>, tonic::Status>;
+        async fn get_player_info(
+            &self,
+            request: tonic::Request<super::GetPlayerInfoRequest>,
+        ) -> Result<tonic::Response<super::GetPlayerInfoResponse>, tonic::Status>;
     }
     #[derive(Debug)]
     pub struct GrapevineerServer<T: Grapevineer> {
@@ -384,6 +476,164 @@ pub mod grapevineer_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = SendOpenAIMessageSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/SetPlayer" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetPlayerSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<super::SetPlayerRequest>
+                    for SetPlayerSvc<T> {
+                        type Response = super::SetPlayerResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::SetPlayerRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move { (*inner).set_player(request).await };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetPlayerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/GetAllPlayers" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetAllPlayersSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<super::GetAllPlayersRequest>
+                    for GetAllPlayersSvc<T> {
+                        type Response = super::GetAllPlayersResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetAllPlayersRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).get_all_players(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetAllPlayersSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/UpdatePlayer" => {
+                    #[allow(non_camel_case_types)]
+                    struct UpdatePlayerSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<super::UpdatePlayerRequest>
+                    for UpdatePlayerSvc<T> {
+                        type Response = super::UpdatePlayerResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::UpdatePlayerRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).update_player(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = UpdatePlayerSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/GetPlayerInfo" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetPlayerInfoSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<super::GetPlayerInfoRequest>
+                    for GetPlayerInfoSvc<T> {
+                        type Response = super::GetPlayerInfoResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::GetPlayerInfoRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).get_player_info(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetPlayerInfoSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

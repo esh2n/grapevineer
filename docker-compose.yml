@@ -2,6 +2,8 @@ version: "3"
 
 services:
   grpc:
+    depends_on:
+      - db
     container_name: grpc
     image: esh2n/grapevineer-grpc:latest
     ports:
@@ -9,6 +11,9 @@ services:
     env_file:
       - ".env"
   grpc-gateway:
+    depends_on:
+      - grpc
+      - db
     container_name: grpc-gateway
     image: esh2n/grapevineer-grpc-gateway:latest
     ports:
@@ -24,3 +29,20 @@ services:
       BASE_URL: /
     volumes:
       - ./gen/openapi/api_definition.swagger.json:/gen/openapi/api_definition.swagger.json
+  db:
+    container_name: db
+    build:
+      context: .
+      dockerfile: ./build/postgresql/Dockerfile
+    environment:
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - db-store:/var/lib/postgresql/data
+      - ./infra/db/init:/docker-entrypoint-initdb.d
+    ports:
+      - ${DB_PORT}:5432
+
+volumes:
+  db-store:

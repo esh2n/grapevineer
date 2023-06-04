@@ -1,10 +1,10 @@
 .PHONY: gen-proto
 
 BIN := $(abspath ./bin)
-TAG := v0.0.11
+TAG := v0.0.14
 
 go-build:
-	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer/main.go
+	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer-grpc/main.go cmd/grapevineer-grpc/wire_gen.go
 
 generate: generate-go generate-gateway-go generate-ts generate-dart generate-rust generate-swagger
 
@@ -62,6 +62,9 @@ generate-swagger:
 evans:
 	$(BIN)/evans -r --port 8050
 
+evans-prod:
+	$(BIN)/evans -r --port 443 --host grapevineer-grpc.fly.dev
+
 docker-build: docker-build-grpc docker-build-grpc-gateway
 
 docker-build-grpc:
@@ -88,3 +91,12 @@ ifeq (,$(shell which fly))
 endif
 	./script/deploy-grpc.sh
 	./script/deploy-grpc-gateway.sh
+
+generate-ent:
+	go generate ./ent
+
+generate-wire:
+	wire ./cmd/...
+
+fly-db-connect:
+	flyctl postgres connect -a grapevineer-db

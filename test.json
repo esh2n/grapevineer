@@ -1,0 +1,654 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "metadata": {
+        "map": "Fracture",
+        "game_version": "release-06.10-shipping-9-885592",
+        "game_length": 3073,
+        "game_start": 1685713585,
+        "game_start_patched": "Friday, June 2, 2023 1:46 PM",
+        "rounds_played": 28,
+        "mode": "Competitive",
+        "mode_id": "competitive",
+        "queue": "Standard",
+        "season_id": "2de5423b-4aad-02ad-8d9b-c0a931958861",
+        "platform": "PC",
+        "matchid": "58eb9d04-97b5-47fa-bbac-32cac7e06809",
+        "premier_info": { "tournament_id": null, "matchup_id": null },
+        "region": "ap",
+        "cluster": "Tokyo"
+      },
+      "players": {
+        "all_players": [
+          {
+            "puuid": "029d71b3-6a1f-5175-ab42-7f9e214d750f",
+            "name": "株式会社オープンハウス",
+            "tag": "0000",
+            "team": "Red",
+            "level": 79,
+            "character": "Breach",
+            "currenttier": 16,
+            "currenttier_patched": "Platinum 2",
+            "player_card": "612cd02d-4294-ee2a-644c-a3ba3ddf8805",
+            "player_title": "9e6f13d8-49f3-db30-76bd-e69a0dba963e",
+            "party_id": "3e84a1e8-99fb-4645-9969-94157b2c1e38",
+            "session_playtime": {
+              "minutes": 8,
+              "seconds": 480,
+              "milliseconds": 480000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.22621.1.768.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 6,
+              "q_cast": 17,
+              "e_cast": 38,
+              "x_cast": 4
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/612cd02d-4294-ee2a-644c-a3ba3ddf8805/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/612cd02d-4294-ee2a-644c-a3ba3ddf8805/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/612cd02d-4294-ee2a-644c-a3ba3ddf8805/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 6039,
+              "kills": 22,
+              "deaths": 20,
+              "assists": 8,
+              "bodyshots": 40,
+              "headshots": 16,
+              "legshots": 7
+            },
+            "economy": {
+              "spent": { "overall": 79550, "average": 2841 },
+              "loadout_value": { "overall": 103000, "average": 3679 }
+            },
+            "damage_made": 4127,
+            "damage_received": 3950
+          },
+          {
+            "puuid": "5fee212b-4329-5a8d-934d-995c566121cf",
+            "name": "冬馬かずさ",
+            "tag": "あみちゃん",
+            "team": "Blue",
+            "level": 33,
+            "character": "Skye",
+            "currenttier": 18,
+            "currenttier_patched": "Diamond 1",
+            "player_card": "9fb348bc-41a0-91ad-8a3e-818035c4e561",
+            "player_title": "d13e579c-435e-44d4-cec2-6eae5a3c5ed4",
+            "party_id": "738cebc2-c78e-4504-bcf7-5aaff8645db7",
+            "session_playtime": {
+              "minutes": 12,
+              "seconds": 720,
+              "milliseconds": 720000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.22621.1.768.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 7,
+              "q_cast": 23,
+              "e_cast": 60,
+              "x_cast": 4
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/9fb348bc-41a0-91ad-8a3e-818035c4e561/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/9fb348bc-41a0-91ad-8a3e-818035c4e561/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/9fb348bc-41a0-91ad-8a3e-818035c4e561/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/6f2a04ca-43e0-be17-7f36-b3908627744d/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/6f2a04ca-43e0-be17-7f36-b3908627744d/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/6f2a04ca-43e0-be17-7f36-b3908627744d/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/6f2a04ca-43e0-be17-7f36-b3908627744d/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 5858,
+              "kills": 22,
+              "deaths": 22,
+              "assists": 6,
+              "bodyshots": 29,
+              "headshots": 19,
+              "legshots": 3
+            },
+            "economy": {
+              "spent": { "overall": 74600, "average": 2664 },
+              "loadout_value": { "overall": 115150, "average": 4113 }
+            },
+            "damage_made": 3799,
+            "damage_received": 4196
+          },
+          {
+            "puuid": "910fc80d-0df9-57d3-882f-f0ea8465db24",
+            "name": "kattiii",
+            "tag": "ニート",
+            "team": "Blue",
+            "level": 288,
+            "character": "Brimstone",
+            "currenttier": 14,
+            "currenttier_patched": "Gold 3",
+            "player_card": "76cfbd33-42ba-33b4-235c-de966683c9d2",
+            "player_title": "e79d9585-4ea7-f8f1-3d4e-31a1e2c71577",
+            "party_id": "738cebc2-c78e-4504-bcf7-5aaff8645db7",
+            "session_playtime": {
+              "minutes": 155,
+              "seconds": 9300,
+              "milliseconds": 9300000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.22621.1.768.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 15,
+              "q_cast": 9,
+              "e_cast": 67,
+              "x_cast": 6
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/76cfbd33-42ba-33b4-235c-de966683c9d2/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/76cfbd33-42ba-33b4-235c-de966683c9d2/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/76cfbd33-42ba-33b4-235c-de966683c9d2/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 7641,
+              "kills": 28,
+              "deaths": 22,
+              "assists": 6,
+              "bodyshots": 44,
+              "headshots": 21,
+              "legshots": 1
+            },
+            "economy": {
+              "spent": { "overall": 127400, "average": 4550 },
+              "loadout_value": { "overall": 105350, "average": 3763 }
+            },
+            "damage_made": 4732,
+            "damage_received": 4473
+          },
+          {
+            "puuid": "4ee2b979-de9b-5b92-b91d-d99d5961994c",
+            "name": "risyan",
+            "tag": "9174",
+            "team": "Blue",
+            "level": 167,
+            "character": "Breach",
+            "currenttier": 17,
+            "currenttier_patched": "Platinum 3",
+            "player_card": "f4361ec4-4e77-48c1-fa4f-b99b03134f96",
+            "player_title": "c406ce13-48d8-bdad-42ce-7a9d4c967492",
+            "party_id": "738cebc2-c78e-4504-bcf7-5aaff8645db7",
+            "session_playtime": {
+              "minutes": 11,
+              "seconds": 660,
+              "milliseconds": 660000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.22621.1.768.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 8,
+              "q_cast": 39,
+              "e_cast": 40,
+              "x_cast": 3
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/f4361ec4-4e77-48c1-fa4f-b99b03134f96/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/f4361ec4-4e77-48c1-fa4f-b99b03134f96/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/f4361ec4-4e77-48c1-fa4f-b99b03134f96/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 5238,
+              "kills": 18,
+              "deaths": 19,
+              "assists": 9,
+              "bodyshots": 62,
+              "headshots": 13,
+              "legshots": 3
+            },
+            "economy": {
+              "spent": { "overall": 64200, "average": 2293 },
+              "loadout_value": { "overall": 107100, "average": 3825 }
+            },
+            "damage_made": 3349,
+            "damage_received": 3710
+          },
+          {
+            "puuid": "e69ad575-0a51-5c36-ad55-6ed5854815a7",
+            "name": "CROWさんがんばれ",
+            "tag": "PRM",
+            "team": "Red",
+            "level": 132,
+            "character": "Reyna",
+            "currenttier": 17,
+            "currenttier_patched": "Platinum 3",
+            "player_card": "bc4443d5-449f-b5eb-a179-4c9ff332294b",
+            "player_title": "42e2f97d-4e69-274c-589c-0fbdeb397df9",
+            "party_id": "3e84a1e8-99fb-4645-9969-94157b2c1e38",
+            "session_playtime": {
+              "minutes": 87,
+              "seconds": 5220,
+              "milliseconds": 5220000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.19045.1.768.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 34,
+              "q_cast": 9,
+              "e_cast": 8,
+              "x_cast": 3
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/bc4443d5-449f-b5eb-a179-4c9ff332294b/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/bc4443d5-449f-b5eb-a179-4c9ff332294b/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/bc4443d5-449f-b5eb-a179-4c9ff332294b/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 6566,
+              "kills": 22,
+              "deaths": 20,
+              "assists": 9,
+              "bodyshots": 65,
+              "headshots": 9,
+              "legshots": 7
+            },
+            "economy": {
+              "spent": { "overall": 77900, "average": 2782 },
+              "loadout_value": { "overall": 107350, "average": 3834 }
+            },
+            "damage_made": 4147,
+            "damage_received": 4386
+          },
+          {
+            "puuid": "68f2e1ae-8962-544d-babe-ca09c156b40e",
+            "name": "PH4R40H",
+            "tag": "PAMO",
+            "team": "Red",
+            "level": 147,
+            "character": "Fade",
+            "currenttier": 16,
+            "currenttier_patched": "Platinum 2",
+            "player_card": "2de95d33-4433-e5dd-0247-0b9994248ff9",
+            "player_title": "f286dd70-42eb-57ba-9711-e2b56db08448",
+            "party_id": "3e84a1e8-99fb-4645-9969-94157b2c1e38",
+            "session_playtime": {
+              "minutes": 95,
+              "seconds": 5700,
+              "milliseconds": 5700000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.22000.1.768.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 31,
+              "q_cast": 13,
+              "e_cast": 39,
+              "x_cast": 2
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/2de95d33-4433-e5dd-0247-0b9994248ff9/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/2de95d33-4433-e5dd-0247-0b9994248ff9/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/2de95d33-4433-e5dd-0247-0b9994248ff9/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/dade69b4-4f5a-8528-247b-219e5a1facd6/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 3000,
+              "kills": 9,
+              "deaths": 21,
+              "assists": 14,
+              "bodyshots": 37,
+              "headshots": 7,
+              "legshots": 14
+            },
+            "economy": {
+              "spent": { "overall": 87700, "average": 3132 },
+              "loadout_value": { "overall": 104000, "average": 3714 }
+            },
+            "damage_made": 2250,
+            "damage_received": 3793
+          },
+          {
+            "puuid": "b50d5edd-e14e-5975-b7b1-2eb42109d424",
+            "name": "lIIl",
+            "tag": "lIl",
+            "team": "Red",
+            "level": 42,
+            "character": "Killjoy",
+            "currenttier": 16,
+            "currenttier_patched": "Platinum 2",
+            "player_card": "bc4443d5-449f-b5eb-a179-4c9ff332294b",
+            "player_title": "d13e579c-435e-44d4-cec2-6eae5a3c5ed4",
+            "party_id": "3e84a1e8-99fb-4645-9969-94157b2c1e38",
+            "session_playtime": {
+              "minutes": 53,
+              "seconds": 3180,
+              "milliseconds": 3180000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.19045.1.256.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 16,
+              "q_cast": 8,
+              "e_cast": 11,
+              "x_cast": 5
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/bc4443d5-449f-b5eb-a179-4c9ff332294b/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/bc4443d5-449f-b5eb-a179-4c9ff332294b/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/bc4443d5-449f-b5eb-a179-4c9ff332294b/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 8005,
+              "kills": 27,
+              "deaths": 21,
+              "assists": 3,
+              "bodyshots": 54,
+              "headshots": 17,
+              "legshots": 1
+            },
+            "economy": {
+              "spent": { "overall": 80800, "average": 2886 },
+              "loadout_value": { "overall": 104300, "average": 3725 }
+            },
+            "damage_made": 5127,
+            "damage_received": 3812
+          },
+          {
+            "puuid": "71fd4ab6-7617-52cd-88cc-4f37859054ca",
+            "name": "ネパール鯖ほのぼのブロンズ日記",
+            "tag": "100",
+            "team": "Red",
+            "level": 96,
+            "character": "Brimstone",
+            "currenttier": 16,
+            "currenttier_patched": "Platinum 2",
+            "player_card": "f33a64a0-40cf-6d1f-2eb0-55b81cf27f24",
+            "player_title": "e79d9585-4ea7-f8f1-3d4e-31a1e2c71577",
+            "party_id": "3e84a1e8-99fb-4645-9969-94157b2c1e38",
+            "session_playtime": {
+              "minutes": 4,
+              "seconds": 240,
+              "milliseconds": 240000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.22621.1.768.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 11,
+              "q_cast": 14,
+              "e_cast": 71,
+              "x_cast": 6
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/f33a64a0-40cf-6d1f-2eb0-55b81cf27f24/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/f33a64a0-40cf-6d1f-2eb0-55b81cf27f24/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/f33a64a0-40cf-6d1f-2eb0-55b81cf27f24/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 6621,
+              "kills": 23,
+              "deaths": 19,
+              "assists": 10,
+              "bodyshots": 42,
+              "headshots": 15,
+              "legshots": 4
+            },
+            "economy": {
+              "spent": { "overall": 82050, "average": 2930 },
+              "loadout_value": { "overall": 107000, "average": 3821 }
+            },
+            "damage_made": 4048,
+            "damage_received": 3380
+          },
+          {
+            "puuid": "1ce22173-f9f3-5f92-a2ac-38465b958fa7",
+            "name": "エクスプロージョン",
+            "tag": "しのみやぁ",
+            "team": "Blue",
+            "level": 178,
+            "character": "Jett",
+            "currenttier": 18,
+            "currenttier_patched": "Diamond 1",
+            "player_card": "9f76957c-4b07-5321-85a1-2a8cda32305b",
+            "player_title": "dd9b86b1-4661-1c98-65ac-c09b70a88e74",
+            "party_id": "738cebc2-c78e-4504-bcf7-5aaff8645db7",
+            "session_playtime": {
+              "minutes": 20,
+              "seconds": 1200,
+              "milliseconds": 1200000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.19045.1.768.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 18,
+              "q_cast": 14,
+              "e_cast": 26,
+              "x_cast": 1
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/9f76957c-4b07-5321-85a1-2a8cda32305b/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/9f76957c-4b07-5321-85a1-2a8cda32305b/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/9f76957c-4b07-5321-85a1-2a8cda32305b/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 6372,
+              "kills": 19,
+              "deaths": 21,
+              "assists": 6,
+              "bodyshots": 38,
+              "headshots": 18,
+              "legshots": 0
+            },
+            "economy": {
+              "spent": { "overall": 79100, "average": 2825 },
+              "loadout_value": { "overall": 116500, "average": 4161 }
+            },
+            "damage_made": 4448,
+            "damage_received": 4155
+          },
+          {
+            "puuid": "b2075b6c-d3e2-5a94-995c-689ab0aed6d8",
+            "name": "kanademic",
+            "tag": "6577",
+            "team": "Blue",
+            "level": 53,
+            "character": "Killjoy",
+            "currenttier": 13,
+            "currenttier_patched": "Gold 2",
+            "player_card": "2a8e14dc-485e-e4e1-2843-9a9b05873089",
+            "player_title": "d13e579c-435e-44d4-cec2-6eae5a3c5ed4",
+            "party_id": "738cebc2-c78e-4504-bcf7-5aaff8645db7",
+            "session_playtime": {
+              "minutes": 92,
+              "seconds": 5520,
+              "milliseconds": 5520000
+            },
+            "behavior": {
+              "afk_rounds": 0,
+              "friendly_fire": { "incoming": 0, "outgoing": 0 },
+              "rounds_in_spawn": 0
+            },
+            "platform": {
+              "type": "PC",
+              "os": { "name": "Windows", "version": "10.0.22621.1.768.64bit" }
+            },
+            "ability_casts": {
+              "c_cast": 30,
+              "q_cast": 22,
+              "e_cast": 8,
+              "x_cast": 3
+            },
+            "assets": {
+              "card": {
+                "small": "https://media.valorant-api.com/playercards/2a8e14dc-485e-e4e1-2843-9a9b05873089/smallart.png",
+                "large": "https://media.valorant-api.com/playercards/2a8e14dc-485e-e4e1-2843-9a9b05873089/largeart.png",
+                "wide": "https://media.valorant-api.com/playercards/2a8e14dc-485e-e4e1-2843-9a9b05873089/wideart.png"
+              },
+              "agent": {
+                "small": "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/displayicon.png",
+                "bust": "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/fullportrait.png",
+                "full": "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/fullportrait.png",
+                "killfeed": "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/killfeedportrait.png"
+              }
+            },
+            "stats": {
+              "score": 4350,
+              "kills": 14,
+              "deaths": 19,
+              "assists": 5,
+              "bodyshots": 51,
+              "headshots": 7,
+              "legshots": 9
+            },
+            "economy": {
+              "spent": { "overall": 57450, "average": 2052 },
+              "loadout_value": { "overall": 93400, "average": 3336 }
+            },
+            "damage_made": 3042,
+            "damage_received": 3214
+          }
+        ]
+      },
+      "observers": [],
+      "coaches": [],
+      "teams": {
+        "red": {
+          "has_won": true,
+          "rounds_won": 15,
+          "rounds_lost": 13,
+          "roster": null
+        },
+        "blue": {
+          "has_won": false,
+          "rounds_won": 13,
+          "rounds_lost": 15,
+          "roster": null
+        }
+      }
+    }
+  ]
+}

@@ -4,8 +4,11 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"esh2n/grapevineer/domain/model"
+	"esh2n/grapevineer/domain/repository"
 	"esh2n/grapevineer/gen/go/grapevineer"
 	"esh2n/grapevineer/internal/config"
+	"esh2n/grapevineer/internal/database"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -18,23 +21,46 @@ import (
 	"google.golang.org/grpc/status"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/google/uuid"
+	"github.com/google/wire"
 	openai "github.com/sashabaranov/go-openai"
 )
 
+var Set = wire.NewSet(
+	NewGrapevineerService,
+)
+
 type GrapevineerService interface {
+	// og image
 	GetOGImage(ctx context.Context, req *grapevineer.GetOGImageRequest) (*grapevineer.GetOGImageResponse, error)
+
+	// flower meaning
 	GetFlowerMeaningByDate(ctx context.Context, req *grapevineer.GetFlowerMeaningByDateRequest) (*grapevineer.GetFlowerMeaningByDateResponse, error)
+
+	// line
 	SendLineMessage(ctx context.Context, req *grapevineer.SendLineMessageRequest) (*grapevineer.SendLineMessageResponse, error)
+
+	// open ai
 	SendOpenAIMessage(ctx context.Context, req *grapevineer.SendOpenAIMessageRequest) (*grapevineer.SendOpenAIMessageResponse, error)
+
+	// player
+	SetPlayer(ctx context.Context, req *grapevineer.SetPlayerRequest) (*grapevineer.SetPlayerResponse, error)
+	GetAllPlayers(ctx context.Context, req *grapevineer.GetAllPlayersRequest) (*grapevineer.GetAllPlayersResponse, error)
+	UpdatePlayer(ctx context.Context, req *grapevineer.UpdatePlayerRequest) (*grapevineer.UpdatePlayerResponse, error)
+	GetPlayerInfo(ctx context.Context, req *grapevineer.GetPlayerInfoRequest) (*grapevineer.GetPlayerInfoResponse, error)
 }
 
 type grapevineerService struct {
-	cfg config.Config
+	cfg        config.Config
+	db         *database.Database
+	repository repository.Repository
 }
 
-func NewGrapevineerService(cfg config.Config) GrapevineerService {
+func NewGrapevineerService(cfg config.Config, db *database.Database, repository repository.Repository) GrapevineerService {
 	return &grapevineerService{
-		cfg: cfg,
+		cfg:        cfg,
+		db:         db,
+		repository: repository,
 	}
 }
 
@@ -244,4 +270,171 @@ func (s *grapevineerService) SendOpenAIMessage(ctx context.Context, req *grapevi
 	return &grapevineer.SendOpenAIMessageResponse{
 		Message: resp.Choices[0].Message.Content,
 	}, nil
+}
+
+func isValidPlayer(playerId, name string) (bool, error) {
+	if playerId == "" || name == "" {
+		return false, nil
+	}
+	apiURL := "https://api.henrikdev.xyz/valorant/v1/account/" + name + "/" + playerId
+	req, err := http.NewRequestWithContext(context.Background(), http.MethodGet, apiURL, nil)
+	if err != nil {
+		return false, status.Errorf(codes.Internal, "failed to create API request: %v", err)
+	}
+
+	client := &http.Client{
+		Timeout: 5 * time.Second,
+	}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return false, status.Errorf(codes.Internal, "failed to send API request: %v", err)
+	}
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return false, status.Errorf(codes.NotFound, "player not found")
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil || body == nil {
+		return false, status.Errorf(codes.Internal, "failed to read response body: %v", err)
+	}
+
+	return true, nil
+}
+
+func (s *grapevineerService) SetPlayer(ctx context.Context, req *grapevineer.SetPlayerRequest) (*grapevineer.SetPlayerResponse, error) {
+	if ok, err := isValidPlayer(req.PlayerId, req.Name); err != nil || !ok {
+		return nil, status.Errorf(codes.Internal, "failed to validate player: %v", err)
+	}
+	player := &model.Player{
+		ID:       uuid.New().String(),
+		PlayerID: req.PlayerId,
+		Name:     req.Name,
+		Region:   req.Region,
+	}
+	if _, err := s.repository.CreatePlayer(ctx, s.db, player); err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to create player: %v", err)
+	}
+	return &grapevineer.SetPlayerResponse{
+		Status: 200,
+	}, nil
+}
+
+func (s *grapevineerService) GetAllPlayers(ctx context.Context, req *grapevineer.GetAllPlayersRequest) (*grapevineer.GetAllPlayersResponse, error) {
+	players, err := s.repository.FindAll(ctx, s.db)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to get all players: %v", err)
+	}
+	var resPlayers []*grapevineer.Player
+	for _, player := range players {
+		if ok, err := isValidPlayer(player.PlayerID, player.Name); err != nil || !ok {
+			continue
+		}
+		resPlayers = append(resPlayers, &grapevineer.Player{
+			Id:       player.ID,
+			PlayerId: player.PlayerID,
+			Name:     player.Name,
+			Region:   player.Region,
+		})
+	}
+	return &grapevineer.GetAllPlayersResponse{
+		Players: resPlayers,
+	}, nil
+}
+
+func (s *grapevineerService) UpdatePlayer(ctx context.Context, req *grapevineer.UpdatePlayerRequest) (*grapevineer.UpdatePlayerResponse, error) {
+	if ok, err := isValidPlayer(req.PlayerId, req.Name); err != nil || !ok {
+		return nil, status.Errorf(codes.Internal, "failed to validate player: %v", err)
+	}
+	player := &model.Player{
+		ID:       req.Id,
+		PlayerID: req.PlayerId,
+		Name:     req.Name,
+		Region:   req.Region,
+	}
+	if _, err := s.repository.UpdatePlayer(ctx, s.db, player); err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to update player: %v", err)
+	}
+	return &grapevineer.UpdatePlayerResponse{
+		Status: 200,
+	}, nil
+}
+
+func (s *grapevineerService) GetPlayerInfo(ctx context.Context, req *grapevineer.GetPlayerInfoRequest) (*grapevineer.GetPlayerInfoResponse, error) {
+	matches, err := getMatches(req.PlayerId, req.Name, req.Region)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to get matches: %v", err)
+	}
+	return &grapevineer.GetPlayerInfoResponse{
+		Player: &grapevineer.Player{
+			Id:       req.PlayerId,
+			PlayerId: req.PlayerId,
+			Name:     req.Name,
+			Region:   req.Region,
+		},
+		RecentMatches: matches,
+	}, nil
+}
+
+func getMatches(playerId, name, region string) ([]*grapevineer.Match, error) {
+	if playerId == "" || name == "" || region == "" {
+		return nil, nil
+	}
+	apiURL := "https://api.henrikdev.xyz/valorant/v3/matches/" + region + "/" + name + "/" + playerId
+	req, err := http.NewRequestWithContext(context.Background(), http.MethodGet, apiURL, nil)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to create API request: %v", err)
+	}
+
+	client := &http.Client{
+		Timeout: 5 * time.Second,
+	}
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to send API request: %v", err)
+	}
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, status.Errorf(codes.NotFound, "player not found")
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil || body == nil {
+		return nil, status.Errorf(codes.Internal, "failed to read response body: %v", err)
+	}
+
+	var data map[string]interface{}
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to parse JSON: %v", err)
+	}
+
+	matchesData, ok := data["data"].([]interface{})
+	if !ok {
+		return nil, status.Errorf(codes.Internal, "failed to extract matches data from JSON")
+	}
+
+	var matches []*grapevineer.Match
+	for _, matchData := range matchesData {
+		matchBytes, err := json.Marshal(matchData)
+		if err != nil {
+			fmt.Println("Failed to marshal match data:", err)
+			continue
+		}
+		var match *grapevineer.Match
+		err = json.Unmarshal(matchBytes, &match)
+		if err != nil {
+			fmt.Println("Failed to parse match data:", err)
+			continue
+		}
+		matches = append(matches, match)
+	}
+
+	return matches, nil
 }

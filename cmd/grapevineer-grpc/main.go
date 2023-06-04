@@ -1,7 +1,7 @@
 package main
 
 import (
-	"esh2n/grapevineer/application"
+	"context"
 	"esh2n/grapevineer/gen/go/grapevineer"
 	"esh2n/grapevineer/internal/config"
 	v1 "esh2n/grapevineer/internal/grpc/v1"
@@ -18,7 +18,7 @@ func main() {
 	errc := make(chan error, 1)
 
 	go func() {
-		errc <- runGRPCServer(*cfg)
+		errc <- runGRPCServer(cfg)
 	}()
 
 	for i := 0; i < 1; i++ {
@@ -35,7 +35,10 @@ func runGRPCServer(cfg config.Config) error {
 	}
 	server := grpc.NewServer()
 
-	service := application.NewGrapevineerService(cfg)
+	service, _, err := wireInject(context.Background())
+	if err != nil {
+		xerrors.Errorf("failed to inject service: %w", err)
+	}
 	grapevineer.RegisterGrapevineerServer(server, v1.NewV1(service))
 
 	reflection.Register(server)

@@ -46,3 +46,27 @@ func (x *V1) SendOpenAIMessage(ctx context.Context, req *grapevineer.SendOpenAIM
 		return got, nil
 	}
 }
+
+func (x *V1) SetPlayer(ctx context.Context, req *grapevineer.SetPlayerRequest) (*grapevineer.SetPlayerResponse, error) {
+	if got, err := x.app.SetPlayer(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}
+
+func (x *V1) GetAllPlayers(ctx context.Context, req *grapevineer.GetAllPlayersRequest) (*grapevineer.GetAllPlayersResponse, error) {
+	if got, err := x.app.GetAllPlayers(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}
+
+func (x *V1) GetPlayerInfo(ctx context.Context, req *grapevineer.GetPlayerInfoRequest) (*grapevineer.GetPlayerInfoResponse, error) {
+	if got, err := x.app.GetPlayerInfo(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}
