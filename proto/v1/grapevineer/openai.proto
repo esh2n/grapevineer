@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package grapevineer;
+
+// OpenAI Related...
+
+message SendOpenAIMessageRequest {
+    string system_prompt = 1;
+    string user_prompt = 2;
+}
+
+message SendOpenAIMessageResponse {
+    string message = 1;
+}

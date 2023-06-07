@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package grapevineer;
+
+// Player Related...
+
+message SetPlayerRequest {
+    string player_id = 1;
+    string name = 2;
+    string region = 3;
+}
+
+message SetPlayerResponse {
+    int32 status = 1;
+}
+
+message GetAllPlayersRequest {
+}
+
+message GetAllPlayersResponse {
+    repeated Player players = 1;
+}
+
+message UpdatePlayerRequest {
+    string id = 1;
+    string player_id = 2;
+    string name = 3;
+    string region = 4;
+}
+
+message UpdatePlayerResponse {
+    int32 status = 1;
+}
+
+message Player {
+    string id = 1;
+    string player_id = 2;
+    string name = 3;
+    string region = 4;
+}
+
+
+message GetPlayerInfoRequest {
+    string player_id = 1;
+    string name = 2;
+    string region = 3;
+}
+
+message GetPlayerInfoResponse {
+    Player player = 1;
+    repeated Match recent_matches = 2;
+}
+
+message Match {
+    MatchMetadata metadata = 1;
+    PlayerInMatch players = 2;
+    Team red = 3;
+    Team blue = 4;
+}
+
+message MatchMetadata {
+    string map = 1;
+    string mode = 2;
+    string game_start_patched = 3;
+}
+
+message PlayerInMatch {
+    repeated AllPlayerInMatch all_players = 1;
+}
+
+message AllPlayerInMatch {
+    string name = 1;
+    string id = 2;
+    string puuid = 3;
+    string team = 4;
+    PlayerStats stats = 5;
+    string character = 6;
+    string currenttier_patched = 7;
+    int32 damage_made = 8;
+    int32 damage_received = 9;
+    PlayerAssets assets = 10;
+}
+
+message PlayerStats {
+    int32 kills = 1;
+    int32 deaths = 2;
+    int32 assists = 3;
+    int32 score = 4;
+    int32 bodyshots = 5;
+    int32 headshots = 6;
+    int32 legshots = 7;
+}
+
+message PlayerAssets {
+    PlayerCard card = 1;
+}
+
+message PlayerCard {
+    string small = 1;
+    string large = 2;
+    string wide = 3;
+}
+
+message Team {
+    bool has_won = 1;
+    int32 rounds_won = 2;
+    int32 rounds_lost = 3;
+}
