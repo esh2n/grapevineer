@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package grapevineer;
 
+option go_package = "github.com/esh2n/grapevineer/gen/go/grapevineer";
+
 // OG Image Related ...
 
 message GetOGImageRequest {
