@@ -1,7 +1,7 @@
 .PHONY: gen-proto
 
 BIN := $(abspath ./bin)
-TAG := v0.0.14
+TAG := v0.0.15
 
 go-build:
 	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer-grpc/main.go cmd/grapevineer-grpc/wire_gen.go

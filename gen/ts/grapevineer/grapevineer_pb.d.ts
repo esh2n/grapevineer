@@ -561,6 +561,12 @@ export namespace PlayerInMatch {
 }
 
 export class AllPlayerInMatch extends jspb.Message {
+  getName(): string;
+  setName(value: string): void;
+
+  getId(): string;
+  setId(value: string): void;
+
   getPuuid(): string;
   setPuuid(value: string): void;
 
@@ -601,6 +607,8 @@ export class AllPlayerInMatch extends jspb.Message {
 
 export namespace AllPlayerInMatch {
   export type AsObject = {
+    name: string,
+    id: string,
     puuid: string,
     team: string,
     stats?: PlayerStats.AsObject,
@@ -625,6 +633,15 @@ export class PlayerStats extends jspb.Message {
   getScore(): number;
   setScore(value: number): void;
 
+  getBodyshots(): number;
+  setBodyshots(value: number): void;
+
+  getHeadshots(): number;
+  setHeadshots(value: number): void;
+
+  getLegshots(): number;
+  setLegshots(value: number): void;
+
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): PlayerStats.AsObject;
   static toObject(includeInstance: boolean, msg: PlayerStats): PlayerStats.AsObject;
@@ -641,6 +658,9 @@ export namespace PlayerStats {
     deaths: number,
     assists: number,
     score: number,
+    bodyshots: number,
+    headshots: number,
+    legshots: number,
   }
 }
 

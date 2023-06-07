@@ -1360,19 +1360,23 @@ class PlayerInMatch extends $pb.GeneratedMessage {
 
 class AllPlayerInMatch extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'AllPlayerInMatch', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'grapevineer'), createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'puuid')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'team')
-    ..aOM<PlayerStats>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'stats', subBuilder: PlayerStats.create)
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'character')
-    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'currenttierPatched')
-    ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'damageMade', $pb.PbFieldType.O3)
-    ..a<$core.int>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'damageReceived', $pb.PbFieldType.O3)
-    ..aOM<PlayerAssets>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'assets', subBuilder: PlayerAssets.create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'puuid')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'team')
+    ..aOM<PlayerStats>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'stats', subBuilder: PlayerStats.create)
+    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'character')
+    ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'currenttierPatched')
+    ..a<$core.int>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'damageMade', $pb.PbFieldType.O3)
+    ..a<$core.int>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'damageReceived', $pb.PbFieldType.O3)
+    ..aOM<PlayerAssets>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'assets', subBuilder: PlayerAssets.create)
     ..hasRequiredFields = false
   ;
 
   AllPlayerInMatch._() : super();
   factory AllPlayerInMatch({
+    $core.String? name,
+    $core.String? id,
     $core.String? puuid,
     $core.String? team,
     PlayerStats? stats,
@@ -1383,6 +1387,12 @@ class AllPlayerInMatch extends $pb.GeneratedMessage {
     PlayerAssets? assets,
   }) {
     final _result = create();
+    if (name != null) {
+      _result.name = name;
+    }
+    if (id != null) {
+      _result.id = id;
+    }
     if (puuid != null) {
       _result.puuid = puuid;
     }
@@ -1431,80 +1441,98 @@ class AllPlayerInMatch extends $pb.GeneratedMessage {
   static AllPlayerInMatch? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get puuid => $_getSZ(0);
+  $core.String get name => $_getSZ(0);
   @$pb.TagNumber(1)
-  set puuid($core.String v) { $_setString(0, v); }
+  set name($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasPuuid() => $_has(0);
+  $core.bool hasName() => $_has(0);
   @$pb.TagNumber(1)
-  void clearPuuid() => clearField(1);
+  void clearName() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get team => $_getSZ(1);
+  $core.String get id => $_getSZ(1);
   @$pb.TagNumber(2)
-  set team($core.String v) { $_setString(1, v); }
+  set id($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasTeam() => $_has(1);
+  $core.bool hasId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearTeam() => clearField(2);
+  void clearId() => clearField(2);
 
   @$pb.TagNumber(3)
-  PlayerStats get stats => $_getN(2);
+  $core.String get puuid => $_getSZ(2);
   @$pb.TagNumber(3)
-  set stats(PlayerStats v) { setField(3, v); }
+  set puuid($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasStats() => $_has(2);
+  $core.bool hasPuuid() => $_has(2);
   @$pb.TagNumber(3)
-  void clearStats() => clearField(3);
-  @$pb.TagNumber(3)
-  PlayerStats ensureStats() => $_ensure(2);
+  void clearPuuid() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get character => $_getSZ(3);
+  $core.String get team => $_getSZ(3);
   @$pb.TagNumber(4)
-  set character($core.String v) { $_setString(3, v); }
+  set team($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasCharacter() => $_has(3);
+  $core.bool hasTeam() => $_has(3);
   @$pb.TagNumber(4)
-  void clearCharacter() => clearField(4);
+  void clearTeam() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get currenttierPatched => $_getSZ(4);
+  PlayerStats get stats => $_getN(4);
   @$pb.TagNumber(5)
-  set currenttierPatched($core.String v) { $_setString(4, v); }
+  set stats(PlayerStats v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasCurrenttierPatched() => $_has(4);
+  $core.bool hasStats() => $_has(4);
   @$pb.TagNumber(5)
-  void clearCurrenttierPatched() => clearField(5);
+  void clearStats() => clearField(5);
+  @$pb.TagNumber(5)
+  PlayerStats ensureStats() => $_ensure(4);
 
   @$pb.TagNumber(6)
-  $core.int get damageMade => $_getIZ(5);
+  $core.String get character => $_getSZ(5);
   @$pb.TagNumber(6)
-  set damageMade($core.int v) { $_setSignedInt32(5, v); }
+  set character($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasDamageMade() => $_has(5);
+  $core.bool hasCharacter() => $_has(5);
   @$pb.TagNumber(6)
-  void clearDamageMade() => clearField(6);
+  void clearCharacter() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.int get damageReceived => $_getIZ(6);
+  $core.String get currenttierPatched => $_getSZ(6);
   @$pb.TagNumber(7)
-  set damageReceived($core.int v) { $_setSignedInt32(6, v); }
+  set currenttierPatched($core.String v) { $_setString(6, v); }
   @$pb.TagNumber(7)
-  $core.bool hasDamageReceived() => $_has(6);
+  $core.bool hasCurrenttierPatched() => $_has(6);
   @$pb.TagNumber(7)
-  void clearDamageReceived() => clearField(7);
+  void clearCurrenttierPatched() => clearField(7);
 
   @$pb.TagNumber(8)
-  PlayerAssets get assets => $_getN(7);
+  $core.int get damageMade => $_getIZ(7);
   @$pb.TagNumber(8)
-  set assets(PlayerAssets v) { setField(8, v); }
+  set damageMade($core.int v) { $_setSignedInt32(7, v); }
   @$pb.TagNumber(8)
-  $core.bool hasAssets() => $_has(7);
+  $core.bool hasDamageMade() => $_has(7);
   @$pb.TagNumber(8)
-  void clearAssets() => clearField(8);
-  @$pb.TagNumber(8)
-  PlayerAssets ensureAssets() => $_ensure(7);
+  void clearDamageMade() => clearField(8);
+
+  @$pb.TagNumber(9)
+  $core.int get damageReceived => $_getIZ(8);
+  @$pb.TagNumber(9)
+  set damageReceived($core.int v) { $_setSignedInt32(8, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasDamageReceived() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearDamageReceived() => clearField(9);
+
+  @$pb.TagNumber(10)
+  PlayerAssets get assets => $_getN(9);
+  @$pb.TagNumber(10)
+  set assets(PlayerAssets v) { setField(10, v); }
+  @$pb.TagNumber(10)
+  $core.bool hasAssets() => $_has(9);
+  @$pb.TagNumber(10)
+  void clearAssets() => clearField(10);
+  @$pb.TagNumber(10)
+  PlayerAssets ensureAssets() => $_ensure(9);
 }
 
 class PlayerStats extends $pb.GeneratedMessage {
@@ -1513,6 +1541,9 @@ class PlayerStats extends $pb.GeneratedMessage {
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'deaths', $pb.PbFieldType.O3)
     ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'assists', $pb.PbFieldType.O3)
     ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'score', $pb.PbFieldType.O3)
+    ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'bodyshots', $pb.PbFieldType.O3)
+    ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'headshots', $pb.PbFieldType.O3)
+    ..a<$core.int>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'legshots', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -1522,6 +1553,9 @@ class PlayerStats extends $pb.GeneratedMessage {
     $core.int? deaths,
     $core.int? assists,
     $core.int? score,
+    $core.int? bodyshots,
+    $core.int? headshots,
+    $core.int? legshots,
   }) {
     final _result = create();
     if (kills != null) {
@@ -1535,6 +1569,15 @@ class PlayerStats extends $pb.GeneratedMessage {
     }
     if (score != null) {
       _result.score = score;
+    }
+    if (bodyshots != null) {
+      _result.bodyshots = bodyshots;
+    }
+    if (headshots != null) {
+      _result.headshots = headshots;
+    }
+    if (legshots != null) {
+      _result.legshots = legshots;
     }
     return _result;
   }
@@ -1594,6 +1637,33 @@ class PlayerStats extends $pb.GeneratedMessage {
   $core.bool hasScore() => $_has(3);
   @$pb.TagNumber(4)
   void clearScore() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.int get bodyshots => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set bodyshots($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasBodyshots() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBodyshots() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get headshots => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set headshots($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasHeadshots() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearHeadshots() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.int get legshots => $_getIZ(6);
+  @$pb.TagNumber(7)
+  set legshots($core.int v) { $_setSignedInt32(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasLegshots() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearLegshots() => clearField(7);
 }
 
 class PlayerAssets extends $pb.GeneratedMessage {

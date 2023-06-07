@@ -248,19 +248,21 @@ final $typed_data.Uint8List playerInMatchDescriptor = $convert.base64Decode('Cg1
 const AllPlayerInMatch$json = const {
   '1': 'AllPlayerInMatch',
   '2': const [
-    const {'1': 'puuid', '3': 1, '4': 1, '5': 9, '10': 'puuid'},
-    const {'1': 'team', '3': 2, '4': 1, '5': 9, '10': 'team'},
-    const {'1': 'stats', '3': 3, '4': 1, '5': 11, '6': '.grapevineer.PlayerStats', '10': 'stats'},
-    const {'1': 'character', '3': 4, '4': 1, '5': 9, '10': 'character'},
-    const {'1': 'currenttier_patched', '3': 5, '4': 1, '5': 9, '10': 'currenttierPatched'},
-    const {'1': 'damage_made', '3': 6, '4': 1, '5': 5, '10': 'damageMade'},
-    const {'1': 'damage_received', '3': 7, '4': 1, '5': 5, '10': 'damageReceived'},
-    const {'1': 'assets', '3': 8, '4': 1, '5': 11, '6': '.grapevineer.PlayerAssets', '10': 'assets'},
+    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'id', '3': 2, '4': 1, '5': 9, '10': 'id'},
+    const {'1': 'puuid', '3': 3, '4': 1, '5': 9, '10': 'puuid'},
+    const {'1': 'team', '3': 4, '4': 1, '5': 9, '10': 'team'},
+    const {'1': 'stats', '3': 5, '4': 1, '5': 11, '6': '.grapevineer.PlayerStats', '10': 'stats'},
+    const {'1': 'character', '3': 6, '4': 1, '5': 9, '10': 'character'},
+    const {'1': 'currenttier_patched', '3': 7, '4': 1, '5': 9, '10': 'currenttierPatched'},
+    const {'1': 'damage_made', '3': 8, '4': 1, '5': 5, '10': 'damageMade'},
+    const {'1': 'damage_received', '3': 9, '4': 1, '5': 5, '10': 'damageReceived'},
+    const {'1': 'assets', '3': 10, '4': 1, '5': 11, '6': '.grapevineer.PlayerAssets', '10': 'assets'},
   ],
 };
 
 /// Descriptor for `AllPlayerInMatch`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List allPlayerInMatchDescriptor = $convert.base64Decode('ChBBbGxQbGF5ZXJJbk1hdGNoEhQKBXB1dWlkGAEgASgJUgVwdXVpZBISCgR0ZWFtGAIgASgJUgR0ZWFtEi4KBXN0YXRzGAMgASgLMhguZ3JhcGV2aW5lZXIuUGxheWVyU3RhdHNSBXN0YXRzEhwKCWNoYXJhY3RlchgEIAEoCVIJY2hhcmFjdGVyEi8KE2N1cnJlbnR0aWVyX3BhdGNoZWQYBSABKAlSEmN1cnJlbnR0aWVyUGF0Y2hlZBIfCgtkYW1hZ2VfbWFkZRgGIAEoBVIKZGFtYWdlTWFkZRInCg9kYW1hZ2VfcmVjZWl2ZWQYByABKAVSDmRhbWFnZVJlY2VpdmVkEjEKBmFzc2V0cxgIIAEoCzIZLmdyYXBldmluZWVyLlBsYXllckFzc2V0c1IGYXNzZXRz');
+final $typed_data.Uint8List allPlayerInMatchDescriptor = $convert.base64Decode('ChBBbGxQbGF5ZXJJbk1hdGNoEhIKBG5hbWUYASABKAlSBG5hbWUSDgoCaWQYAiABKAlSAmlkEhQKBXB1dWlkGAMgASgJUgVwdXVpZBISCgR0ZWFtGAQgASgJUgR0ZWFtEi4KBXN0YXRzGAUgASgLMhguZ3JhcGV2aW5lZXIuUGxheWVyU3RhdHNSBXN0YXRzEhwKCWNoYXJhY3RlchgGIAEoCVIJY2hhcmFjdGVyEi8KE2N1cnJlbnR0aWVyX3BhdGNoZWQYByABKAlSEmN1cnJlbnR0aWVyUGF0Y2hlZBIfCgtkYW1hZ2VfbWFkZRgIIAEoBVIKZGFtYWdlTWFkZRInCg9kYW1hZ2VfcmVjZWl2ZWQYCSABKAVSDmRhbWFnZVJlY2VpdmVkEjEKBmFzc2V0cxgKIAEoCzIZLmdyYXBldmluZWVyLlBsYXllckFzc2V0c1IGYXNzZXRz');
 @$core.Deprecated('Use playerStatsDescriptor instead')
 const PlayerStats$json = const {
   '1': 'PlayerStats',
@@ -269,11 +271,14 @@ const PlayerStats$json = const {
     const {'1': 'deaths', '3': 2, '4': 1, '5': 5, '10': 'deaths'},
     const {'1': 'assists', '3': 3, '4': 1, '5': 5, '10': 'assists'},
     const {'1': 'score', '3': 4, '4': 1, '5': 5, '10': 'score'},
+    const {'1': 'bodyshots', '3': 5, '4': 1, '5': 5, '10': 'bodyshots'},
+    const {'1': 'headshots', '3': 6, '4': 1, '5': 5, '10': 'headshots'},
+    const {'1': 'legshots', '3': 7, '4': 1, '5': 5, '10': 'legshots'},
   ],
 };
 
 /// Descriptor for `PlayerStats`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List playerStatsDescriptor = $convert.base64Decode('CgtQbGF5ZXJTdGF0cxIUCgVraWxscxgBIAEoBVIFa2lsbHMSFgoGZGVhdGhzGAIgASgFUgZkZWF0aHMSGAoHYXNzaXN0cxgDIAEoBVIHYXNzaXN0cxIUCgVzY29yZRgEIAEoBVIFc2NvcmU=');
+final $typed_data.Uint8List playerStatsDescriptor = $convert.base64Decode('CgtQbGF5ZXJTdGF0cxIUCgVraWxscxgBIAEoBVIFa2lsbHMSFgoGZGVhdGhzGAIgASgFUgZkZWF0aHMSGAoHYXNzaXN0cxgDIAEoBVIHYXNzaXN0cxIUCgVzY29yZRgEIAEoBVIFc2NvcmUSHAoJYm9keXNob3RzGAUgASgFUglib2R5c2hvdHMSHAoJaGVhZHNob3RzGAYgASgFUgloZWFkc2hvdHMSGgoIbGVnc2hvdHMYByABKAVSCGxlZ3Nob3Rz');
 @$core.Deprecated('Use playerAssetsDescriptor instead')
 const PlayerAssets$json = const {
   '1': 'PlayerAssets',

@@ -4499,13 +4499,15 @@ proto.grapevineer.AllPlayerInMatch.prototype.toObject = function(opt_includeInst
  */
 proto.grapevineer.AllPlayerInMatch.toObject = function(includeInstance, msg) {
   var f, obj = {
-    puuid: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    team: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    id: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    puuid: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    team: jspb.Message.getFieldWithDefault(msg, 4, ""),
     stats: (f = msg.getStats()) && proto.grapevineer.PlayerStats.toObject(includeInstance, f),
-    character: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    currenttierPatched: jspb.Message.getFieldWithDefault(msg, 5, ""),
-    damageMade: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    damageReceived: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    character: jspb.Message.getFieldWithDefault(msg, 6, ""),
+    currenttierPatched: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    damageMade: jspb.Message.getFieldWithDefault(msg, 8, 0),
+    damageReceived: jspb.Message.getFieldWithDefault(msg, 9, 0),
     assets: (f = msg.getAssets()) && proto.grapevineer.PlayerAssets.toObject(includeInstance, f)
   };
 
@@ -4545,34 +4547,42 @@ proto.grapevineer.AllPlayerInMatch.deserializeBinaryFromReader = function(msg, r
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setPuuid(value);
+      msg.setName(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setTeam(value);
+      msg.setId(value);
       break;
     case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPuuid(value);
+      break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTeam(value);
+      break;
+    case 5:
       var value = new proto.grapevineer.PlayerStats;
       reader.readMessage(value,proto.grapevineer.PlayerStats.deserializeBinaryFromReader);
       msg.setStats(value);
       break;
-    case 4:
+    case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setCharacter(value);
       break;
-    case 5:
+    case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setCurrenttierPatched(value);
       break;
-    case 6:
+    case 8:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setDamageMade(value);
       break;
-    case 7:
+    case 9:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setDamageReceived(value);
       break;
-    case 8:
+    case 10:
       var value = new proto.grapevineer.PlayerAssets;
       reader.readMessage(value,proto.grapevineer.PlayerAssets.deserializeBinaryFromReader);
       msg.setAssets(value);
@@ -4606,24 +4616,38 @@ proto.grapevineer.AllPlayerInMatch.prototype.serializeBinary = function() {
  */
 proto.grapevineer.AllPlayerInMatch.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getPuuid();
+  f = message.getName();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getTeam();
+  f = message.getId();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
+  f = message.getPuuid();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
+  f = message.getTeam();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
   f = message.getStats();
   if (f != null) {
     writer.writeMessage(
-      3,
+      5,
       f,
       proto.grapevineer.PlayerStats.serializeBinaryToWriter
     );
@@ -4631,35 +4655,35 @@ proto.grapevineer.AllPlayerInMatch.serializeBinaryToWriter = function(message, w
   f = message.getCharacter();
   if (f.length > 0) {
     writer.writeString(
-      4,
+      6,
       f
     );
   }
   f = message.getCurrenttierPatched();
   if (f.length > 0) {
     writer.writeString(
-      5,
+      7,
       f
     );
   }
   f = message.getDamageMade();
   if (f !== 0) {
     writer.writeInt32(
-      6,
+      8,
       f
     );
   }
   f = message.getDamageReceived();
   if (f !== 0) {
     writer.writeInt32(
-      7,
+      9,
       f
     );
   }
   f = message.getAssets();
   if (f != null) {
     writer.writeMessage(
-      8,
+      10,
       f,
       proto.grapevineer.PlayerAssets.serializeBinaryToWriter
     );
@@ -4668,10 +4692,10 @@ proto.grapevineer.AllPlayerInMatch.serializeBinaryToWriter = function(message, w
 
 
 /**
- * optional string puuid = 1;
+ * optional string name = 1;
  * @return {string}
  */
-proto.grapevineer.AllPlayerInMatch.prototype.getPuuid = function() {
+proto.grapevineer.AllPlayerInMatch.prototype.getName = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -4680,16 +4704,16 @@ proto.grapevineer.AllPlayerInMatch.prototype.getPuuid = function() {
  * @param {string} value
  * @return {!proto.grapevineer.AllPlayerInMatch} returns this
  */
-proto.grapevineer.AllPlayerInMatch.prototype.setPuuid = function(value) {
+proto.grapevineer.AllPlayerInMatch.prototype.setName = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string team = 2;
+ * optional string id = 2;
  * @return {string}
  */
-proto.grapevineer.AllPlayerInMatch.prototype.getTeam = function() {
+proto.grapevineer.AllPlayerInMatch.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -4698,18 +4722,54 @@ proto.grapevineer.AllPlayerInMatch.prototype.getTeam = function() {
  * @param {string} value
  * @return {!proto.grapevineer.AllPlayerInMatch} returns this
  */
-proto.grapevineer.AllPlayerInMatch.prototype.setTeam = function(value) {
+proto.grapevineer.AllPlayerInMatch.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional PlayerStats stats = 3;
+ * optional string puuid = 3;
+ * @return {string}
+ */
+proto.grapevineer.AllPlayerInMatch.prototype.getPuuid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.grapevineer.AllPlayerInMatch} returns this
+ */
+proto.grapevineer.AllPlayerInMatch.prototype.setPuuid = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional string team = 4;
+ * @return {string}
+ */
+proto.grapevineer.AllPlayerInMatch.prototype.getTeam = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.grapevineer.AllPlayerInMatch} returns this
+ */
+proto.grapevineer.AllPlayerInMatch.prototype.setTeam = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional PlayerStats stats = 5;
  * @return {?proto.grapevineer.PlayerStats}
  */
 proto.grapevineer.AllPlayerInMatch.prototype.getStats = function() {
   return /** @type{?proto.grapevineer.PlayerStats} */ (
-    jspb.Message.getWrapperField(this, proto.grapevineer.PlayerStats, 3));
+    jspb.Message.getWrapperField(this, proto.grapevineer.PlayerStats, 5));
 };
 
 
@@ -4718,7 +4778,7 @@ proto.grapevineer.AllPlayerInMatch.prototype.getStats = function() {
  * @return {!proto.grapevineer.AllPlayerInMatch} returns this
 */
 proto.grapevineer.AllPlayerInMatch.prototype.setStats = function(value) {
-  return jspb.Message.setWrapperField(this, 3, value);
+  return jspb.Message.setWrapperField(this, 5, value);
 };
 
 
@@ -4736,16 +4796,16 @@ proto.grapevineer.AllPlayerInMatch.prototype.clearStats = function() {
  * @return {boolean}
  */
 proto.grapevineer.AllPlayerInMatch.prototype.hasStats = function() {
-  return jspb.Message.getField(this, 3) != null;
+  return jspb.Message.getField(this, 5) != null;
 };
 
 
 /**
- * optional string character = 4;
+ * optional string character = 6;
  * @return {string}
  */
 proto.grapevineer.AllPlayerInMatch.prototype.getCharacter = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
 };
 
 
@@ -4754,16 +4814,16 @@ proto.grapevineer.AllPlayerInMatch.prototype.getCharacter = function() {
  * @return {!proto.grapevineer.AllPlayerInMatch} returns this
  */
 proto.grapevineer.AllPlayerInMatch.prototype.setCharacter = function(value) {
-  return jspb.Message.setProto3StringField(this, 4, value);
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
 /**
- * optional string currenttier_patched = 5;
+ * optional string currenttier_patched = 7;
  * @return {string}
  */
 proto.grapevineer.AllPlayerInMatch.prototype.getCurrenttierPatched = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 7, ""));
 };
 
 
@@ -4772,16 +4832,16 @@ proto.grapevineer.AllPlayerInMatch.prototype.getCurrenttierPatched = function() 
  * @return {!proto.grapevineer.AllPlayerInMatch} returns this
  */
 proto.grapevineer.AllPlayerInMatch.prototype.setCurrenttierPatched = function(value) {
-  return jspb.Message.setProto3StringField(this, 5, value);
+  return jspb.Message.setProto3StringField(this, 7, value);
 };
 
 
 /**
- * optional int32 damage_made = 6;
+ * optional int32 damage_made = 8;
  * @return {number}
  */
 proto.grapevineer.AllPlayerInMatch.prototype.getDamageMade = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
 };
 
 
@@ -4790,16 +4850,16 @@ proto.grapevineer.AllPlayerInMatch.prototype.getDamageMade = function() {
  * @return {!proto.grapevineer.AllPlayerInMatch} returns this
  */
 proto.grapevineer.AllPlayerInMatch.prototype.setDamageMade = function(value) {
-  return jspb.Message.setProto3IntField(this, 6, value);
+  return jspb.Message.setProto3IntField(this, 8, value);
 };
 
 
 /**
- * optional int32 damage_received = 7;
+ * optional int32 damage_received = 9;
  * @return {number}
  */
 proto.grapevineer.AllPlayerInMatch.prototype.getDamageReceived = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
 };
 
 
@@ -4808,17 +4868,17 @@ proto.grapevineer.AllPlayerInMatch.prototype.getDamageReceived = function() {
  * @return {!proto.grapevineer.AllPlayerInMatch} returns this
  */
 proto.grapevineer.AllPlayerInMatch.prototype.setDamageReceived = function(value) {
-  return jspb.Message.setProto3IntField(this, 7, value);
+  return jspb.Message.setProto3IntField(this, 9, value);
 };
 
 
 /**
- * optional PlayerAssets assets = 8;
+ * optional PlayerAssets assets = 10;
  * @return {?proto.grapevineer.PlayerAssets}
  */
 proto.grapevineer.AllPlayerInMatch.prototype.getAssets = function() {
   return /** @type{?proto.grapevineer.PlayerAssets} */ (
-    jspb.Message.getWrapperField(this, proto.grapevineer.PlayerAssets, 8));
+    jspb.Message.getWrapperField(this, proto.grapevineer.PlayerAssets, 10));
 };
 
 
@@ -4827,7 +4887,7 @@ proto.grapevineer.AllPlayerInMatch.prototype.getAssets = function() {
  * @return {!proto.grapevineer.AllPlayerInMatch} returns this
 */
 proto.grapevineer.AllPlayerInMatch.prototype.setAssets = function(value) {
-  return jspb.Message.setWrapperField(this, 8, value);
+  return jspb.Message.setWrapperField(this, 10, value);
 };
 
 
@@ -4845,7 +4905,7 @@ proto.grapevineer.AllPlayerInMatch.prototype.clearAssets = function() {
  * @return {boolean}
  */
 proto.grapevineer.AllPlayerInMatch.prototype.hasAssets = function() {
-  return jspb.Message.getField(this, 8) != null;
+  return jspb.Message.getField(this, 10) != null;
 };
 
 
@@ -4884,7 +4944,10 @@ proto.grapevineer.PlayerStats.toObject = function(includeInstance, msg) {
     kills: jspb.Message.getFieldWithDefault(msg, 1, 0),
     deaths: jspb.Message.getFieldWithDefault(msg, 2, 0),
     assists: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    score: jspb.Message.getFieldWithDefault(msg, 4, 0)
+    score: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    bodyshots: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    headshots: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    legshots: jspb.Message.getFieldWithDefault(msg, 7, 0)
   };
 
   if (includeInstance) {
@@ -4936,6 +4999,18 @@ proto.grapevineer.PlayerStats.deserializeBinaryFromReader = function(msg, reader
     case 4:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setScore(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setBodyshots(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setHeadshots(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setLegshots(value);
       break;
     default:
       reader.skipField();
@@ -4991,6 +5066,27 @@ proto.grapevineer.PlayerStats.serializeBinaryToWriter = function(message, writer
   if (f !== 0) {
     writer.writeInt32(
       4,
+      f
+    );
+  }
+  f = message.getBodyshots();
+  if (f !== 0) {
+    writer.writeInt32(
+      5,
+      f
+    );
+  }
+  f = message.getHeadshots();
+  if (f !== 0) {
+    writer.writeInt32(
+      6,
+      f
+    );
+  }
+  f = message.getLegshots();
+  if (f !== 0) {
+    writer.writeInt32(
+      7,
       f
     );
   }
@@ -5066,6 +5162,60 @@ proto.grapevineer.PlayerStats.prototype.getScore = function() {
  */
 proto.grapevineer.PlayerStats.prototype.setScore = function(value) {
   return jspb.Message.setProto3IntField(this, 4, value);
+};
+
+
+/**
+ * optional int32 bodyshots = 5;
+ * @return {number}
+ */
+proto.grapevineer.PlayerStats.prototype.getBodyshots = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.grapevineer.PlayerStats} returns this
+ */
+proto.grapevineer.PlayerStats.prototype.setBodyshots = function(value) {
+  return jspb.Message.setProto3IntField(this, 5, value);
+};
+
+
+/**
+ * optional int32 headshots = 6;
+ * @return {number}
+ */
+proto.grapevineer.PlayerStats.prototype.getHeadshots = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.grapevineer.PlayerStats} returns this
+ */
+proto.grapevineer.PlayerStats.prototype.setHeadshots = function(value) {
+  return jspb.Message.setProto3IntField(this, 6, value);
+};
+
+
+/**
+ * optional int32 legshots = 7;
+ * @return {number}
+ */
+proto.grapevineer.PlayerStats.prototype.getLegshots = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/**
+ * @param {number} value
+ * @return {!proto.grapevineer.PlayerStats} returns this
+ */
+proto.grapevineer.PlayerStats.prototype.setLegshots = function(value) {
+  return jspb.Message.setProto3IntField(this, 7, value);
 };
 
 

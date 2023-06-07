@@ -163,14 +163,16 @@ message PlayerInMatch {
 }
 
 message AllPlayerInMatch {
-    string puuid = 1;
-    string team = 2;
-    PlayerStats stats = 3;
-    string character = 4;
-    string currenttier_patched = 5;
-    int32 damage_made = 6;
-    int32 damage_received = 7;
-    PlayerAssets assets = 8;
+    string name = 1;
+    string id = 2;
+    string puuid = 3;
+    string team = 4;
+    PlayerStats stats = 5;
+    string character = 6;
+    string currenttier_patched = 7;
+    int32 damage_made = 8;
+    int32 damage_received = 9;
+    PlayerAssets assets = 10;
 }
 
 message PlayerStats {
@@ -178,6 +180,9 @@ message PlayerStats {
     int32 deaths = 2;
     int32 assists = 3;
     int32 score = 4;
+    int32 bodyshots = 5;
+    int32 headshots = 6;
+    int32 legshots = 7;
 }
 
 message PlayerAssets {

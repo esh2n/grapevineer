@@ -291,6 +291,12 @@
     "grapevineerAllPlayerInMatch": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
         "puuid": {
           "type": "string"
         },
@@ -494,6 +500,18 @@
           "format": "int32"
         },
         "score": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "bodyshots": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "headshots": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "legshots": {
           "type": "integer",
           "format": "int32"
         }
