@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option go_package = "github.com/esh2n/grapevineer/gen/go/grapevineer";
+
+// VoiceVox Related ...
+
+message GetWavFromTextRequest {
+    string text = 1;
+    int32 speaker_id = 2;
+}
+
+message GetWavFromTextResponse {
+    bytes audio_data = 1;
+}

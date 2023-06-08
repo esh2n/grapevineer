@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "github.com/esh2n/grapevineer/gen/go/grapevineer";
+
+// OG Image Related ...
+
+message GetOGImageRequest {
+    string base_url = 1;
+    string title = 2;
+    repeated string tags = 3;
+    string body = 4;
+    string color_code = 5;
+}
+
+message GetOGImageResponse {
+    bytes image = 1;
+}

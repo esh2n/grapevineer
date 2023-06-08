@@ -1,7 +1,7 @@
 .PHONY: gen-proto
 
 BIN := $(abspath ./bin)
-TAG := v0.0.15
+TAG := v1.0.0
 
 go-build:
 	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer-grpc/main.go cmd/grapevineer-grpc/wire_gen.go
@@ -9,12 +9,12 @@ go-build:
 generate: generate-go generate-gateway-go generate-ts generate-dart generate-rust generate-swagger
 
 generate-go:
-	protoc -I ./proto/v1/grapevineer \
-		--go_out=./gen/go/grapevineer \
+	protoc -I ./proto \
+		--go_out=./gen/go \
 		--go_opt=paths=source_relative \
-		--go-grpc_out=./gen/go/grapevineer \
+		--go-grpc_out=./gen/go \
 		--go-grpc_opt=paths=source_relative \
-		./proto/v1/grapevineer/grapevineer.proto
+		./proto/v1/*.proto
 
 generate-ts:
 	@make generate-grapevineer-ts-node
@@ -22,51 +22,51 @@ generate-ts:
 	@make generate-google-ts
 
 generate-grapevineer-ts-web:
-	grpc_tools_node_protoc -I ./proto/v1/grapevineer \
+	grpc_tools_node_protoc -I ./proto \
 		--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts \
-		--js_out=import_style=commonjs,binary:./gen/ts/grapevineer \
-		--grpc_out=grpc_js:./gen/ts/grapevineer \
-		--ts_out=service=grpc-web,grpc_js:./gen/ts/grapevineer \
-		./proto/v1/grapevineer/grapevineer.proto
+		--js_out=import_style=commonjs,binary:./gen/ts \
+		--grpc_out=grpc_js:./gen/ts \
+		--ts_out=service=grpc-web,grpc_js:./gen/ts \
+		./proto/v1/*.proto
 
 generate-grapevineer-ts-node:
-	grpc_tools_node_protoc -I ./proto/v1/grapevineer \
+	grpc_tools_node_protoc -I ./proto \
 		--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts \
-		--js_out=import_style=commonjs,binary:./gen/ts/grapevineer \
-		--grpc_out=grpc_js:./gen/ts/grapevineer \
-		--ts_out=service=grpc-node,mode=grpc-js:./gen/ts/grapevineer \
-		./proto/v1/grapevineer/grapevineer.proto
+		--js_out=import_style=commonjs,binary:./gen/ts \
+		--grpc_out=grpc_js:./gen/ts \
+		--ts_out=service=grpc-node,mode=grpc-js:./gen/ts \
+		./proto/v1/*.proto
 
 generate-google-ts:
-	grpc_tools_node_protoc -I ./proto/v1/grapevineer \
+	grpc_tools_node_protoc -I ./proto \
 		--plugin=protoc-gen-ts=./node_modules/.bin/protoc-gen-ts \
-		--js_out=import_style=commonjs,binary:./gen/ts/grapevineer \
-		--grpc_out=grpc_js:./gen/ts/grapevineer \
-		--ts_out=service=grpc-web,grpc_js:./gen/ts/grapevineer \
-		./proto/v1/grapevineer/google/api/*.proto
+		--js_out=import_style=commonjs,binary:./gen/ts \
+		--grpc_out=grpc_js:./gen/ts \
+		--ts_out=service=grpc-web,grpc_js:./gen/ts \
+		./proto/google/api/*.proto
 
 generate-dart:
-	protoc -I ./proto/v1/grapevineer \
-		--dart_out=grpc:./gen/dart/grapevineer \
-		./proto/v1/grapevineer/grapevineer.proto
+	protoc -I ./proto \
+		--dart_out=grpc:./gen/dart \
+		./proto/v1/*.proto
 
 generate-rust:
-	protoc -I ./proto/v1/grapevineer \
-		--tonic_out=./gen/rust/grapevineer \
+	protoc -I ./proto \
+		--tonic_out=./gen/rust \
 		--tonic_opt=no_include \
-		./proto/v1/grapevineer/grapevineer.proto
+		./proto/v1/*.proto
 generate-gateway-go:
-	protoc -I ./proto/v1/grapevineer \
-		--grpc-gateway_out=./gen/go/grapevineer \
+	protoc -I ./proto \
+		--grpc-gateway_out=./gen/go \
 		--grpc-gateway_opt logtostderr=true \
 		--grpc-gateway_opt paths=source_relative \
 		--grpc-gateway_opt generate_unbound_methods=true \
-		./proto/v1/grapevineer/grapevineer.proto
+		./proto/v1/*.proto
 generate-swagger:
-	protoc -I ./proto/v1/grapevineer --openapiv2_out ./gen/openapi --openapiv2_opt logtostderr=true \
+	protoc -I ./proto --openapiv2_out ./gen/openapi --openapiv2_opt logtostderr=true \
 		--openapiv2_opt disable_default_errors=true \
 		--openapiv2_opt allow_merge=true \
-		--openapiv2_opt merge_file_name="api_definition.yml" ./proto/v1/grapevineer/grapevineer.proto
+		--openapiv2_opt merge_file_name="api_definition.yml" ./proto/v1/*.proto
 
 evans:
 	$(BIN)/evans -r --port 8050

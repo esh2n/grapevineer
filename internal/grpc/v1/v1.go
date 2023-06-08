@@ -3,7 +3,7 @@ package v1
 import (
 	"context"
 	"esh2n/grapevineer/application"
-	"esh2n/grapevineer/gen/go/grapevineer"
+	grapevineer "esh2n/grapevineer/gen/go/v1"
 )
 
 func NewV1(grapevineer application.GrapevineerService) grapevineer.GrapevineerServer {
@@ -63,8 +63,24 @@ func (x *V1) GetAllPlayers(ctx context.Context, req *grapevineer.GetAllPlayersRe
 	}
 }
 
+func (x *V1) UpdatePlayer(ctx context.Context, req *grapevineer.UpdatePlayerRequest) (*grapevineer.UpdatePlayerResponse, error) {
+	if got, err := x.app.UpdatePlayer(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}
+
 func (x *V1) GetPlayerInfo(ctx context.Context, req *grapevineer.GetPlayerInfoRequest) (*grapevineer.GetPlayerInfoResponse, error) {
 	if got, err := x.app.GetPlayerInfo(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}
+
+func (x *V1) GetWavFromText(ctx context.Context, req *grapevineer.GetWavFromTextRequest) (*grapevineer.GetWavFromTextResponse, error) {
+	if got, err := x.app.GetWavFromText(ctx, req); err != nil {
 		return nil, err
 	} else {
 		return got, nil

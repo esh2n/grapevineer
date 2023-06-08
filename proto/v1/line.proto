@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "github.com/esh2n/grapevineer/gen/go/grapevineer";
+
+// Line Related...
+
+message SendLineMessageRequest {
+    string to = 1;
+    string name = 2;
+    string message = 3;
+}
+
+message SendLineMessageResponse {
+    int32 status = 1;
+}
