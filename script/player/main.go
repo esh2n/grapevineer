@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"esh2n/grapevineer/gen/go/grapevineer"
+	grapevineer "esh2n/grapevineer/gen/go/v1"
 	"fmt"
 	"io/ioutil"
 	"net/http"

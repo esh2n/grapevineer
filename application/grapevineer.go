@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"esh2n/grapevineer/domain/model"
 	"esh2n/grapevineer/domain/repository"
-	"esh2n/grapevineer/gen/go/grapevineer"
+	grapevineer "esh2n/grapevineer/gen/go/v1"
 	"esh2n/grapevineer/internal/config"
 	"esh2n/grapevineer/internal/database"
 	"fmt"
@@ -17,6 +17,7 @@ import (
 	"strings"
 	"time"
 
+	"golang.org/x/xerrors"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
@@ -48,6 +49,9 @@ type GrapevineerService interface {
 	GetAllPlayers(ctx context.Context, req *grapevineer.GetAllPlayersRequest) (*grapevineer.GetAllPlayersResponse, error)
 	UpdatePlayer(ctx context.Context, req *grapevineer.UpdatePlayerRequest) (*grapevineer.UpdatePlayerResponse, error)
 	GetPlayerInfo(ctx context.Context, req *grapevineer.GetPlayerInfoRequest) (*grapevineer.GetPlayerInfoResponse, error)
+
+	// voicevox
+	GetWavFromText(ctx context.Context, req *grapevineer.GetWavFromTextRequest) (*grapevineer.GetWavFromTextResponse, error)
 }
 
 type grapevineerService struct {
@@ -437,4 +441,88 @@ func getMatches(playerId, name, region string) ([]*grapevineer.Match, error) {
 	}
 
 	return matches, nil
+}
+
+func (s *grapevineerService) GetWavFromText(ctx context.Context, req *grapevineer.GetWavFromTextRequest) (*grapevineer.GetWavFromTextResponse, error) {
+	err := ioutil.WriteFile("text.txt", []byte(req.Text), 0644)
+	if err != nil {
+		return nil, xerrors.Errorf("failed to create text file: %v", err)
+	}
+
+	const BASE_URL = "https://voicevox-bo65gv7bka-an.a.run.app"
+	audioQueryURL := BASE_URL + "/audio_query"
+
+	audioParams := url.Values{}
+	audioParams.Set("speaker", fmt.Sprintf("%d", req.SpeakerId))
+
+	fileData, err := ioutil.ReadFile("text.txt")
+	if err != nil {
+		return nil, status.Error(codes.Internal, "failed to read text file")
+	}
+	audioParams.Set("text", string(fileData))
+
+	audioQueryURL = audioQueryURL + "?" + audioParams.Encode()
+
+	queryReq, err := http.NewRequest("POST", audioQueryURL, nil)
+	if err != nil {
+		fmt.Printf("failed to create audio_query request: %v\n", err)
+		return nil, status.Error(codes.Internal, "failed to create audio_query request")
+	}
+	queryRes, err := http.DefaultClient.Do(queryReq)
+	if err != nil {
+		fmt.Printf("failed to execute audio_query: %v\n", err)
+		return nil, status.Error(codes.Internal, "failed to execute audio_query")
+	}
+	defer queryRes.Body.Close()
+
+	queryBody, err := ioutil.ReadAll(queryRes.Body)
+	if err != nil {
+		fmt.Printf("failed to read audio_query response: %v\n", err)
+		return nil, status.Error(codes.Internal, "failed to read audio_query response")
+	}
+
+	err = ioutil.WriteFile("query.json", queryBody, 0644)
+	if err != nil {
+		fmt.Printf("failed to write query.json: %v\n", err)
+		return nil, status.Error(codes.Internal, "failed to write query.json")
+	}
+
+	synthesisURL := BASE_URL + "/synthesis"
+
+	synthesisParams := url.Values{}
+	synthesisParams.Set("speaker", fmt.Sprintf("%d", req.SpeakerId))
+
+	synthesisBody, err := ioutil.ReadFile("query.json")
+	if err != nil {
+		fmt.Printf("failed to read query.json: %v\n", err)
+		return nil, status.Error(codes.Internal, "failed to read query.json")
+	}
+
+	synthesisURL = synthesisURL + "?" + synthesisParams.Encode()
+
+	synthesisReq, err := http.NewRequest("POST", synthesisURL, bytes.NewBuffer(synthesisBody))
+	if err != nil {
+		fmt.Printf("failed to create synthesis request: %v\n", err)
+		return nil, status.Error(codes.Internal, "failed to create synthesis request")
+	}
+	synthesisReq.Header.Set("Content-Type", "application/json")
+
+	synthesisRes, err := http.DefaultClient.Do(synthesisReq)
+	if err != nil {
+		fmt.Printf("failed to execute synthesis: %v\n", err)
+		return nil, status.Error(codes.Internal, "failed to execute synthesis")
+	}
+	defer synthesisRes.Body.Close()
+
+	synthesisBody, err = ioutil.ReadAll(synthesisRes.Body)
+	if err != nil {
+		fmt.Printf("failed to read synthesis response: %v\n", err)
+		return nil, status.Error(codes.Internal, "failed to read synthesis response")
+	}
+
+	response := &grapevineer.GetWavFromTextResponse{
+		AudioData: synthesisBody,
+	}
+
+	return response, nil
 }

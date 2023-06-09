@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"esh2n/grapevineer/gen/go/grapevineer"
+	grapevineer "esh2n/grapevineer/gen/go/v1"
 	"esh2n/grapevineer/internal/config"
 	v1 "esh2n/grapevineer/internal/grpc/v1"
 	"fmt"

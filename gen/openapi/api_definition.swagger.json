@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "grapevineer.proto",
+    "title": "v1/flower_meaning.proto",
     "version": "version not set"
   },
   "tags": [
@@ -23,7 +23,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/grapevineerGetFlowerMeaningByDateResponse"
+              "$ref": "#/definitions/GetFlowerMeaningByDateResponse"
             }
           }
         },
@@ -47,7 +47,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/grapevineerSendLineMessageResponse"
+              "$ref": "#/definitions/SendLineMessageResponse"
             }
           }
         },
@@ -83,7 +83,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/grapevineerGetOGImageResponse"
+              "$ref": "#/definitions/GetOGImageResponse"
             }
           }
         },
@@ -135,7 +135,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/grapevineerSendOpenAIMessageResponse"
+              "$ref": "#/definitions/SendOpenAIMessageResponse"
             }
           }
         },
@@ -165,7 +165,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/grapevineerSetPlayerResponse"
+              "$ref": "#/definitions/SetPlayerResponse"
             }
           }
         },
@@ -199,7 +199,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/grapevineerUpdatePlayerResponse"
+              "$ref": "#/definitions/UpdatePlayerResponse"
             }
           }
         },
@@ -241,7 +241,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/grapevineerGetPlayerInfoResponse"
+              "$ref": "#/definitions/GetPlayerInfoResponse"
             }
           }
         },
@@ -277,7 +277,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/grapevineerGetAllPlayersResponse"
+              "$ref": "#/definitions/GetAllPlayersResponse"
             }
           }
         },
@@ -285,12 +285,49 @@
           "Grapevineer"
         ]
       }
+    },
+    "/v1/wav_from_text": {
+      "get": {
+        "operationId": "Grapevineer_GetWavFromText",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetWavFromTextResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "speakerId",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
     }
   },
   "definitions": {
-    "grapevineerAllPlayerInMatch": {
+    "AllPlayerInMatch": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
         "puuid": {
           "type": "string"
         },
@@ -298,7 +335,7 @@
           "type": "string"
         },
         "stats": {
-          "$ref": "#/definitions/grapevineerPlayerStats"
+          "$ref": "#/definitions/PlayerStats"
         },
         "character": {
           "type": "string"
@@ -315,11 +352,11 @@
           "format": "int32"
         },
         "assets": {
-          "$ref": "#/definitions/grapevineerPlayerAssets"
+          "$ref": "#/definitions/PlayerAssets"
         }
       }
     },
-    "grapevineerFlower": {
+    "Flower": {
       "type": "object",
       "properties": {
         "name": {
@@ -339,19 +376,19 @@
         }
       }
     },
-    "grapevineerGetAllPlayersResponse": {
+    "GetAllPlayersResponse": {
       "type": "object",
       "properties": {
         "players": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/grapevineerPlayer"
+            "$ref": "#/definitions/Player"
           }
         }
       }
     },
-    "grapevineerGetFlowerMeaningByDateResponse": {
+    "GetFlowerMeaningByDateResponse": {
       "type": "object",
       "properties": {
         "url": {
@@ -367,12 +404,12 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/grapevineerFlower"
+            "$ref": "#/definitions/Flower"
           }
         }
       }
     },
-    "grapevineerGetOGImageResponse": {
+    "GetOGImageResponse": {
       "type": "object",
       "properties": {
         "image": {
@@ -381,39 +418,48 @@
         }
       }
     },
-    "grapevineerGetPlayerInfoResponse": {
+    "GetPlayerInfoResponse": {
       "type": "object",
       "properties": {
         "player": {
-          "$ref": "#/definitions/grapevineerPlayer"
+          "$ref": "#/definitions/Player"
         },
         "recentMatches": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/grapevineerMatch"
+            "$ref": "#/definitions/Match"
           }
         }
       }
     },
-    "grapevineerMatch": {
+    "GetWavFromTextResponse": {
       "type": "object",
       "properties": {
-        "metadata": {
-          "$ref": "#/definitions/grapevineerMatchMetadata"
-        },
-        "players": {
-          "$ref": "#/definitions/grapevineerPlayerInMatch"
-        },
-        "red": {
-          "$ref": "#/definitions/grapevineerTeam"
-        },
-        "blue": {
-          "$ref": "#/definitions/grapevineerTeam"
+        "audioData": {
+          "type": "string",
+          "format": "byte"
         }
       }
     },
-    "grapevineerMatchMetadata": {
+    "Match": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/MatchMetadata"
+        },
+        "players": {
+          "$ref": "#/definitions/PlayerInMatch"
+        },
+        "red": {
+          "$ref": "#/definitions/Team"
+        },
+        "blue": {
+          "$ref": "#/definitions/Team"
+        }
+      }
+    },
+    "MatchMetadata": {
       "type": "object",
       "properties": {
         "map": {
@@ -427,7 +473,7 @@
         }
       }
     },
-    "grapevineerPlayer": {
+    "Player": {
       "type": "object",
       "properties": {
         "id": {
@@ -444,15 +490,15 @@
         }
       }
     },
-    "grapevineerPlayerAssets": {
+    "PlayerAssets": {
       "type": "object",
       "properties": {
         "card": {
-          "$ref": "#/definitions/grapevineerPlayerCard"
+          "$ref": "#/definitions/PlayerCard"
         }
       }
     },
-    "grapevineerPlayerCard": {
+    "PlayerCard": {
       "type": "object",
       "properties": {
         "small": {
@@ -466,19 +512,19 @@
         }
       }
     },
-    "grapevineerPlayerInMatch": {
+    "PlayerInMatch": {
       "type": "object",
       "properties": {
         "allPlayers": {
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/grapevineerAllPlayerInMatch"
+            "$ref": "#/definitions/AllPlayerInMatch"
           }
         }
       }
     },
-    "grapevineerPlayerStats": {
+    "PlayerStats": {
       "type": "object",
       "properties": {
         "kills": {
@@ -496,10 +542,22 @@
         "score": {
           "type": "integer",
           "format": "int32"
+        },
+        "bodyshots": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "headshots": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "legshots": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
-    "grapevineerSendLineMessageResponse": {
+    "SendLineMessageResponse": {
       "type": "object",
       "properties": {
         "status": {
@@ -508,7 +566,7 @@
         }
       }
     },
-    "grapevineerSendOpenAIMessageResponse": {
+    "SendOpenAIMessageResponse": {
       "type": "object",
       "properties": {
         "message": {
@@ -516,7 +574,7 @@
         }
       }
     },
-    "grapevineerSetPlayerResponse": {
+    "SetPlayerResponse": {
       "type": "object",
       "properties": {
         "status": {
@@ -525,7 +583,7 @@
         }
       }
     },
-    "grapevineerTeam": {
+    "Team": {
       "type": "object",
       "properties": {
         "hasWon": {
@@ -541,7 +599,7 @@
         }
       }
     },
-    "grapevineerUpdatePlayerResponse": {
+    "UpdatePlayerResponse": {
       "type": "object",
       "properties": {
         "status": {
