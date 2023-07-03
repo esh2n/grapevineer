@@ -33,26 +33,26 @@ function deserialize_GetAllPlayersResponse(buffer_arg) {
   return v1_player_pb.GetAllPlayersResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_GetBoScriptRamdomlyRequest(arg) {
-  if (!(arg instanceof v1_bo_pb.GetBoScriptRamdomlyRequest)) {
-    throw new Error('Expected argument of type GetBoScriptRamdomlyRequest');
+function serialize_GetBoScriptRandomlyRequest(arg) {
+  if (!(arg instanceof v1_bo_pb.GetBoScriptRandomlyRequest)) {
+    throw new Error('Expected argument of type GetBoScriptRandomlyRequest');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_GetBoScriptRamdomlyRequest(buffer_arg) {
-  return v1_bo_pb.GetBoScriptRamdomlyRequest.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_GetBoScriptRandomlyRequest(buffer_arg) {
+  return v1_bo_pb.GetBoScriptRandomlyRequest.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
-function serialize_GetBoScriptRamdomlyResponse(arg) {
-  if (!(arg instanceof v1_bo_pb.GetBoScriptRamdomlyResponse)) {
-    throw new Error('Expected argument of type GetBoScriptRamdomlyResponse');
+function serialize_GetBoScriptRandomlyResponse(arg) {
+  if (!(arg instanceof v1_bo_pb.GetBoScriptRandomlyResponse)) {
+    throw new Error('Expected argument of type GetBoScriptRandomlyResponse');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
-function deserialize_GetBoScriptRamdomlyResponse(buffer_arg) {
-  return v1_bo_pb.GetBoScriptRamdomlyResponse.deserializeBinary(new Uint8Array(buffer_arg));
+function deserialize_GetBoScriptRandomlyResponse(buffer_arg) {
+  return v1_bo_pb.GetBoScriptRandomlyResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_GetFlowerMeaningByDateRequest(arg) {
@@ -365,16 +365,16 @@ var GrapevineerService = exports.GrapevineerService = {
     responseSerialize: serialize_SetBoScriptResponse,
     responseDeserialize: deserialize_SetBoScriptResponse,
   },
-  getBoScriptRamdomly: {
-    path: '/grapevineer.Grapevineer/GetBoScriptRamdomly',
+  getBoScriptRandomly: {
+    path: '/grapevineer.Grapevineer/GetBoScriptRandomly',
     requestStream: false,
     responseStream: false,
-    requestType: v1_bo_pb.GetBoScriptRamdomlyRequest,
-    responseType: v1_bo_pb.GetBoScriptRamdomlyResponse,
-    requestSerialize: serialize_GetBoScriptRamdomlyRequest,
-    requestDeserialize: deserialize_GetBoScriptRamdomlyRequest,
-    responseSerialize: serialize_GetBoScriptRamdomlyResponse,
-    responseDeserialize: deserialize_GetBoScriptRamdomlyResponse,
+    requestType: v1_bo_pb.GetBoScriptRandomlyRequest,
+    responseType: v1_bo_pb.GetBoScriptRandomlyResponse,
+    requestSerialize: serialize_GetBoScriptRandomlyRequest,
+    requestDeserialize: deserialize_GetBoScriptRandomlyRequest,
+    responseSerialize: serialize_GetBoScriptRandomlyResponse,
+    responseDeserialize: deserialize_GetBoScriptRandomlyResponse,
   },
 };
 

@@ -24,7 +24,7 @@ interface IGrapevineerService extends grpc.ServiceDefinition<grpc.UntypedService
   getPlayerInfo: grpc.MethodDefinition<v1_player_pb.GetPlayerInfoRequest, v1_player_pb.GetPlayerInfoResponse>;
   getWavFromText: grpc.MethodDefinition<v1_voicevox_pb.GetWavFromTextRequest, v1_voicevox_pb.GetWavFromTextResponse>;
   setBoScript: grpc.MethodDefinition<v1_bo_pb.SetBoScriptRequest, v1_bo_pb.SetBoScriptResponse>;
-  getBoScriptRamdomly: grpc.MethodDefinition<v1_bo_pb.GetBoScriptRamdomlyRequest, v1_bo_pb.GetBoScriptRamdomlyResponse>;
+  getBoScriptRandomly: grpc.MethodDefinition<v1_bo_pb.GetBoScriptRandomlyRequest, v1_bo_pb.GetBoScriptRandomlyResponse>;
 }
 
 export const GrapevineerService: IGrapevineerService;
@@ -40,7 +40,7 @@ export interface IGrapevineerServer extends grpc.UntypedServiceImplementation {
   getPlayerInfo: grpc.handleUnaryCall<v1_player_pb.GetPlayerInfoRequest, v1_player_pb.GetPlayerInfoResponse>;
   getWavFromText: grpc.handleUnaryCall<v1_voicevox_pb.GetWavFromTextRequest, v1_voicevox_pb.GetWavFromTextResponse>;
   setBoScript: grpc.handleUnaryCall<v1_bo_pb.SetBoScriptRequest, v1_bo_pb.SetBoScriptResponse>;
-  getBoScriptRamdomly: grpc.handleUnaryCall<v1_bo_pb.GetBoScriptRamdomlyRequest, v1_bo_pb.GetBoScriptRamdomlyResponse>;
+  getBoScriptRandomly: grpc.handleUnaryCall<v1_bo_pb.GetBoScriptRandomlyRequest, v1_bo_pb.GetBoScriptRandomlyResponse>;
 }
 
 export class GrapevineerClient extends grpc.Client {
@@ -75,7 +75,7 @@ export class GrapevineerClient extends grpc.Client {
   setBoScript(argument: v1_bo_pb.SetBoScriptRequest, callback: grpc.requestCallback<v1_bo_pb.SetBoScriptResponse>): grpc.ClientUnaryCall;
   setBoScript(argument: v1_bo_pb.SetBoScriptRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.SetBoScriptResponse>): grpc.ClientUnaryCall;
   setBoScript(argument: v1_bo_pb.SetBoScriptRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.SetBoScriptResponse>): grpc.ClientUnaryCall;
-  getBoScriptRamdomly(argument: v1_bo_pb.GetBoScriptRamdomlyRequest, callback: grpc.requestCallback<v1_bo_pb.GetBoScriptRamdomlyResponse>): grpc.ClientUnaryCall;
-  getBoScriptRamdomly(argument: v1_bo_pb.GetBoScriptRamdomlyRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.GetBoScriptRamdomlyResponse>): grpc.ClientUnaryCall;
-  getBoScriptRamdomly(argument: v1_bo_pb.GetBoScriptRamdomlyRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.GetBoScriptRamdomlyResponse>): grpc.ClientUnaryCall;
+  getBoScriptRandomly(argument: v1_bo_pb.GetBoScriptRandomlyRequest, callback: grpc.requestCallback<v1_bo_pb.GetBoScriptRandomlyResponse>): grpc.ClientUnaryCall;
+  getBoScriptRandomly(argument: v1_bo_pb.GetBoScriptRandomlyRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.GetBoScriptRandomlyResponse>): grpc.ClientUnaryCall;
+  getBoScriptRandomly(argument: v1_bo_pb.GetBoScriptRandomlyRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.GetBoScriptRandomlyResponse>): grpc.ClientUnaryCall;
 }

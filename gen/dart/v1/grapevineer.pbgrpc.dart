@@ -16,6 +16,7 @@ import 'line.pb.dart' as $2;
 import 'openai.pb.dart' as $3;
 import 'player.pb.dart' as $4;
 import 'voicevox.pb.dart' as $5;
+import 'bo.pb.dart' as $6;
 export 'grapevineer.pb.dart';
 
 class GrapevineerClient extends $grpc.Client {
@@ -73,6 +74,18 @@ class GrapevineerClient extends $grpc.Client {
           ($5.GetWavFromTextRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $5.GetWavFromTextResponse.fromBuffer(value));
+  static final _$setBoScript =
+      $grpc.ClientMethod<$6.SetBoScriptRequest, $6.SetBoScriptResponse>(
+          '/grapevineer.Grapevineer/SetBoScript',
+          ($6.SetBoScriptRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $6.SetBoScriptResponse.fromBuffer(value));
+  static final _$getBoScriptRandomly = $grpc.ClientMethod<
+          $6.GetBoScriptRandomlyRequest, $6.GetBoScriptRandomlyResponse>(
+      '/grapevineer.Grapevineer/GetBoScriptRandomly',
+      ($6.GetBoScriptRandomlyRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $6.GetBoScriptRandomlyResponse.fromBuffer(value));
 
   GrapevineerClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -132,6 +145,18 @@ class GrapevineerClient extends $grpc.Client {
       $5.GetWavFromTextRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getWavFromText, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$6.SetBoScriptResponse> setBoScript(
+      $6.SetBoScriptRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$setBoScript, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$6.GetBoScriptRandomlyResponse> getBoScriptRandomly(
+      $6.GetBoScriptRandomlyRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getBoScriptRandomly, request, options: options);
   }
 }
 
@@ -216,6 +241,24 @@ abstract class GrapevineerServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $5.GetWavFromTextRequest.fromBuffer(value),
         ($5.GetWavFromTextResponse value) => value.writeToBuffer()));
+    $addMethod(
+        $grpc.ServiceMethod<$6.SetBoScriptRequest, $6.SetBoScriptResponse>(
+            'SetBoScript',
+            setBoScript_Pre,
+            false,
+            false,
+            ($core.List<$core.int> value) =>
+                $6.SetBoScriptRequest.fromBuffer(value),
+            ($6.SetBoScriptResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$6.GetBoScriptRandomlyRequest,
+            $6.GetBoScriptRandomlyResponse>(
+        'GetBoScriptRandomly',
+        getBoScriptRandomly_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $6.GetBoScriptRandomlyRequest.fromBuffer(value),
+        ($6.GetBoScriptRandomlyResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.GetOGImageResponse> getOGImage_Pre($grpc.ServiceCall call,
@@ -270,6 +313,17 @@ abstract class GrapevineerServiceBase extends $grpc.Service {
     return getWavFromText(call, await request);
   }
 
+  $async.Future<$6.SetBoScriptResponse> setBoScript_Pre($grpc.ServiceCall call,
+      $async.Future<$6.SetBoScriptRequest> request) async {
+    return setBoScript(call, await request);
+  }
+
+  $async.Future<$6.GetBoScriptRandomlyResponse> getBoScriptRandomly_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$6.GetBoScriptRandomlyRequest> request) async {
+    return getBoScriptRandomly(call, await request);
+  }
+
   $async.Future<$0.GetOGImageResponse> getOGImage(
       $grpc.ServiceCall call, $0.GetOGImageRequest request);
   $async.Future<$1.GetFlowerMeaningByDateResponse> getFlowerMeaningByDate(
@@ -288,4 +342,8 @@ abstract class GrapevineerServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $4.GetPlayerInfoRequest request);
   $async.Future<$5.GetWavFromTextResponse> getWavFromText(
       $grpc.ServiceCall call, $5.GetWavFromTextRequest request);
+  $async.Future<$6.SetBoScriptResponse> setBoScript(
+      $grpc.ServiceCall call, $6.SetBoScriptRequest request);
+  $async.Future<$6.GetBoScriptRandomlyResponse> getBoScriptRandomly(
+      $grpc.ServiceCall call, $6.GetBoScriptRandomlyRequest request);
 }

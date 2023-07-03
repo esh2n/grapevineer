@@ -50,6 +50,10 @@ type GrapevineerService interface {
 	UpdatePlayer(ctx context.Context, req *grapevineer.UpdatePlayerRequest) (*grapevineer.UpdatePlayerResponse, error)
 	GetPlayerInfo(ctx context.Context, req *grapevineer.GetPlayerInfoRequest) (*grapevineer.GetPlayerInfoResponse, error)
 
+	// bo
+	SetBoScript(ctx context.Context, req *grapevineer.SetBoScriptRequest) (*grapevineer.SetBoScriptResponse, error)
+	GetBoScriptRandomly(ctx context.Context, req *grapevineer.GetBoScriptRandomlyRequest) (*grapevineer.GetBoScriptRandomlyResponse, error)
+
 	// voicevox
 	GetWavFromText(ctx context.Context, req *grapevineer.GetWavFromTextRequest) (*grapevineer.GetWavFromTextResponse, error)
 }

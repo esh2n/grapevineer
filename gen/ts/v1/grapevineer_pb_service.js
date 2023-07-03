@@ -107,13 +107,13 @@ Grapevineer.SetBoScript = {
   responseType: v1_bo_pb.SetBoScriptResponse
 };
 
-Grapevineer.GetBoScriptRamdomly = {
-  methodName: "GetBoScriptRamdomly",
+Grapevineer.GetBoScriptRandomly = {
+  methodName: "GetBoScriptRandomly",
   service: Grapevineer,
   requestStream: false,
   responseStream: false,
-  requestType: v1_bo_pb.GetBoScriptRamdomlyRequest,
-  responseType: v1_bo_pb.GetBoScriptRamdomlyResponse
+  requestType: v1_bo_pb.GetBoScriptRandomlyRequest,
+  responseType: v1_bo_pb.GetBoScriptRandomlyResponse
 };
 
 exports.Grapevineer = Grapevineer;
@@ -433,11 +433,11 @@ GrapevineerClient.prototype.setBoScript = function setBoScript(requestMessage, m
   };
 };
 
-GrapevineerClient.prototype.getBoScriptRamdomly = function getBoScriptRamdomly(requestMessage, metadata, callback) {
+GrapevineerClient.prototype.getBoScriptRandomly = function getBoScriptRandomly(requestMessage, metadata, callback) {
   if (arguments.length === 2) {
     callback = arguments[1];
   }
-  var client = grpc.unary(Grapevineer.GetBoScriptRamdomly, {
+  var client = grpc.unary(Grapevineer.GetBoScriptRandomly, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

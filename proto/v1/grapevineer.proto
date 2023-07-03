@@ -65,7 +65,7 @@ service Grapevineer {
             post: "/v1/bo_script"
         };
     }
-    rpc GetBoScriptRamdomly(GetBoScriptRamdomlyRequest) returns (GetBoScriptRamdomlyResponse) {
+    rpc GetBoScriptRandomly(GetBoScriptRandomlyRequest) returns (GetBoScriptRandomlyResponse) {
         option (google.api.http) = {
             get: "/v1/bo_script"
         };

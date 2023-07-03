@@ -8,6 +8,17 @@ import (
 )
 
 var (
+	// BosColumns holds the columns for the "bos" table.
+	BosColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeString, SchemaType: map[string]string{"postgres": "uuid"}},
+		{Name: "script", Type: field.TypeString},
+	}
+	// BosTable holds the schema information for the "bos" table.
+	BosTable = &schema.Table{
+		Name:       "bos",
+		Columns:    BosColumns,
+		PrimaryKey: []*schema.Column{BosColumns[0]},
+	}
 	// PlayersColumns holds the columns for the "players" table.
 	PlayersColumns = []*schema.Column{
 		{Name: "id", Type: field.TypeString, SchemaType: map[string]string{"postgres": "uuid"}},
@@ -23,6 +34,7 @@ var (
 	}
 	// Tables holds all the tables in the schema.
 	Tables = []*schema.Table{
+		BosTable,
 		PlayersTable,
 	}
 )

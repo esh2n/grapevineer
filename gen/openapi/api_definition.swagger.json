@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "v1/flower_meaning.proto",
+    "title": "v1/bo.proto",
     "version": "version not set"
   },
   "tags": [
@@ -16,6 +16,50 @@
     "application/json"
   ],
   "paths": {
+    "/v1/bo_script": {
+      "get": {
+        "operationId": "Grapevineer_GetBoScriptRandomly",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetBoScriptRandomlyResponse"
+            }
+          }
+        },
+        "tags": [
+          "Grapevineer"
+        ]
+      },
+      "post": {
+        "operationId": "Grapevineer_SetBoScript",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SetBoScriptResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "boId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "script",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
     "/v1/flower_meaning/{date}": {
       "get": {
         "operationId": "Grapevineer_GetFlowerMeaningByDate",
@@ -388,6 +432,17 @@
         }
       }
     },
+    "GetBoScriptRandomlyResponse": {
+      "type": "object",
+      "properties": {
+        "boId": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        }
+      }
+    },
     "GetFlowerMeaningByDateResponse": {
       "type": "object",
       "properties": {
@@ -571,6 +626,15 @@
       "properties": {
         "message": {
           "type": "string"
+        }
+      }
+    },
+    "SetBoScriptResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

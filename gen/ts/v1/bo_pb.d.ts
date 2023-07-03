@@ -47,23 +47,23 @@ export namespace SetBoScriptResponse {
   }
 }
 
-export class GetBoScriptRamdomlyRequest extends jspb.Message {
+export class GetBoScriptRandomlyRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetBoScriptRamdomlyRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetBoScriptRamdomlyRequest): GetBoScriptRamdomlyRequest.AsObject;
+  toObject(includeInstance?: boolean): GetBoScriptRandomlyRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetBoScriptRandomlyRequest): GetBoScriptRandomlyRequest.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: GetBoScriptRamdomlyRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetBoScriptRamdomlyRequest;
-  static deserializeBinaryFromReader(message: GetBoScriptRamdomlyRequest, reader: jspb.BinaryReader): GetBoScriptRamdomlyRequest;
+  static serializeBinaryToWriter(message: GetBoScriptRandomlyRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetBoScriptRandomlyRequest;
+  static deserializeBinaryFromReader(message: GetBoScriptRandomlyRequest, reader: jspb.BinaryReader): GetBoScriptRandomlyRequest;
 }
 
-export namespace GetBoScriptRamdomlyRequest {
+export namespace GetBoScriptRandomlyRequest {
   export type AsObject = {
   }
 }
 
-export class GetBoScriptRamdomlyResponse extends jspb.Message {
+export class GetBoScriptRandomlyResponse extends jspb.Message {
   getBoId(): string;
   setBoId(value: string): void;
 
@@ -71,16 +71,16 @@ export class GetBoScriptRamdomlyResponse extends jspb.Message {
   setScript(value: string): void;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetBoScriptRamdomlyResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetBoScriptRamdomlyResponse): GetBoScriptRamdomlyResponse.AsObject;
+  toObject(includeInstance?: boolean): GetBoScriptRandomlyResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetBoScriptRandomlyResponse): GetBoScriptRandomlyResponse.AsObject;
   static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
   static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
-  static serializeBinaryToWriter(message: GetBoScriptRamdomlyResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetBoScriptRamdomlyResponse;
-  static deserializeBinaryFromReader(message: GetBoScriptRamdomlyResponse, reader: jspb.BinaryReader): GetBoScriptRamdomlyResponse;
+  static serializeBinaryToWriter(message: GetBoScriptRandomlyResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetBoScriptRandomlyResponse;
+  static deserializeBinaryFromReader(message: GetBoScriptRandomlyResponse, reader: jspb.BinaryReader): GetBoScriptRandomlyResponse;
 }
 
-export namespace GetBoScriptRamdomlyResponse {
+export namespace GetBoScriptRandomlyResponse {
   export type AsObject = {
     boId: string,
     script: string,

@@ -13,10 +13,10 @@ message SetBoScriptResponse {
     int32 status = 1;
 }
 
-message GetBoScriptRamdomlyRequest {
+message GetBoScriptRandomlyRequest {
 }
 
-message GetBoScriptRamdomlyResponse {
+message GetBoScriptRandomlyResponse {
     string bo_id = 1;
     string script = 2;
 }

@@ -5,6 +5,7 @@ package ent
 import (
 	"context"
 	"errors"
+	"esh2n/grapevineer/ent/bo"
 	"esh2n/grapevineer/ent/player"
 	"fmt"
 	"reflect"
@@ -73,6 +74,7 @@ var (
 func checkColumn(table, column string) error {
 	initCheck.Do(func() {
 		columnCheck = sql.NewColumnCheck(map[string]func(string) bool{
+			bo.Table:     bo.ValidColumn,
 			player.Table: player.ValidColumn,
 		})
 	})

@@ -101,13 +101,13 @@ type GrapevineerSetBoScript = {
   readonly responseType: typeof v1_bo_pb.SetBoScriptResponse;
 };
 
-type GrapevineerGetBoScriptRamdomly = {
+type GrapevineerGetBoScriptRandomly = {
   readonly methodName: string;
   readonly service: typeof Grapevineer;
   readonly requestStream: false;
   readonly responseStream: false;
-  readonly requestType: typeof v1_bo_pb.GetBoScriptRamdomlyRequest;
-  readonly responseType: typeof v1_bo_pb.GetBoScriptRamdomlyResponse;
+  readonly requestType: typeof v1_bo_pb.GetBoScriptRandomlyRequest;
+  readonly responseType: typeof v1_bo_pb.GetBoScriptRandomlyResponse;
 };
 
 export class Grapevineer {
@@ -122,7 +122,7 @@ export class Grapevineer {
   static readonly GetPlayerInfo: GrapevineerGetPlayerInfo;
   static readonly GetWavFromText: GrapevineerGetWavFromText;
   static readonly SetBoScript: GrapevineerSetBoScript;
-  static readonly GetBoScriptRamdomly: GrapevineerGetBoScriptRamdomly;
+  static readonly GetBoScriptRandomly: GrapevineerGetBoScriptRandomly;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -247,14 +247,14 @@ export class GrapevineerClient {
     requestMessage: v1_bo_pb.SetBoScriptRequest,
     callback: (error: ServiceError|null, responseMessage: v1_bo_pb.SetBoScriptResponse|null) => void
   ): UnaryResponse;
-  getBoScriptRamdomly(
-    requestMessage: v1_bo_pb.GetBoScriptRamdomlyRequest,
+  getBoScriptRandomly(
+    requestMessage: v1_bo_pb.GetBoScriptRandomlyRequest,
     metadata: grpc.Metadata,
-    callback: (error: ServiceError|null, responseMessage: v1_bo_pb.GetBoScriptRamdomlyResponse|null) => void
+    callback: (error: ServiceError|null, responseMessage: v1_bo_pb.GetBoScriptRandomlyResponse|null) => void
   ): UnaryResponse;
-  getBoScriptRamdomly(
-    requestMessage: v1_bo_pb.GetBoScriptRamdomlyRequest,
-    callback: (error: ServiceError|null, responseMessage: v1_bo_pb.GetBoScriptRamdomlyResponse|null) => void
+  getBoScriptRandomly(
+    requestMessage: v1_bo_pb.GetBoScriptRandomlyRequest,
+    callback: (error: ServiceError|null, responseMessage: v1_bo_pb.GetBoScriptRandomlyResponse|null) => void
   ): UnaryResponse;
 }
 
