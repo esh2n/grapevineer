@@ -3,6 +3,7 @@
 
 import * as jspb from "google-protobuf";
 import * as google_api_annotations_pb from "../google/api/annotations_pb";
+import * as v1_bo_pb from "../v1/bo_pb";
 import * as v1_player_pb from "../v1/player_pb";
 import * as v1_og_image_pb from "../v1/og_image_pb";
 import * as v1_flower_meaning_pb from "../v1/flower_meaning_pb";

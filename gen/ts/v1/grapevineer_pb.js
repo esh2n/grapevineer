@@ -23,6 +23,8 @@ var global = (function() {
 
 var google_api_annotations_pb = require('../google/api/annotations_pb.js');
 goog.object.extend(proto, google_api_annotations_pb);
+var v1_bo_pb = require('../v1/bo_pb.js');
+goog.object.extend(proto, v1_bo_pb);
 var v1_player_pb = require('../v1/player_pb.js');
 goog.object.extend(proto, v1_player_pb);
 var v1_og_image_pb = require('../v1/og_image_pb.js');
