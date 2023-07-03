@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "github.com/esh2n/grapevineer/gen/go/grapevineer";
+
+// Bo Related...
+
+message SetBoScriptRequest {
+    string script = 1;
+}
+
+message SetBoScriptResponse {
+    int32 status = 1;
+}
+
+message GetBoScriptRandomlyRequest {
+}
+
+message GetBoScriptRandomlyResponse {
+    string bo_id = 1;
+    string script = 2;
+}

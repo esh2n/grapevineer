@@ -86,3 +86,18 @@ func (x *V1) GetWavFromText(ctx context.Context, req *grapevineer.GetWavFromText
 		return got, nil
 	}
 }
+func (x *V1) GetBoScriptRandomly(ctx context.Context, req *grapevineer.GetBoScriptRandomlyRequest) (*grapevineer.GetBoScriptRandomlyResponse, error) {
+	if got, err := x.app.GetBoScriptRandomly(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}
+
+func (x *V1) SetBoScript(ctx context.Context, req *grapevineer.SetBoScriptRequest) (*grapevineer.SetBoScriptResponse, error) {
+	if got, err := x.app.SetBoScript(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}

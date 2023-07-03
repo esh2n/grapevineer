@@ -23,8 +23,9 @@ func wireInject(ctx context.Context) (application.GrapevineerService, func(), er
 	if err != nil {
 		return nil, nil, err
 	}
-	repositoryRepository := repository.NewPlayerRepository()
-	grapevineerService := application.NewGrapevineerService(configConfig, databaseDatabase, repositoryRepository)
+	playerRepository := repository.NewPlayerRepository()
+	boRepository := repository.NewBoRepository()
+	grapevineerService := application.NewGrapevineerService(configConfig, databaseDatabase, playerRepository, boRepository)
 	return grapevineerService, func() {
 	}, nil
 }

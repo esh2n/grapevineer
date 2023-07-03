@@ -4,6 +4,7 @@ package grapevineer;
 
 import "google/api/annotations.proto";
 
+import "v1/bo.proto";
 import "v1/player.proto";
 import "v1/og_image.proto";
 import "v1/flower_meaning.proto";
@@ -57,6 +58,16 @@ service Grapevineer {
     rpc GetWavFromText(GetWavFromTextRequest) returns (GetWavFromTextResponse) {
         option (google.api.http) = {
             get: "/v1/wav_from_text"
+        };
+    }
+    rpc SetBoScript(SetBoScriptRequest) returns (SetBoScriptResponse) {
+        option (google.api.http) = {
+            post: "/v1/bo_script"
+        };
+    }
+    rpc GetBoScriptRandomly(GetBoScriptRandomlyRequest) returns (GetBoScriptRandomlyResponse) {
+        option (google.api.http) = {
+            get: "/v1/bo_script"
         };
     }
 }

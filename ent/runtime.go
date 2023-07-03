@@ -3,6 +3,7 @@
 package ent
 
 import (
+	"esh2n/grapevineer/ent/bo"
 	"esh2n/grapevineer/ent/player"
 	"esh2n/grapevineer/ent/schema"
 )
@@ -11,6 +12,12 @@ import (
 // (default values, validators, hooks and policies) and stitches it
 // to their package variables.
 func init() {
+	boFields := schema.Bo{}.Fields()
+	_ = boFields
+	// boDescScript is the schema descriptor for script field.
+	boDescScript := boFields[1].Descriptor()
+	// bo.ScriptValidator is a validator for the "script" field. It is called by the builders before save.
+	bo.ScriptValidator = boDescScript.Validators[0].(func(string) error)
 	playerFields := schema.Player{}.Fields()
 	_ = playerFields
 	// playerDescPlayerID is the schema descriptor for player_id field.
