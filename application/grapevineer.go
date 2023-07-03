@@ -59,16 +59,18 @@ type GrapevineerService interface {
 }
 
 type grapevineerService struct {
-	cfg        config.Config
-	db         *database.Database
-	repository repository.Repository
+	cfg              config.Config
+	db               *database.Database
+	playerRepository repository.PlayerRepository
+	boRepository     repository.BoRepository
 }
 
-func NewGrapevineerService(cfg config.Config, db *database.Database, repository repository.Repository) GrapevineerService {
+func NewGrapevineerService(cfg config.Config, db *database.Database, playerRepository repository.PlayerRepository, boRepository repository.BoRepository) GrapevineerService {
 	return &grapevineerService{
-		cfg:        cfg,
-		db:         db,
-		repository: repository,
+		cfg:              cfg,
+		db:               db,
+		playerRepository: playerRepository,
+		boRepository:     boRepository,
 	}
 }
 
@@ -323,7 +325,7 @@ func (s *grapevineerService) SetPlayer(ctx context.Context, req *grapevineer.Set
 		Name:     req.Name,
 		Region:   req.Region,
 	}
-	if _, err := s.repository.CreatePlayer(ctx, s.db, player); err != nil {
+	if _, err := s.playerRepository.CreatePlayer(ctx, s.db, player); err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to create player: %v", err)
 	}
 	return &grapevineer.SetPlayerResponse{
@@ -332,7 +334,7 @@ func (s *grapevineerService) SetPlayer(ctx context.Context, req *grapevineer.Set
 }
 
 func (s *grapevineerService) GetAllPlayers(ctx context.Context, req *grapevineer.GetAllPlayersRequest) (*grapevineer.GetAllPlayersResponse, error) {
-	players, err := s.repository.FindAll(ctx, s.db)
+	players, err := s.playerRepository.FindAll(ctx, s.db)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to get all players: %v", err)
 	}
@@ -363,7 +365,7 @@ func (s *grapevineerService) UpdatePlayer(ctx context.Context, req *grapevineer.
 		Name:     req.Name,
 		Region:   req.Region,
 	}
-	if _, err := s.repository.UpdatePlayer(ctx, s.db, player); err != nil {
+	if _, err := s.playerRepository.UpdatePlayer(ctx, s.db, player); err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to update player: %v", err)
 	}
 	return &grapevineer.UpdatePlayerResponse{
@@ -529,4 +531,28 @@ func (s *grapevineerService) GetWavFromText(ctx context.Context, req *grapevinee
 	}
 
 	return response, nil
+}
+
+func (s *grapevineerService) SetBoScript(ctx context.Context, req *grapevineer.SetBoScriptRequest) (*grapevineer.SetBoScriptResponse, error) {
+	bo := &model.Bo{
+		ID:     uuid.New().String(),
+		Script: req.Script,
+	}
+	if _, err := s.boRepository.CreateBo(ctx, s.db, bo); err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to create bo: %v", err)
+	}
+	return &grapevineer.SetBoScriptResponse{
+		Status: 200,
+	}, nil
+}
+
+func (s *grapevineerService) GetBoScriptRandomly(ctx context.Context, req *grapevineer.GetBoScriptRandomlyRequest) (*grapevineer.GetBoScriptRandomlyResponse, error) {
+	bo, err := s.boRepository.FindOneRandomly(ctx, s.db)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to get bo: %v", err)
+	}
+	return &grapevineer.GetBoScriptRandomlyResponse{
+		BoId:   bo.ID,
+		Script: bo.Script,
+	}, nil
 }

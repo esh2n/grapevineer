@@ -4,9 +4,6 @@
 import * as jspb from "google-protobuf";
 
 export class SetBoScriptRequest extends jspb.Message {
-  getBoId(): string;
-  setBoId(value: string): void;
-
   getScript(): string;
   setScript(value: string): void;
 
@@ -22,7 +19,6 @@ export class SetBoScriptRequest extends jspb.Message {
 
 export namespace SetBoScriptRequest {
   export type AsObject = {
-    boId: string,
     script: string,
   }
 }

@@ -141,8 +141,7 @@ proto.SetBoScriptRequest.prototype.toObject = function(opt_includeInstance) {
  */
 proto.SetBoScriptRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    boId: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    script: jspb.Message.getFieldWithDefault(msg, 2, "")
+    script: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -181,10 +180,6 @@ proto.SetBoScriptRequest.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setBoId(value);
-      break;
-    case 2:
-      var value = /** @type {string} */ (reader.readString());
       msg.setScript(value);
       break;
     default:
@@ -216,17 +211,10 @@ proto.SetBoScriptRequest.prototype.serializeBinary = function() {
  */
 proto.SetBoScriptRequest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getBoId();
-  if (f.length > 0) {
-    writer.writeString(
-      1,
-      f
-    );
-  }
   f = message.getScript();
   if (f.length > 0) {
     writer.writeString(
-      2,
+      1,
       f
     );
   }
@@ -234,10 +222,10 @@ proto.SetBoScriptRequest.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string bo_id = 1;
+ * optional string script = 1;
  * @return {string}
  */
-proto.SetBoScriptRequest.prototype.getBoId = function() {
+proto.SetBoScriptRequest.prototype.getScript = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -246,26 +234,8 @@ proto.SetBoScriptRequest.prototype.getBoId = function() {
  * @param {string} value
  * @return {!proto.SetBoScriptRequest} returns this
  */
-proto.SetBoScriptRequest.prototype.setBoId = function(value) {
-  return jspb.Message.setProto3StringField(this, 1, value);
-};
-
-
-/**
- * optional string script = 2;
- * @return {string}
- */
-proto.SetBoScriptRequest.prototype.getScript = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.SetBoScriptRequest} returns this
- */
 proto.SetBoScriptRequest.prototype.setScript = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
+  return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 

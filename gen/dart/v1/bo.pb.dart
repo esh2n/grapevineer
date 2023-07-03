@@ -11,20 +11,15 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 class SetBoScriptRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'SetBoScriptRequest', createEmptyInstance: create)
-    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'boId')
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'script')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'script')
     ..hasRequiredFields = false
   ;
 
   SetBoScriptRequest._() : super();
   factory SetBoScriptRequest({
-    $core.String? boId,
     $core.String? script,
   }) {
     final _result = create();
-    if (boId != null) {
-      _result.boId = boId;
-    }
     if (script != null) {
       _result.script = script;
     }
@@ -52,22 +47,13 @@ class SetBoScriptRequest extends $pb.GeneratedMessage {
   static SetBoScriptRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get boId => $_getSZ(0);
+  $core.String get script => $_getSZ(0);
   @$pb.TagNumber(1)
-  set boId($core.String v) { $_setString(0, v); }
+  set script($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasBoId() => $_has(0);
+  $core.bool hasScript() => $_has(0);
   @$pb.TagNumber(1)
-  void clearBoId() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get script => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set script($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasScript() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearScript() => clearField(2);
+  void clearScript() => clearField(1);
 }
 
 class SetBoScriptResponse extends $pb.GeneratedMessage {

@@ -43,12 +43,6 @@
         },
         "parameters": [
           {
-            "name": "boId",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "script",
             "in": "query",
             "required": false,

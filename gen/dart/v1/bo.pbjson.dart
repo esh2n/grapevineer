@@ -12,13 +12,12 @@ import 'dart:typed_data' as $typed_data;
 const SetBoScriptRequest$json = const {
   '1': 'SetBoScriptRequest',
   '2': const [
-    const {'1': 'bo_id', '3': 1, '4': 1, '5': 9, '10': 'boId'},
-    const {'1': 'script', '3': 2, '4': 1, '5': 9, '10': 'script'},
+    const {'1': 'script', '3': 1, '4': 1, '5': 9, '10': 'script'},
   ],
 };
 
 /// Descriptor for `SetBoScriptRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List setBoScriptRequestDescriptor = $convert.base64Decode('ChJTZXRCb1NjcmlwdFJlcXVlc3QSEwoFYm9faWQYASABKAlSBGJvSWQSFgoGc2NyaXB0GAIgASgJUgZzY3JpcHQ=');
+final $typed_data.Uint8List setBoScriptRequestDescriptor = $convert.base64Decode('ChJTZXRCb1NjcmlwdFJlcXVlc3QSFgoGc2NyaXB0GAEgASgJUgZzY3JpcHQ=');
 @$core.Deprecated('Use setBoScriptResponseDescriptor instead')
 const SetBoScriptResponse$json = const {
   '1': 'SetBoScriptResponse',

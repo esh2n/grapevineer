@@ -12,3 +12,8 @@ CREATE TABLE IF NOT EXISTS players (
   name VARCHAR(255),
   region VARCHAR(255)
 );
+
+CREATE TABLE IF NOT EXISTS bos (
+  id uuid NOT NULL,
+  script VARCHAR(255)
+);

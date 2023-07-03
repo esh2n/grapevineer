@@ -5,8 +5,7 @@ option go_package = "github.com/esh2n/grapevineer/gen/go/grapevineer";
 // Bo Related...
 
 message SetBoScriptRequest {
-    string bo_id = 1;
-    string script = 2;
+    string script = 1;
 }
 
 message SetBoScriptResponse {
