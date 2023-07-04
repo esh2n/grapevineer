@@ -10,7 +10,9 @@ import (
 
 	"esh2n/grapevineer/ent/migrate"
 
+	"esh2n/grapevineer/ent/bo"
 	"esh2n/grapevineer/ent/player"
+	"esh2n/grapevineer/ent/storeviewer"
 
 	"entgo.io/ent"
 	"entgo.io/ent/dialect"
@@ -22,8 +24,12 @@ type Client struct {
 	config
 	// Schema is the client for creating, migrating and dropping schema.
 	Schema *migrate.Schema
+	// Bo is the client for interacting with the Bo builders.
+	Bo *BoClient
 	// Player is the client for interacting with the Player builders.
 	Player *PlayerClient
+	// StoreViewer is the client for interacting with the StoreViewer builders.
+	StoreViewer *StoreViewerClient
 }
 
 // NewClient creates a new client configured with the given options.
@@ -37,7 +43,9 @@ func NewClient(opts ...Option) *Client {
 
 func (c *Client) init() {
 	c.Schema = migrate.NewSchema(c.driver)
+	c.Bo = NewBoClient(c.config)
 	c.Player = NewPlayerClient(c.config)
+	c.StoreViewer = NewStoreViewerClient(c.config)
 }
 
 type (
@@ -118,9 +126,11 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 	cfg := c.config
 	cfg.driver = tx
 	return &Tx{
-		ctx:    ctx,
-		config: cfg,
-		Player: NewPlayerClient(cfg),
+		ctx:         ctx,
+		config:      cfg,
+		Bo:          NewBoClient(cfg),
+		Player:      NewPlayerClient(cfg),
+		StoreViewer: NewStoreViewerClient(cfg),
 	}, nil
 }
 
@@ -138,16 +148,18 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 	cfg := c.config
 	cfg.driver = &txDriver{tx: tx, drv: c.driver}
 	return &Tx{
-		ctx:    ctx,
-		config: cfg,
-		Player: NewPlayerClient(cfg),
+		ctx:         ctx,
+		config:      cfg,
+		Bo:          NewBoClient(cfg),
+		Player:      NewPlayerClient(cfg),
+		StoreViewer: NewStoreViewerClient(cfg),
 	}, nil
 }
 
 // Debug returns a new debug-client. It's used to get verbose logging on specific operations.
 //
 //	client.Debug().
-//		Player.
+//		Bo.
 //		Query().
 //		Count(ctx)
 func (c *Client) Debug() *Client {
@@ -169,22 +181,148 @@ func (c *Client) Close() error {
 // Use adds the mutation hooks to all the entity clients.
 // In order to add hooks to a specific client, call: `client.Node.Use(...)`.
 func (c *Client) Use(hooks ...Hook) {
+	c.Bo.Use(hooks...)
 	c.Player.Use(hooks...)
+	c.StoreViewer.Use(hooks...)
 }
 
 // Intercept adds the query interceptors to all the entity clients.
 // In order to add interceptors to a specific client, call: `client.Node.Intercept(...)`.
 func (c *Client) Intercept(interceptors ...Interceptor) {
+	c.Bo.Intercept(interceptors...)
 	c.Player.Intercept(interceptors...)
+	c.StoreViewer.Intercept(interceptors...)
 }
 
 // Mutate implements the ent.Mutator interface.
 func (c *Client) Mutate(ctx context.Context, m Mutation) (Value, error) {
 	switch m := m.(type) {
+	case *BoMutation:
+		return c.Bo.mutate(ctx, m)
 	case *PlayerMutation:
 		return c.Player.mutate(ctx, m)
+	case *StoreViewerMutation:
+		return c.StoreViewer.mutate(ctx, m)
 	default:
 		return nil, fmt.Errorf("ent: unknown mutation type %T", m)
+	}
+}
+
+// BoClient is a client for the Bo schema.
+type BoClient struct {
+	config
+}
+
+// NewBoClient returns a client for the Bo from the given config.
+func NewBoClient(c config) *BoClient {
+	return &BoClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `bo.Hooks(f(g(h())))`.
+func (c *BoClient) Use(hooks ...Hook) {
+	c.hooks.Bo = append(c.hooks.Bo, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `bo.Intercept(f(g(h())))`.
+func (c *BoClient) Intercept(interceptors ...Interceptor) {
+	c.inters.Bo = append(c.inters.Bo, interceptors...)
+}
+
+// Create returns a builder for creating a Bo entity.
+func (c *BoClient) Create() *BoCreate {
+	mutation := newBoMutation(c.config, OpCreate)
+	return &BoCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of Bo entities.
+func (c *BoClient) CreateBulk(builders ...*BoCreate) *BoCreateBulk {
+	return &BoCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for Bo.
+func (c *BoClient) Update() *BoUpdate {
+	mutation := newBoMutation(c.config, OpUpdate)
+	return &BoUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *BoClient) UpdateOne(b *Bo) *BoUpdateOne {
+	mutation := newBoMutation(c.config, OpUpdateOne, withBo(b))
+	return &BoUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *BoClient) UpdateOneID(id string) *BoUpdateOne {
+	mutation := newBoMutation(c.config, OpUpdateOne, withBoID(id))
+	return &BoUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for Bo.
+func (c *BoClient) Delete() *BoDelete {
+	mutation := newBoMutation(c.config, OpDelete)
+	return &BoDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *BoClient) DeleteOne(b *Bo) *BoDeleteOne {
+	return c.DeleteOneID(b.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *BoClient) DeleteOneID(id string) *BoDeleteOne {
+	builder := c.Delete().Where(bo.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &BoDeleteOne{builder}
+}
+
+// Query returns a query builder for Bo.
+func (c *BoClient) Query() *BoQuery {
+	return &BoQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeBo},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a Bo entity by its id.
+func (c *BoClient) Get(ctx context.Context, id string) (*Bo, error) {
+	return c.Query().Where(bo.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *BoClient) GetX(ctx context.Context, id string) *Bo {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *BoClient) Hooks() []Hook {
+	return c.hooks.Bo
+}
+
+// Interceptors returns the client interceptors.
+func (c *BoClient) Interceptors() []Interceptor {
+	return c.inters.Bo
+}
+
+func (c *BoClient) mutate(ctx context.Context, m *BoMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&BoCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&BoUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&BoUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&BoDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown Bo mutation op: %q", m.Op())
 	}
 }
 
@@ -306,12 +444,130 @@ func (c *PlayerClient) mutate(ctx context.Context, m *PlayerMutation) (Value, er
 	}
 }
 
+// StoreViewerClient is a client for the StoreViewer schema.
+type StoreViewerClient struct {
+	config
+}
+
+// NewStoreViewerClient returns a client for the StoreViewer from the given config.
+func NewStoreViewerClient(c config) *StoreViewerClient {
+	return &StoreViewerClient{config: c}
+}
+
+// Use adds a list of mutation hooks to the hooks stack.
+// A call to `Use(f, g, h)` equals to `storeviewer.Hooks(f(g(h())))`.
+func (c *StoreViewerClient) Use(hooks ...Hook) {
+	c.hooks.StoreViewer = append(c.hooks.StoreViewer, hooks...)
+}
+
+// Intercept adds a list of query interceptors to the interceptors stack.
+// A call to `Intercept(f, g, h)` equals to `storeviewer.Intercept(f(g(h())))`.
+func (c *StoreViewerClient) Intercept(interceptors ...Interceptor) {
+	c.inters.StoreViewer = append(c.inters.StoreViewer, interceptors...)
+}
+
+// Create returns a builder for creating a StoreViewer entity.
+func (c *StoreViewerClient) Create() *StoreViewerCreate {
+	mutation := newStoreViewerMutation(c.config, OpCreate)
+	return &StoreViewerCreate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// CreateBulk returns a builder for creating a bulk of StoreViewer entities.
+func (c *StoreViewerClient) CreateBulk(builders ...*StoreViewerCreate) *StoreViewerCreateBulk {
+	return &StoreViewerCreateBulk{config: c.config, builders: builders}
+}
+
+// Update returns an update builder for StoreViewer.
+func (c *StoreViewerClient) Update() *StoreViewerUpdate {
+	mutation := newStoreViewerMutation(c.config, OpUpdate)
+	return &StoreViewerUpdate{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOne returns an update builder for the given entity.
+func (c *StoreViewerClient) UpdateOne(sv *StoreViewer) *StoreViewerUpdateOne {
+	mutation := newStoreViewerMutation(c.config, OpUpdateOne, withStoreViewer(sv))
+	return &StoreViewerUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// UpdateOneID returns an update builder for the given id.
+func (c *StoreViewerClient) UpdateOneID(id string) *StoreViewerUpdateOne {
+	mutation := newStoreViewerMutation(c.config, OpUpdateOne, withStoreViewerID(id))
+	return &StoreViewerUpdateOne{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// Delete returns a delete builder for StoreViewer.
+func (c *StoreViewerClient) Delete() *StoreViewerDelete {
+	mutation := newStoreViewerMutation(c.config, OpDelete)
+	return &StoreViewerDelete{config: c.config, hooks: c.Hooks(), mutation: mutation}
+}
+
+// DeleteOne returns a builder for deleting the given entity.
+func (c *StoreViewerClient) DeleteOne(sv *StoreViewer) *StoreViewerDeleteOne {
+	return c.DeleteOneID(sv.ID)
+}
+
+// DeleteOneID returns a builder for deleting the given entity by its id.
+func (c *StoreViewerClient) DeleteOneID(id string) *StoreViewerDeleteOne {
+	builder := c.Delete().Where(storeviewer.ID(id))
+	builder.mutation.id = &id
+	builder.mutation.op = OpDeleteOne
+	return &StoreViewerDeleteOne{builder}
+}
+
+// Query returns a query builder for StoreViewer.
+func (c *StoreViewerClient) Query() *StoreViewerQuery {
+	return &StoreViewerQuery{
+		config: c.config,
+		ctx:    &QueryContext{Type: TypeStoreViewer},
+		inters: c.Interceptors(),
+	}
+}
+
+// Get returns a StoreViewer entity by its id.
+func (c *StoreViewerClient) Get(ctx context.Context, id string) (*StoreViewer, error) {
+	return c.Query().Where(storeviewer.ID(id)).Only(ctx)
+}
+
+// GetX is like Get, but panics if an error occurs.
+func (c *StoreViewerClient) GetX(ctx context.Context, id string) *StoreViewer {
+	obj, err := c.Get(ctx, id)
+	if err != nil {
+		panic(err)
+	}
+	return obj
+}
+
+// Hooks returns the client hooks.
+func (c *StoreViewerClient) Hooks() []Hook {
+	return c.hooks.StoreViewer
+}
+
+// Interceptors returns the client interceptors.
+func (c *StoreViewerClient) Interceptors() []Interceptor {
+	return c.inters.StoreViewer
+}
+
+func (c *StoreViewerClient) mutate(ctx context.Context, m *StoreViewerMutation) (Value, error) {
+	switch m.Op() {
+	case OpCreate:
+		return (&StoreViewerCreate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdate:
+		return (&StoreViewerUpdate{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpUpdateOne:
+		return (&StoreViewerUpdateOne{config: c.config, hooks: c.Hooks(), mutation: m}).Save(ctx)
+	case OpDelete, OpDeleteOne:
+		return (&StoreViewerDelete{config: c.config, hooks: c.Hooks(), mutation: m}).Exec(ctx)
+	default:
+		return nil, fmt.Errorf("ent: unknown StoreViewer mutation op: %q", m.Op())
+	}
+}
+
 // hooks and interceptors per client, for fast access.
 type (
 	hooks struct {
-		Player []ent.Hook
+		Bo, Player, StoreViewer []ent.Hook
 	}
 	inters struct {
-		Player []ent.Interceptor
+		Bo, Player, StoreViewer []ent.Interceptor
 	}
 )

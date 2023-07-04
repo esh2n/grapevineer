@@ -68,7 +68,6 @@ pub mod grapevineer_client {
             self.inner = self.inner.accept_compressed(encoding);
             self
         }
-        ///
         pub async fn get_og_image(
             &mut self,
             request: impl tonic::IntoRequest<super::super::GetOgImageRequest>,
@@ -88,7 +87,6 @@ pub mod grapevineer_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
-        ///
         pub async fn get_flower_meaning_by_date(
             &mut self,
             request: impl tonic::IntoRequest<super::super::GetFlowerMeaningByDateRequest>,
@@ -266,6 +264,120 @@ pub mod grapevineer_client {
             );
             self.inner.unary(request.into_request(), path, codec).await
         }
+        ///
+        pub async fn set_bo_script(
+            &mut self,
+            request: impl tonic::IntoRequest<super::super::SetBoScriptRequest>,
+        ) -> Result<tonic::Response<super::super::SetBoScriptResponse>, tonic::Status> {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/SetBoScript",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        ///
+        pub async fn get_bo_script_randomly(
+            &mut self,
+            request: impl tonic::IntoRequest<super::super::GetBoScriptRandomlyRequest>,
+        ) -> Result<
+            tonic::Response<super::super::GetBoScriptRandomlyResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/GetBoScriptRandomly",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        ///
+        pub async fn get_todays_store(
+            &mut self,
+            request: impl tonic::IntoRequest<super::super::GetTodaysStoreRequest>,
+        ) -> Result<
+            tonic::Response<super::super::GetTodaysStoreResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/GetTodaysStore",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        ///
+        pub async fn get_todays_stores_by_discord_id(
+            &mut self,
+            request: impl tonic::IntoRequest<
+                super::super::GetTodaysStoresByDiscordIdRequest,
+            >,
+        ) -> Result<
+            tonic::Response<super::super::GetTodaysStoresByDiscordIdResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/GetTodaysStoresByDiscordID",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
+        ///
+        pub async fn set_store_viewer(
+            &mut self,
+            request: impl tonic::IntoRequest<super::super::SetStoreViewerRequest>,
+        ) -> Result<
+            tonic::Response<super::super::SetStoreViewerResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::new(
+                        tonic::Code::Unknown,
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic::codec::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/grapevineer.Grapevineer/SetStoreViewer",
+            );
+            self.inner.unary(request.into_request(), path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -275,12 +387,10 @@ pub mod grapevineer_server {
     /// Generated trait containing gRPC methods that should be implemented for use with GrapevineerServer.
     #[async_trait]
     pub trait Grapevineer: Send + Sync + 'static {
-        ///
         async fn get_og_image(
             &self,
             request: tonic::Request<super::super::GetOgImageRequest>,
         ) -> Result<tonic::Response<super::super::GetOgImageResponse>, tonic::Status>;
-        ///
         async fn get_flower_meaning_by_date(
             &self,
             request: tonic::Request<super::super::GetFlowerMeaningByDateRequest>,
@@ -330,6 +440,43 @@ pub mod grapevineer_server {
             request: tonic::Request<super::super::GetWavFromTextRequest>,
         ) -> Result<
             tonic::Response<super::super::GetWavFromTextResponse>,
+            tonic::Status,
+        >;
+        ///
+        async fn set_bo_script(
+            &self,
+            request: tonic::Request<super::super::SetBoScriptRequest>,
+        ) -> Result<tonic::Response<super::super::SetBoScriptResponse>, tonic::Status>;
+        ///
+        async fn get_bo_script_randomly(
+            &self,
+            request: tonic::Request<super::super::GetBoScriptRandomlyRequest>,
+        ) -> Result<
+            tonic::Response<super::super::GetBoScriptRandomlyResponse>,
+            tonic::Status,
+        >;
+        ///
+        async fn get_todays_store(
+            &self,
+            request: tonic::Request<super::super::GetTodaysStoreRequest>,
+        ) -> Result<
+            tonic::Response<super::super::GetTodaysStoreResponse>,
+            tonic::Status,
+        >;
+        ///
+        async fn get_todays_stores_by_discord_id(
+            &self,
+            request: tonic::Request<super::super::GetTodaysStoresByDiscordIdRequest>,
+        ) -> Result<
+            tonic::Response<super::super::GetTodaysStoresByDiscordIdResponse>,
+            tonic::Status,
+        >;
+        ///
+        async fn set_store_viewer(
+            &self,
+            request: tonic::Request<super::super::SetStoreViewerRequest>,
+        ) -> Result<
+            tonic::Response<super::super::SetStoreViewerResponse>,
             tonic::Status,
         >;
     }
@@ -744,6 +891,212 @@ pub mod grapevineer_server {
                     let fut = async move {
                         let inner = inner.0;
                         let method = GetWavFromTextSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/SetBoScript" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetBoScriptSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<super::super::SetBoScriptRequest>
+                    for SetBoScriptSvc<T> {
+                        type Response = super::super::SetBoScriptResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::super::SetBoScriptRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).set_bo_script(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetBoScriptSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/GetBoScriptRandomly" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetBoScriptRandomlySvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<
+                        super::super::GetBoScriptRandomlyRequest,
+                    > for GetBoScriptRandomlySvc<T> {
+                        type Response = super::super::GetBoScriptRandomlyResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::super::GetBoScriptRandomlyRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).get_bo_script_randomly(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetBoScriptRandomlySvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/GetTodaysStore" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetTodaysStoreSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<super::super::GetTodaysStoreRequest>
+                    for GetTodaysStoreSvc<T> {
+                        type Response = super::super::GetTodaysStoreResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::super::GetTodaysStoreRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).get_todays_store(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetTodaysStoreSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/GetTodaysStoresByDiscordID" => {
+                    #[allow(non_camel_case_types)]
+                    struct GetTodaysStoresByDiscordIDSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<
+                        super::super::GetTodaysStoresByDiscordIdRequest,
+                    > for GetTodaysStoresByDiscordIDSvc<T> {
+                        type Response = super::super::GetTodaysStoresByDiscordIdResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<
+                                super::super::GetTodaysStoresByDiscordIdRequest,
+                            >,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).get_todays_stores_by_discord_id(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = GetTodaysStoresByDiscordIDSvc(inner);
+                        let codec = tonic::codec::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/grapevineer.Grapevineer/SetStoreViewer" => {
+                    #[allow(non_camel_case_types)]
+                    struct SetStoreViewerSvc<T: Grapevineer>(pub Arc<T>);
+                    impl<
+                        T: Grapevineer,
+                    > tonic::server::UnaryService<super::super::SetStoreViewerRequest>
+                    for SetStoreViewerSvc<T> {
+                        type Response = super::super::SetStoreViewerResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::super::SetStoreViewerRequest>,
+                        ) -> Self::Future {
+                            let inner = self.0.clone();
+                            let fut = async move {
+                                (*inner).set_store_viewer(request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let inner = inner.0;
+                        let method = SetStoreViewerSvc(inner);
                         let codec = tonic::codec::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

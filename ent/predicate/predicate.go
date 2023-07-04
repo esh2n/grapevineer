@@ -6,5 +6,11 @@ import (
 	"entgo.io/ent/dialect/sql"
 )
 
+// Bo is the predicate function for bo builders.
+type Bo func(*sql.Selector)
+
 // Player is the predicate function for player builders.
 type Player func(*sql.Selector)
+
+// StoreViewer is the predicate function for storeviewer builders.
+type StoreViewer func(*sql.Selector)

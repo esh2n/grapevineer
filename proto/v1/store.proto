@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option go_package = "github.com/esh2n/grapevineer/gen/go/grapevineer";
+
+// Store Related...
+
+message GetTodaysStoreRequest {
+    string id = 1;
+    string password = 2;
+}
+
+message GetTodaysStoreResponse {
+    int32 status = 1;
+    repeated Skin skins = 2;
+}
+
+message Skin {
+    string uuid = 1;
+    string display_name = 2;
+    string display_icon = 3;
+    Tier tier = 4;
+}
+
+message Tier {
+    string uuid = 1;
+    string color_code = 2;
+    int32 value = 3;
+}
+
+message GetTodaysStoresByDiscordIDRequest {
+    string discord_id = 1;
+}
+
+message GetTodaysStoresByDiscordIDResponse {
+    int32 status = 1;
+    repeated MultiAccountSkins multiaccount_skins = 2;
+}
+
+message MultiAccountSkins {
+    repeated Skin skins = 1;
+    string player_name = 2;
+}
+
+message SetStoreViewerRequest {
+    string player_id = 1;
+    string token = 2;
+    string discord_id = 3;
+}
+
+message SetStoreViewerResponse {
+    int32 status = 1;
+}

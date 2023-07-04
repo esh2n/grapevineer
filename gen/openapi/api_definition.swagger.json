@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "v1/flower_meaning.proto",
+    "title": "v1/bo.proto",
     "version": "version not set"
   },
   "tags": [
@@ -16,6 +16,44 @@
     "application/json"
   ],
   "paths": {
+    "/v1/bo_script": {
+      "get": {
+        "operationId": "Grapevineer_GetBoScriptRandomly",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetBoScriptRandomlyResponse"
+            }
+          }
+        },
+        "tags": [
+          "Grapevineer"
+        ]
+      },
+      "post": {
+        "operationId": "Grapevineer_SetBoScript",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SetBoScriptResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "script",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
     "/v1/flower_meaning/{date}": {
       "get": {
         "operationId": "Grapevineer_GetFlowerMeaningByDate",
@@ -286,6 +324,96 @@
         ]
       }
     },
+    "/v1/store_viewer": {
+      "post": {
+        "operationId": "Grapevineer_SetStoreViewer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/SetStoreViewerResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "playerId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "discordId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
+    "/v1/todays_store": {
+      "get": {
+        "operationId": "Grapevineer_GetTodaysStore",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetTodaysStoreResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
+    "/v1/todays_stores": {
+      "get": {
+        "operationId": "Grapevineer_GetTodaysStoresByDiscordID",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetTodaysStoresByDiscordIDResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "discordId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Grapevineer"
+        ]
+      }
+    },
     "/v1/wav_from_text": {
       "get": {
         "operationId": "Grapevineer_GetWavFromText",
@@ -388,6 +516,17 @@
         }
       }
     },
+    "GetBoScriptRandomlyResponse": {
+      "type": "object",
+      "properties": {
+        "boId": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
+        }
+      }
+    },
     "GetFlowerMeaningByDateResponse": {
       "type": "object",
       "properties": {
@@ -433,6 +572,38 @@
         }
       }
     },
+    "GetTodaysStoreResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "skins": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Skin"
+          }
+        }
+      }
+    },
+    "GetTodaysStoresByDiscordIDResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "multiaccountSkins": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MultiAccountSkins"
+          }
+        }
+      }
+    },
     "GetWavFromTextResponse": {
       "type": "object",
       "properties": {
@@ -469,6 +640,21 @@
           "type": "string"
         },
         "gameStartPatched": {
+          "type": "string"
+        }
+      }
+    },
+    "MultiAccountSkins": {
+      "type": "object",
+      "properties": {
+        "skins": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Skin"
+          }
+        },
+        "playerName": {
           "type": "string"
         }
       }
@@ -574,12 +760,47 @@
         }
       }
     },
+    "SetBoScriptResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "SetPlayerResponse": {
       "type": "object",
       "properties": {
         "status": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "SetStoreViewerResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Skin": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayIcon": {
+          "type": "string"
+        },
+        "tier": {
+          "$ref": "#/definitions/Tier"
         }
       }
     },
@@ -594,6 +815,21 @@
           "format": "int32"
         },
         "roundsLost": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Tier": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "colorCode": {
+          "type": "string"
+        },
+        "value": {
           "type": "integer",
           "format": "int32"
         }

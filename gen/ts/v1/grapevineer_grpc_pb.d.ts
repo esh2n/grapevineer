@@ -4,11 +4,13 @@
 // file: v1/grapevineer.proto
 
 import * as v1_grapevineer_pb from "../v1/grapevineer_pb";
+import * as v1_bo_pb from "../v1/bo_pb";
 import * as v1_player_pb from "../v1/player_pb";
 import * as v1_og_image_pb from "../v1/og_image_pb";
 import * as v1_flower_meaning_pb from "../v1/flower_meaning_pb";
 import * as v1_line_pb from "../v1/line_pb";
 import * as v1_openai_pb from "../v1/openai_pb";
+import * as v1_store_pb from "../v1/store_pb";
 import * as v1_voicevox_pb from "../v1/voicevox_pb";
 import * as grpc from "@grpc/grpc-js";
 
@@ -22,6 +24,11 @@ interface IGrapevineerService extends grpc.ServiceDefinition<grpc.UntypedService
   updatePlayer: grpc.MethodDefinition<v1_player_pb.UpdatePlayerRequest, v1_player_pb.UpdatePlayerResponse>;
   getPlayerInfo: grpc.MethodDefinition<v1_player_pb.GetPlayerInfoRequest, v1_player_pb.GetPlayerInfoResponse>;
   getWavFromText: grpc.MethodDefinition<v1_voicevox_pb.GetWavFromTextRequest, v1_voicevox_pb.GetWavFromTextResponse>;
+  setBoScript: grpc.MethodDefinition<v1_bo_pb.SetBoScriptRequest, v1_bo_pb.SetBoScriptResponse>;
+  getBoScriptRandomly: grpc.MethodDefinition<v1_bo_pb.GetBoScriptRandomlyRequest, v1_bo_pb.GetBoScriptRandomlyResponse>;
+  getTodaysStore: grpc.MethodDefinition<v1_store_pb.GetTodaysStoreRequest, v1_store_pb.GetTodaysStoreResponse>;
+  getTodaysStoresByDiscordID: grpc.MethodDefinition<v1_store_pb.GetTodaysStoresByDiscordIDRequest, v1_store_pb.GetTodaysStoresByDiscordIDResponse>;
+  setStoreViewer: grpc.MethodDefinition<v1_store_pb.SetStoreViewerRequest, v1_store_pb.SetStoreViewerResponse>;
 }
 
 export const GrapevineerService: IGrapevineerService;
@@ -36,6 +43,11 @@ export interface IGrapevineerServer extends grpc.UntypedServiceImplementation {
   updatePlayer: grpc.handleUnaryCall<v1_player_pb.UpdatePlayerRequest, v1_player_pb.UpdatePlayerResponse>;
   getPlayerInfo: grpc.handleUnaryCall<v1_player_pb.GetPlayerInfoRequest, v1_player_pb.GetPlayerInfoResponse>;
   getWavFromText: grpc.handleUnaryCall<v1_voicevox_pb.GetWavFromTextRequest, v1_voicevox_pb.GetWavFromTextResponse>;
+  setBoScript: grpc.handleUnaryCall<v1_bo_pb.SetBoScriptRequest, v1_bo_pb.SetBoScriptResponse>;
+  getBoScriptRandomly: grpc.handleUnaryCall<v1_bo_pb.GetBoScriptRandomlyRequest, v1_bo_pb.GetBoScriptRandomlyResponse>;
+  getTodaysStore: grpc.handleUnaryCall<v1_store_pb.GetTodaysStoreRequest, v1_store_pb.GetTodaysStoreResponse>;
+  getTodaysStoresByDiscordID: grpc.handleUnaryCall<v1_store_pb.GetTodaysStoresByDiscordIDRequest, v1_store_pb.GetTodaysStoresByDiscordIDResponse>;
+  setStoreViewer: grpc.handleUnaryCall<v1_store_pb.SetStoreViewerRequest, v1_store_pb.SetStoreViewerResponse>;
 }
 
 export class GrapevineerClient extends grpc.Client {
@@ -67,4 +79,19 @@ export class GrapevineerClient extends grpc.Client {
   getWavFromText(argument: v1_voicevox_pb.GetWavFromTextRequest, callback: grpc.requestCallback<v1_voicevox_pb.GetWavFromTextResponse>): grpc.ClientUnaryCall;
   getWavFromText(argument: v1_voicevox_pb.GetWavFromTextRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<v1_voicevox_pb.GetWavFromTextResponse>): grpc.ClientUnaryCall;
   getWavFromText(argument: v1_voicevox_pb.GetWavFromTextRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<v1_voicevox_pb.GetWavFromTextResponse>): grpc.ClientUnaryCall;
+  setBoScript(argument: v1_bo_pb.SetBoScriptRequest, callback: grpc.requestCallback<v1_bo_pb.SetBoScriptResponse>): grpc.ClientUnaryCall;
+  setBoScript(argument: v1_bo_pb.SetBoScriptRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.SetBoScriptResponse>): grpc.ClientUnaryCall;
+  setBoScript(argument: v1_bo_pb.SetBoScriptRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.SetBoScriptResponse>): grpc.ClientUnaryCall;
+  getBoScriptRandomly(argument: v1_bo_pb.GetBoScriptRandomlyRequest, callback: grpc.requestCallback<v1_bo_pb.GetBoScriptRandomlyResponse>): grpc.ClientUnaryCall;
+  getBoScriptRandomly(argument: v1_bo_pb.GetBoScriptRandomlyRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.GetBoScriptRandomlyResponse>): grpc.ClientUnaryCall;
+  getBoScriptRandomly(argument: v1_bo_pb.GetBoScriptRandomlyRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<v1_bo_pb.GetBoScriptRandomlyResponse>): grpc.ClientUnaryCall;
+  getTodaysStore(argument: v1_store_pb.GetTodaysStoreRequest, callback: grpc.requestCallback<v1_store_pb.GetTodaysStoreResponse>): grpc.ClientUnaryCall;
+  getTodaysStore(argument: v1_store_pb.GetTodaysStoreRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<v1_store_pb.GetTodaysStoreResponse>): grpc.ClientUnaryCall;
+  getTodaysStore(argument: v1_store_pb.GetTodaysStoreRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<v1_store_pb.GetTodaysStoreResponse>): grpc.ClientUnaryCall;
+  getTodaysStoresByDiscordID(argument: v1_store_pb.GetTodaysStoresByDiscordIDRequest, callback: grpc.requestCallback<v1_store_pb.GetTodaysStoresByDiscordIDResponse>): grpc.ClientUnaryCall;
+  getTodaysStoresByDiscordID(argument: v1_store_pb.GetTodaysStoresByDiscordIDRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<v1_store_pb.GetTodaysStoresByDiscordIDResponse>): grpc.ClientUnaryCall;
+  getTodaysStoresByDiscordID(argument: v1_store_pb.GetTodaysStoresByDiscordIDRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<v1_store_pb.GetTodaysStoresByDiscordIDResponse>): grpc.ClientUnaryCall;
+  setStoreViewer(argument: v1_store_pb.SetStoreViewerRequest, callback: grpc.requestCallback<v1_store_pb.SetStoreViewerResponse>): grpc.ClientUnaryCall;
+  setStoreViewer(argument: v1_store_pb.SetStoreViewerRequest, metadataOrOptions: grpc.Metadata | grpc.CallOptions | null, callback: grpc.requestCallback<v1_store_pb.SetStoreViewerResponse>): grpc.ClientUnaryCall;
+  setStoreViewer(argument: v1_store_pb.SetStoreViewerRequest, metadata: grpc.Metadata | null, options: grpc.CallOptions | null, callback: grpc.requestCallback<v1_store_pb.SetStoreViewerResponse>): grpc.ClientUnaryCall;
 }

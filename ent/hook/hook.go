@@ -8,6 +8,18 @@ import (
 	"fmt"
 )
 
+// The BoFunc type is an adapter to allow the use of ordinary
+// function as Bo mutator.
+type BoFunc func(context.Context, *ent.BoMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f BoFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.BoMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.BoMutation", m)
+}
+
 // The PlayerFunc type is an adapter to allow the use of ordinary
 // function as Player mutator.
 type PlayerFunc func(context.Context, *ent.PlayerMutation) (ent.Value, error)
@@ -18,6 +30,18 @@ func (f PlayerFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, erro
 		return f(ctx, mv)
 	}
 	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.PlayerMutation", m)
+}
+
+// The StoreViewerFunc type is an adapter to allow the use of ordinary
+// function as StoreViewer mutator.
+type StoreViewerFunc func(context.Context, *ent.StoreViewerMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f StoreViewerFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.StoreViewerMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.StoreViewerMutation", m)
 }
 
 // Condition is a hook condition function.

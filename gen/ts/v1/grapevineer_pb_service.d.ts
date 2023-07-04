@@ -2,11 +2,13 @@
 // file: v1/grapevineer.proto
 
 import * as v1_grapevineer_pb from "../v1/grapevineer_pb";
+import * as v1_bo_pb from "../v1/bo_pb";
 import * as v1_player_pb from "../v1/player_pb";
 import * as v1_og_image_pb from "../v1/og_image_pb";
 import * as v1_flower_meaning_pb from "../v1/flower_meaning_pb";
 import * as v1_line_pb from "../v1/line_pb";
 import * as v1_openai_pb from "../v1/openai_pb";
+import * as v1_store_pb from "../v1/store_pb";
 import * as v1_voicevox_pb from "../v1/voicevox_pb";
 import {grpc} from "@improbable-eng/grpc-web";
 
@@ -91,6 +93,51 @@ type GrapevineerGetWavFromText = {
   readonly responseType: typeof v1_voicevox_pb.GetWavFromTextResponse;
 };
 
+type GrapevineerSetBoScript = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof v1_bo_pb.SetBoScriptRequest;
+  readonly responseType: typeof v1_bo_pb.SetBoScriptResponse;
+};
+
+type GrapevineerGetBoScriptRandomly = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof v1_bo_pb.GetBoScriptRandomlyRequest;
+  readonly responseType: typeof v1_bo_pb.GetBoScriptRandomlyResponse;
+};
+
+type GrapevineerGetTodaysStore = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof v1_store_pb.GetTodaysStoreRequest;
+  readonly responseType: typeof v1_store_pb.GetTodaysStoreResponse;
+};
+
+type GrapevineerGetTodaysStoresByDiscordID = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof v1_store_pb.GetTodaysStoresByDiscordIDRequest;
+  readonly responseType: typeof v1_store_pb.GetTodaysStoresByDiscordIDResponse;
+};
+
+type GrapevineerSetStoreViewer = {
+  readonly methodName: string;
+  readonly service: typeof Grapevineer;
+  readonly requestStream: false;
+  readonly responseStream: false;
+  readonly requestType: typeof v1_store_pb.SetStoreViewerRequest;
+  readonly responseType: typeof v1_store_pb.SetStoreViewerResponse;
+};
+
 export class Grapevineer {
   static readonly serviceName: string;
   static readonly GetOGImage: GrapevineerGetOGImage;
@@ -102,6 +149,11 @@ export class Grapevineer {
   static readonly UpdatePlayer: GrapevineerUpdatePlayer;
   static readonly GetPlayerInfo: GrapevineerGetPlayerInfo;
   static readonly GetWavFromText: GrapevineerGetWavFromText;
+  static readonly SetBoScript: GrapevineerSetBoScript;
+  static readonly GetBoScriptRandomly: GrapevineerGetBoScriptRandomly;
+  static readonly GetTodaysStore: GrapevineerGetTodaysStore;
+  static readonly GetTodaysStoresByDiscordID: GrapevineerGetTodaysStoresByDiscordID;
+  static readonly SetStoreViewer: GrapevineerSetStoreViewer;
 }
 
 export type ServiceError = { message: string, code: number; metadata: grpc.Metadata }
@@ -216,6 +268,51 @@ export class GrapevineerClient {
   getWavFromText(
     requestMessage: v1_voicevox_pb.GetWavFromTextRequest,
     callback: (error: ServiceError|null, responseMessage: v1_voicevox_pb.GetWavFromTextResponse|null) => void
+  ): UnaryResponse;
+  setBoScript(
+    requestMessage: v1_bo_pb.SetBoScriptRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: v1_bo_pb.SetBoScriptResponse|null) => void
+  ): UnaryResponse;
+  setBoScript(
+    requestMessage: v1_bo_pb.SetBoScriptRequest,
+    callback: (error: ServiceError|null, responseMessage: v1_bo_pb.SetBoScriptResponse|null) => void
+  ): UnaryResponse;
+  getBoScriptRandomly(
+    requestMessage: v1_bo_pb.GetBoScriptRandomlyRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: v1_bo_pb.GetBoScriptRandomlyResponse|null) => void
+  ): UnaryResponse;
+  getBoScriptRandomly(
+    requestMessage: v1_bo_pb.GetBoScriptRandomlyRequest,
+    callback: (error: ServiceError|null, responseMessage: v1_bo_pb.GetBoScriptRandomlyResponse|null) => void
+  ): UnaryResponse;
+  getTodaysStore(
+    requestMessage: v1_store_pb.GetTodaysStoreRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: v1_store_pb.GetTodaysStoreResponse|null) => void
+  ): UnaryResponse;
+  getTodaysStore(
+    requestMessage: v1_store_pb.GetTodaysStoreRequest,
+    callback: (error: ServiceError|null, responseMessage: v1_store_pb.GetTodaysStoreResponse|null) => void
+  ): UnaryResponse;
+  getTodaysStoresByDiscordID(
+    requestMessage: v1_store_pb.GetTodaysStoresByDiscordIDRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: v1_store_pb.GetTodaysStoresByDiscordIDResponse|null) => void
+  ): UnaryResponse;
+  getTodaysStoresByDiscordID(
+    requestMessage: v1_store_pb.GetTodaysStoresByDiscordIDRequest,
+    callback: (error: ServiceError|null, responseMessage: v1_store_pb.GetTodaysStoresByDiscordIDResponse|null) => void
+  ): UnaryResponse;
+  setStoreViewer(
+    requestMessage: v1_store_pb.SetStoreViewerRequest,
+    metadata: grpc.Metadata,
+    callback: (error: ServiceError|null, responseMessage: v1_store_pb.SetStoreViewerResponse|null) => void
+  ): UnaryResponse;
+  setStoreViewer(
+    requestMessage: v1_store_pb.SetStoreViewerRequest,
+    callback: (error: ServiceError|null, responseMessage: v1_store_pb.SetStoreViewerResponse|null) => void
   ): UnaryResponse;
 }
 

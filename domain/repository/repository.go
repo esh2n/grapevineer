@@ -6,4 +6,6 @@ import (
 
 var Set = wire.NewSet(
 	NewPlayerRepository,
+	NewBoRepository,
+	NewStoreViewerRepository,
 )

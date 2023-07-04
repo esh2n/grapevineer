@@ -6,7 +6,7 @@ import (
 	"esh2n/grapevineer/internal/database"
 )
 
-type Repository interface {
+type PlayerRepository interface {
 	CreatePlayer(ctx context.Context, db *database.Database, player *model.Player) (*model.Player, error)
 	DeletePlayer(ctx context.Context, db *database.Database, id string) error
 	UpdatePlayer(ctx context.Context, db *database.Database, player *model.Player) (*model.Player, error)
@@ -76,6 +76,6 @@ func (a *playerRepositoryImpl) FindAll(ctx context.Context, db *database.Databas
 	return result, nil
 }
 
-func NewPlayerRepository() Repository {
+func NewPlayerRepository() PlayerRepository {
 	return &playerRepositoryImpl{}
 }

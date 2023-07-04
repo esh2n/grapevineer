@@ -3,11 +3,13 @@
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var google_api_annotations_pb = require('../google/api/annotations_pb.js');
+var v1_bo_pb = require('../v1/bo_pb.js');
 var v1_player_pb = require('../v1/player_pb.js');
 var v1_og_image_pb = require('../v1/og_image_pb.js');
 var v1_flower_meaning_pb = require('../v1/flower_meaning_pb.js');
 var v1_line_pb = require('../v1/line_pb.js');
 var v1_openai_pb = require('../v1/openai_pb.js');
+var v1_store_pb = require('../v1/store_pb.js');
 var v1_voicevox_pb = require('../v1/voicevox_pb.js');
 
 function serialize_GetAllPlayersRequest(arg) {
@@ -30,6 +32,28 @@ function serialize_GetAllPlayersResponse(arg) {
 
 function deserialize_GetAllPlayersResponse(buffer_arg) {
   return v1_player_pb.GetAllPlayersResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_GetBoScriptRandomlyRequest(arg) {
+  if (!(arg instanceof v1_bo_pb.GetBoScriptRandomlyRequest)) {
+    throw new Error('Expected argument of type GetBoScriptRandomlyRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_GetBoScriptRandomlyRequest(buffer_arg) {
+  return v1_bo_pb.GetBoScriptRandomlyRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_GetBoScriptRandomlyResponse(arg) {
+  if (!(arg instanceof v1_bo_pb.GetBoScriptRandomlyResponse)) {
+    throw new Error('Expected argument of type GetBoScriptRandomlyResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_GetBoScriptRandomlyResponse(buffer_arg) {
+  return v1_bo_pb.GetBoScriptRandomlyResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_GetFlowerMeaningByDateRequest(arg) {
@@ -98,6 +122,50 @@ function deserialize_GetPlayerInfoResponse(buffer_arg) {
   return v1_player_pb.GetPlayerInfoResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_GetTodaysStoreRequest(arg) {
+  if (!(arg instanceof v1_store_pb.GetTodaysStoreRequest)) {
+    throw new Error('Expected argument of type GetTodaysStoreRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_GetTodaysStoreRequest(buffer_arg) {
+  return v1_store_pb.GetTodaysStoreRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_GetTodaysStoreResponse(arg) {
+  if (!(arg instanceof v1_store_pb.GetTodaysStoreResponse)) {
+    throw new Error('Expected argument of type GetTodaysStoreResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_GetTodaysStoreResponse(buffer_arg) {
+  return v1_store_pb.GetTodaysStoreResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_GetTodaysStoresByDiscordIDRequest(arg) {
+  if (!(arg instanceof v1_store_pb.GetTodaysStoresByDiscordIDRequest)) {
+    throw new Error('Expected argument of type GetTodaysStoresByDiscordIDRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_GetTodaysStoresByDiscordIDRequest(buffer_arg) {
+  return v1_store_pb.GetTodaysStoresByDiscordIDRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_GetTodaysStoresByDiscordIDResponse(arg) {
+  if (!(arg instanceof v1_store_pb.GetTodaysStoresByDiscordIDResponse)) {
+    throw new Error('Expected argument of type GetTodaysStoresByDiscordIDResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_GetTodaysStoresByDiscordIDResponse(buffer_arg) {
+  return v1_store_pb.GetTodaysStoresByDiscordIDResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_GetWavFromTextRequest(arg) {
   if (!(arg instanceof v1_voicevox_pb.GetWavFromTextRequest)) {
     throw new Error('Expected argument of type GetWavFromTextRequest');
@@ -164,6 +232,28 @@ function deserialize_SendOpenAIMessageResponse(buffer_arg) {
   return v1_openai_pb.SendOpenAIMessageResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
+function serialize_SetBoScriptRequest(arg) {
+  if (!(arg instanceof v1_bo_pb.SetBoScriptRequest)) {
+    throw new Error('Expected argument of type SetBoScriptRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_SetBoScriptRequest(buffer_arg) {
+  return v1_bo_pb.SetBoScriptRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_SetBoScriptResponse(arg) {
+  if (!(arg instanceof v1_bo_pb.SetBoScriptResponse)) {
+    throw new Error('Expected argument of type SetBoScriptResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_SetBoScriptResponse(buffer_arg) {
+  return v1_bo_pb.SetBoScriptResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
 function serialize_SetPlayerRequest(arg) {
   if (!(arg instanceof v1_player_pb.SetPlayerRequest)) {
     throw new Error('Expected argument of type SetPlayerRequest');
@@ -184,6 +274,28 @@ function serialize_SetPlayerResponse(arg) {
 
 function deserialize_SetPlayerResponse(buffer_arg) {
   return v1_player_pb.SetPlayerResponse.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_SetStoreViewerRequest(arg) {
+  if (!(arg instanceof v1_store_pb.SetStoreViewerRequest)) {
+    throw new Error('Expected argument of type SetStoreViewerRequest');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_SetStoreViewerRequest(buffer_arg) {
+  return v1_store_pb.SetStoreViewerRequest.deserializeBinary(new Uint8Array(buffer_arg));
+}
+
+function serialize_SetStoreViewerResponse(arg) {
+  if (!(arg instanceof v1_store_pb.SetStoreViewerResponse)) {
+    throw new Error('Expected argument of type SetStoreViewerResponse');
+  }
+  return Buffer.from(arg.serializeBinary());
+}
+
+function deserialize_SetStoreViewerResponse(buffer_arg) {
+  return v1_store_pb.SetStoreViewerResponse.deserializeBinary(new Uint8Array(buffer_arg));
 }
 
 function serialize_UpdatePlayerRequest(arg) {
@@ -308,6 +420,61 @@ var GrapevineerService = exports.GrapevineerService = {
     requestDeserialize: deserialize_GetWavFromTextRequest,
     responseSerialize: serialize_GetWavFromTextResponse,
     responseDeserialize: deserialize_GetWavFromTextResponse,
+  },
+  setBoScript: {
+    path: '/grapevineer.Grapevineer/SetBoScript',
+    requestStream: false,
+    responseStream: false,
+    requestType: v1_bo_pb.SetBoScriptRequest,
+    responseType: v1_bo_pb.SetBoScriptResponse,
+    requestSerialize: serialize_SetBoScriptRequest,
+    requestDeserialize: deserialize_SetBoScriptRequest,
+    responseSerialize: serialize_SetBoScriptResponse,
+    responseDeserialize: deserialize_SetBoScriptResponse,
+  },
+  getBoScriptRandomly: {
+    path: '/grapevineer.Grapevineer/GetBoScriptRandomly',
+    requestStream: false,
+    responseStream: false,
+    requestType: v1_bo_pb.GetBoScriptRandomlyRequest,
+    responseType: v1_bo_pb.GetBoScriptRandomlyResponse,
+    requestSerialize: serialize_GetBoScriptRandomlyRequest,
+    requestDeserialize: deserialize_GetBoScriptRandomlyRequest,
+    responseSerialize: serialize_GetBoScriptRandomlyResponse,
+    responseDeserialize: deserialize_GetBoScriptRandomlyResponse,
+  },
+  getTodaysStore: {
+    path: '/grapevineer.Grapevineer/GetTodaysStore',
+    requestStream: false,
+    responseStream: false,
+    requestType: v1_store_pb.GetTodaysStoreRequest,
+    responseType: v1_store_pb.GetTodaysStoreResponse,
+    requestSerialize: serialize_GetTodaysStoreRequest,
+    requestDeserialize: deserialize_GetTodaysStoreRequest,
+    responseSerialize: serialize_GetTodaysStoreResponse,
+    responseDeserialize: deserialize_GetTodaysStoreResponse,
+  },
+  getTodaysStoresByDiscordID: {
+    path: '/grapevineer.Grapevineer/GetTodaysStoresByDiscordID',
+    requestStream: false,
+    responseStream: false,
+    requestType: v1_store_pb.GetTodaysStoresByDiscordIDRequest,
+    responseType: v1_store_pb.GetTodaysStoresByDiscordIDResponse,
+    requestSerialize: serialize_GetTodaysStoresByDiscordIDRequest,
+    requestDeserialize: deserialize_GetTodaysStoresByDiscordIDRequest,
+    responseSerialize: serialize_GetTodaysStoresByDiscordIDResponse,
+    responseDeserialize: deserialize_GetTodaysStoresByDiscordIDResponse,
+  },
+  setStoreViewer: {
+    path: '/grapevineer.Grapevineer/SetStoreViewer',
+    requestStream: false,
+    responseStream: false,
+    requestType: v1_store_pb.SetStoreViewerRequest,
+    responseType: v1_store_pb.SetStoreViewerResponse,
+    requestSerialize: serialize_SetStoreViewerRequest,
+    requestDeserialize: deserialize_SetStoreViewerRequest,
+    responseSerialize: serialize_SetStoreViewerResponse,
+    responseDeserialize: deserialize_SetStoreViewerResponse,
   },
 };
 

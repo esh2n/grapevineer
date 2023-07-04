@@ -3,14 +3,22 @@
 package ent
 
 import (
+	"esh2n/grapevineer/ent/bo"
 	"esh2n/grapevineer/ent/player"
 	"esh2n/grapevineer/ent/schema"
+	"esh2n/grapevineer/ent/storeviewer"
 )
 
 // The init function reads all schema descriptors with runtime code
 // (default values, validators, hooks and policies) and stitches it
 // to their package variables.
 func init() {
+	boFields := schema.Bo{}.Fields()
+	_ = boFields
+	// boDescScript is the schema descriptor for script field.
+	boDescScript := boFields[1].Descriptor()
+	// bo.ScriptValidator is a validator for the "script" field. It is called by the builders before save.
+	bo.ScriptValidator = boDescScript.Validators[0].(func(string) error)
 	playerFields := schema.Player{}.Fields()
 	_ = playerFields
 	// playerDescPlayerID is the schema descriptor for player_id field.
@@ -27,4 +35,18 @@ func init() {
 	player.DefaultRegion = playerDescRegion.Default.(string)
 	// player.RegionValidator is a validator for the "region" field. It is called by the builders before save.
 	player.RegionValidator = playerDescRegion.Validators[0].(func(string) error)
+	storeviewerFields := schema.StoreViewer{}.Fields()
+	_ = storeviewerFields
+	// storeviewerDescPlayerID is the schema descriptor for player_id field.
+	storeviewerDescPlayerID := storeviewerFields[1].Descriptor()
+	// storeviewer.PlayerIDValidator is a validator for the "player_id" field. It is called by the builders before save.
+	storeviewer.PlayerIDValidator = storeviewerDescPlayerID.Validators[0].(func(string) error)
+	// storeviewerDescToken is the schema descriptor for token field.
+	storeviewerDescToken := storeviewerFields[2].Descriptor()
+	// storeviewer.TokenValidator is a validator for the "token" field. It is called by the builders before save.
+	storeviewer.TokenValidator = storeviewerDescToken.Validators[0].(func(string) error)
+	// storeviewerDescDiscordID is the schema descriptor for discord_id field.
+	storeviewerDescDiscordID := storeviewerFields[3].Descriptor()
+	// storeviewer.DiscordIDValidator is a validator for the "discord_id" field. It is called by the builders before save.
+	storeviewer.DiscordIDValidator = storeviewerDescDiscordID.Validators[0].(func(string) error)
 }
