@@ -126,11 +126,18 @@ func (c *Client) Tx(ctx context.Context) (*Tx, error) {
 	cfg := c.config
 	cfg.driver = tx
 	return &Tx{
+<<<<<<< HEAD
 		ctx:         ctx,
 		config:      cfg,
 		Bo:          NewBoClient(cfg),
 		Player:      NewPlayerClient(cfg),
 		StoreViewer: NewStoreViewerClient(cfg),
+=======
+		ctx:    ctx,
+		config: cfg,
+		Bo:     NewBoClient(cfg),
+		Player: NewPlayerClient(cfg),
+>>>>>>> main
 	}, nil
 }
 
@@ -148,11 +155,18 @@ func (c *Client) BeginTx(ctx context.Context, opts *sql.TxOptions) (*Tx, error) 
 	cfg := c.config
 	cfg.driver = &txDriver{tx: tx, drv: c.driver}
 	return &Tx{
+<<<<<<< HEAD
 		ctx:         ctx,
 		config:      cfg,
 		Bo:          NewBoClient(cfg),
 		Player:      NewPlayerClient(cfg),
 		StoreViewer: NewStoreViewerClient(cfg),
+=======
+		ctx:    ctx,
+		config: cfg,
+		Bo:     NewBoClient(cfg),
+		Player: NewPlayerClient(cfg),
+>>>>>>> main
 	}, nil
 }
 
@@ -565,9 +579,16 @@ func (c *StoreViewerClient) mutate(ctx context.Context, m *StoreViewerMutation) 
 // hooks and interceptors per client, for fast access.
 type (
 	hooks struct {
+<<<<<<< HEAD
 		Bo, Player, StoreViewer []ent.Hook
 	}
 	inters struct {
 		Bo, Player, StoreViewer []ent.Interceptor
+=======
+		Bo, Player []ent.Hook
+	}
+	inters struct {
+		Bo, Player []ent.Interceptor
+>>>>>>> main
 	}
 )

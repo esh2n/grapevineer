@@ -25,9 +25,14 @@ const (
 	OpUpdateOne = ent.OpUpdateOne
 
 	// Node types.
+<<<<<<< HEAD
 	TypeBo          = "Bo"
 	TypePlayer      = "Player"
 	TypeStoreViewer = "StoreViewer"
+=======
+	TypeBo     = "Bo"
+	TypePlayer = "Player"
+>>>>>>> main
 )
 
 // BoMutation represents an operation that mutates the Bo nodes in the graph.
