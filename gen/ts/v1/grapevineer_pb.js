@@ -35,5 +35,7 @@ var v1_line_pb = require('../v1/line_pb.js');
 goog.object.extend(proto, v1_line_pb);
 var v1_openai_pb = require('../v1/openai_pb.js');
 goog.object.extend(proto, v1_openai_pb);
+var v1_store_pb = require('../v1/store_pb.js');
+goog.object.extend(proto, v1_store_pb);
 var v1_voicevox_pb = require('../v1/voicevox_pb.js');
 goog.object.extend(proto, v1_voicevox_pb);

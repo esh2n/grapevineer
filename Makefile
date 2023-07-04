@@ -1,7 +1,7 @@
 .PHONY: gen-proto
 
 BIN := $(abspath ./bin)
-TAG := v1.1.1
+TAG := v1.2.0
 
 go-build:
 	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o grapevineer-grpc cmd/grapevineer-grpc/main.go cmd/grapevineer-grpc/wire_gen.go
@@ -101,6 +101,7 @@ endif
 	./script/deploy-grpc.sh
 	./script/deploy-grpc-gateway.sh
 
+# go run -mod=mod entgo.io/ent/cmd/ent new User
 generate-ent:
 	go generate ./ent
 

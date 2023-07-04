@@ -9,6 +9,7 @@ import (
 	grapevineer "esh2n/grapevineer/gen/go/v1"
 	"esh2n/grapevineer/internal/config"
 	"esh2n/grapevineer/internal/database"
+	"esh2n/grapevineer/internal/valorant"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -56,21 +57,28 @@ type GrapevineerService interface {
 
 	// voicevox
 	GetWavFromText(ctx context.Context, req *grapevineer.GetWavFromTextRequest) (*grapevineer.GetWavFromTextResponse, error)
+
+	// store
+	GetTodaysStore(ctx context.Context, req *grapevineer.GetTodaysStoreRequest) (*grapevineer.GetTodaysStoreResponse, error)
+	GetTodaysStoresByDiscordID(ctx context.Context, req *grapevineer.GetTodaysStoresByDiscordIDRequest) (*grapevineer.GetTodaysStoresByDiscordIDResponse, error)
+	SetStoreViewer(ctx context.Context, req *grapevineer.SetStoreViewerRequest) (*grapevineer.SetStoreViewerResponse, error)
 }
 
 type grapevineerService struct {
-	cfg              config.Config
-	db               *database.Database
-	playerRepository repository.PlayerRepository
-	boRepository     repository.BoRepository
+	cfg                   config.Config
+	db                    *database.Database
+	playerRepository      repository.PlayerRepository
+	boRepository          repository.BoRepository
+	storeViewerRepository repository.StoreViewerRepository
 }
 
-func NewGrapevineerService(cfg config.Config, db *database.Database, playerRepository repository.PlayerRepository, boRepository repository.BoRepository) GrapevineerService {
+func NewGrapevineerService(cfg config.Config, db *database.Database, playerRepository repository.PlayerRepository, boRepository repository.BoRepository, storeViewerRepository repository.StoreViewerRepository) GrapevineerService {
 	return &grapevineerService{
-		cfg:              cfg,
-		db:               db,
-		playerRepository: playerRepository,
-		boRepository:     boRepository,
+		cfg:                   cfg,
+		db:                    db,
+		playerRepository:      playerRepository,
+		boRepository:          boRepository,
+		storeViewerRepository: storeViewerRepository,
 	}
 }
 
@@ -554,5 +562,109 @@ func (s *grapevineerService) GetBoScriptRandomly(ctx context.Context, req *grape
 	return &grapevineer.GetBoScriptRandomlyResponse{
 		BoId:   bo.ID,
 		Script: bo.Script,
+	}, nil
+}
+
+func (s *grapevineerService) GetTodaysStore(ctx context.Context, req *grapevineer.GetTodaysStoreRequest) (*grapevineer.GetTodaysStoreResponse, error) {
+	returnedSkins, _, err := getSkinsFromAuthInfo(req.Id, req.Password)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to get skins: %v", err)
+	}
+	return &grapevineer.GetTodaysStoreResponse{
+		Status: 200,
+		Skins:  returnedSkins,
+	}, nil
+}
+
+func (s *grapevineerService) GetTodaysStoresByDiscordID(ctx context.Context, req *grapevineer.GetTodaysStoresByDiscordIDRequest) (*grapevineer.GetTodaysStoresByDiscordIDResponse, error) {
+	svs, err := s.storeViewerRepository.FindAllByDiscordID(ctx, s.db, req.DiscordId)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to get store viewers: %v", err)
+	}
+
+	var multiaccountSkins []*grapevineer.MultiAccountSkins
+	for _, sv := range svs {
+		returnedSkins, userInfo, err := getSkinsFromAuthInfo(sv.PlayerID, sv.Token)
+		if err != nil {
+			return nil, status.Errorf(codes.Internal, "failed to get skins: %v", err)
+		}
+		multiaccountSkins = append(multiaccountSkins, &grapevineer.MultiAccountSkins{
+			Skins:      returnedSkins,
+			PlayerName: userInfo.Username,
+		})
+	}
+	return &grapevineer.GetTodaysStoresByDiscordIDResponse{
+		Status:            200,
+		MultiaccountSkins: multiaccountSkins,
+	}, nil
+}
+
+func getSkinsFromAuthInfo(name, token string) ([]*grapevineer.Skin, *valorant.UserInfo, error) {
+	valorant.RiotUserAgent, _ = valorant.GetUserAgent()
+
+	proxyUrl, _ := url.Parse("http://user:pass@ip:port")
+	client := valorant.New(proxyUrl)
+
+	data, err := client.Authorize(name, token)
+	if err != nil {
+		return nil, nil, status.Errorf(codes.Internal, "failed to authorize: %v", err)
+	}
+	rso := data.AccessToken
+	ent, err := valorant.GetEntitlements(rso)
+	if err != nil {
+		return nil, nil, status.Errorf(codes.Internal, "failed to get entitlements: %v", err)
+	}
+	user, err := valorant.GetUserInfo(rso)
+	if err != nil {
+		return nil, nil, status.Errorf(codes.Internal, "failed to get user info: %v", err)
+	}
+	userInfo, err := valorant.GetUserInfo(rso)
+	if err != nil {
+		return nil, nil, status.Errorf(codes.Internal, "failed to get user info: %v", err)
+	}
+	shop, err := valorant.GetShop(user.Puuid, rso, ent)
+	if err != nil {
+		return nil, nil, status.Errorf(codes.Internal, "failed to get shop: %v", err)
+	}
+	weapons, err := valorant.GetSkinList("ja-JP")
+	if err != nil {
+		return nil, nil, status.Errorf(codes.Internal, "failed to get skin list: %v", err)
+	}
+	skins, err := valorant.GetSkinsFromUUIDs(shop.SkinsPanelLayout.SingleItemOffers, weapons)
+	if err != nil {
+		return nil, nil, status.Errorf(codes.Internal, "failed to get skins: %v", err)
+	}
+	var returnedSkins []*grapevineer.Skin
+	for _, skin := range skins {
+		dto, err := skin.ToDTO()
+		if err != nil {
+			return nil, nil, status.Errorf(codes.Internal, "failed to convert skin to DTO: %v", err)
+		}
+		returnedSkins = append(returnedSkins, &grapevineer.Skin{
+			Uuid:        dto.UUID,
+			DisplayName: dto.DisplayName,
+			DisplayIcon: dto.DisplayIcon,
+			Tier: &grapevineer.Tier{
+				Uuid:      dto.Tier.UUID,
+				ColorCode: dto.Tier.ColorCode,
+				Value:     int32(dto.Tier.TierNum),
+			},
+		})
+	}
+	return returnedSkins, userInfo, nil
+}
+
+func (s *grapevineerService) SetStoreViewer(ctx context.Context, req *grapevineer.SetStoreViewerRequest) (*grapevineer.SetStoreViewerResponse, error) {
+	storeViewer := &model.StoreViewer{
+		ID:        uuid.New().String(),
+		DiscordID: req.DiscordId,
+		PlayerID:  req.PlayerId,
+		Token:     req.Token,
+	}
+	if _, err := s.storeViewerRepository.CreateStoreViewer(ctx, s.db, storeViewer); err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to create store viewer: %v", err)
+	}
+	return &grapevineer.SetStoreViewerResponse{
+		Status: 200,
 	}, nil
 }

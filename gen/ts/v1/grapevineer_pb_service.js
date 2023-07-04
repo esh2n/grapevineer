@@ -8,6 +8,7 @@ var v1_og_image_pb = require("../v1/og_image_pb");
 var v1_flower_meaning_pb = require("../v1/flower_meaning_pb");
 var v1_line_pb = require("../v1/line_pb");
 var v1_openai_pb = require("../v1/openai_pb");
+var v1_store_pb = require("../v1/store_pb");
 var v1_voicevox_pb = require("../v1/voicevox_pb");
 var grpc = require("@improbable-eng/grpc-web").grpc;
 
@@ -114,6 +115,33 @@ Grapevineer.GetBoScriptRandomly = {
   responseStream: false,
   requestType: v1_bo_pb.GetBoScriptRandomlyRequest,
   responseType: v1_bo_pb.GetBoScriptRandomlyResponse
+};
+
+Grapevineer.GetTodaysStore = {
+  methodName: "GetTodaysStore",
+  service: Grapevineer,
+  requestStream: false,
+  responseStream: false,
+  requestType: v1_store_pb.GetTodaysStoreRequest,
+  responseType: v1_store_pb.GetTodaysStoreResponse
+};
+
+Grapevineer.GetTodaysStoresByDiscordID = {
+  methodName: "GetTodaysStoresByDiscordID",
+  service: Grapevineer,
+  requestStream: false,
+  responseStream: false,
+  requestType: v1_store_pb.GetTodaysStoresByDiscordIDRequest,
+  responseType: v1_store_pb.GetTodaysStoresByDiscordIDResponse
+};
+
+Grapevineer.SetStoreViewer = {
+  methodName: "SetStoreViewer",
+  service: Grapevineer,
+  requestStream: false,
+  responseStream: false,
+  requestType: v1_store_pb.SetStoreViewerRequest,
+  responseType: v1_store_pb.SetStoreViewerResponse
 };
 
 exports.Grapevineer = Grapevineer;
@@ -438,6 +466,99 @@ GrapevineerClient.prototype.getBoScriptRandomly = function getBoScriptRandomly(r
     callback = arguments[1];
   }
   var client = grpc.unary(Grapevineer.GetBoScriptRandomly, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrapevineerClient.prototype.getTodaysStore = function getTodaysStore(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(Grapevineer.GetTodaysStore, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrapevineerClient.prototype.getTodaysStoresByDiscordID = function getTodaysStoresByDiscordID(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(Grapevineer.GetTodaysStoresByDiscordID, {
+    request: requestMessage,
+    host: this.serviceHost,
+    metadata: metadata,
+    transport: this.options.transport,
+    debug: this.options.debug,
+    onEnd: function (response) {
+      if (callback) {
+        if (response.status !== grpc.Code.OK) {
+          var err = new Error(response.statusMessage);
+          err.code = response.status;
+          err.metadata = response.trailers;
+          callback(err, null);
+        } else {
+          callback(null, response.message);
+        }
+      }
+    }
+  });
+  return {
+    cancel: function () {
+      callback = null;
+      client.close();
+    }
+  };
+};
+
+GrapevineerClient.prototype.setStoreViewer = function setStoreViewer(requestMessage, metadata, callback) {
+  if (arguments.length === 2) {
+    callback = arguments[1];
+  }
+  var client = grpc.unary(Grapevineer.SetStoreViewer, {
     request: requestMessage,
     host: this.serviceHost,
     metadata: metadata,

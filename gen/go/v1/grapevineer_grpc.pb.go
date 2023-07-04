@@ -19,17 +19,20 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Grapevineer_GetOGImage_FullMethodName             = "/grapevineer.Grapevineer/GetOGImage"
-	Grapevineer_GetFlowerMeaningByDate_FullMethodName = "/grapevineer.Grapevineer/GetFlowerMeaningByDate"
-	Grapevineer_SendLineMessage_FullMethodName        = "/grapevineer.Grapevineer/SendLineMessage"
-	Grapevineer_SendOpenAIMessage_FullMethodName      = "/grapevineer.Grapevineer/SendOpenAIMessage"
-	Grapevineer_SetPlayer_FullMethodName              = "/grapevineer.Grapevineer/SetPlayer"
-	Grapevineer_GetAllPlayers_FullMethodName          = "/grapevineer.Grapevineer/GetAllPlayers"
-	Grapevineer_UpdatePlayer_FullMethodName           = "/grapevineer.Grapevineer/UpdatePlayer"
-	Grapevineer_GetPlayerInfo_FullMethodName          = "/grapevineer.Grapevineer/GetPlayerInfo"
-	Grapevineer_GetWavFromText_FullMethodName         = "/grapevineer.Grapevineer/GetWavFromText"
-	Grapevineer_SetBoScript_FullMethodName            = "/grapevineer.Grapevineer/SetBoScript"
-	Grapevineer_GetBoScriptRandomly_FullMethodName    = "/grapevineer.Grapevineer/GetBoScriptRandomly"
+	Grapevineer_GetOGImage_FullMethodName                 = "/grapevineer.Grapevineer/GetOGImage"
+	Grapevineer_GetFlowerMeaningByDate_FullMethodName     = "/grapevineer.Grapevineer/GetFlowerMeaningByDate"
+	Grapevineer_SendLineMessage_FullMethodName            = "/grapevineer.Grapevineer/SendLineMessage"
+	Grapevineer_SendOpenAIMessage_FullMethodName          = "/grapevineer.Grapevineer/SendOpenAIMessage"
+	Grapevineer_SetPlayer_FullMethodName                  = "/grapevineer.Grapevineer/SetPlayer"
+	Grapevineer_GetAllPlayers_FullMethodName              = "/grapevineer.Grapevineer/GetAllPlayers"
+	Grapevineer_UpdatePlayer_FullMethodName               = "/grapevineer.Grapevineer/UpdatePlayer"
+	Grapevineer_GetPlayerInfo_FullMethodName              = "/grapevineer.Grapevineer/GetPlayerInfo"
+	Grapevineer_GetWavFromText_FullMethodName             = "/grapevineer.Grapevineer/GetWavFromText"
+	Grapevineer_SetBoScript_FullMethodName                = "/grapevineer.Grapevineer/SetBoScript"
+	Grapevineer_GetBoScriptRandomly_FullMethodName        = "/grapevineer.Grapevineer/GetBoScriptRandomly"
+	Grapevineer_GetTodaysStore_FullMethodName             = "/grapevineer.Grapevineer/GetTodaysStore"
+	Grapevineer_GetTodaysStoresByDiscordID_FullMethodName = "/grapevineer.Grapevineer/GetTodaysStoresByDiscordID"
+	Grapevineer_SetStoreViewer_FullMethodName             = "/grapevineer.Grapevineer/SetStoreViewer"
 )
 
 // GrapevineerClient is the client API for Grapevineer service.
@@ -47,6 +50,9 @@ type GrapevineerClient interface {
 	GetWavFromText(ctx context.Context, in *GetWavFromTextRequest, opts ...grpc.CallOption) (*GetWavFromTextResponse, error)
 	SetBoScript(ctx context.Context, in *SetBoScriptRequest, opts ...grpc.CallOption) (*SetBoScriptResponse, error)
 	GetBoScriptRandomly(ctx context.Context, in *GetBoScriptRandomlyRequest, opts ...grpc.CallOption) (*GetBoScriptRandomlyResponse, error)
+	GetTodaysStore(ctx context.Context, in *GetTodaysStoreRequest, opts ...grpc.CallOption) (*GetTodaysStoreResponse, error)
+	GetTodaysStoresByDiscordID(ctx context.Context, in *GetTodaysStoresByDiscordIDRequest, opts ...grpc.CallOption) (*GetTodaysStoresByDiscordIDResponse, error)
+	SetStoreViewer(ctx context.Context, in *SetStoreViewerRequest, opts ...grpc.CallOption) (*SetStoreViewerResponse, error)
 }
 
 type grapevineerClient struct {
@@ -156,6 +162,33 @@ func (c *grapevineerClient) GetBoScriptRandomly(ctx context.Context, in *GetBoSc
 	return out, nil
 }
 
+func (c *grapevineerClient) GetTodaysStore(ctx context.Context, in *GetTodaysStoreRequest, opts ...grpc.CallOption) (*GetTodaysStoreResponse, error) {
+	out := new(GetTodaysStoreResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_GetTodaysStore_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *grapevineerClient) GetTodaysStoresByDiscordID(ctx context.Context, in *GetTodaysStoresByDiscordIDRequest, opts ...grpc.CallOption) (*GetTodaysStoresByDiscordIDResponse, error) {
+	out := new(GetTodaysStoresByDiscordIDResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_GetTodaysStoresByDiscordID_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *grapevineerClient) SetStoreViewer(ctx context.Context, in *SetStoreViewerRequest, opts ...grpc.CallOption) (*SetStoreViewerResponse, error) {
+	out := new(SetStoreViewerResponse)
+	err := c.cc.Invoke(ctx, Grapevineer_SetStoreViewer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GrapevineerServer is the server API for Grapevineer service.
 // All implementations must embed UnimplementedGrapevineerServer
 // for forward compatibility
@@ -171,6 +204,9 @@ type GrapevineerServer interface {
 	GetWavFromText(context.Context, *GetWavFromTextRequest) (*GetWavFromTextResponse, error)
 	SetBoScript(context.Context, *SetBoScriptRequest) (*SetBoScriptResponse, error)
 	GetBoScriptRandomly(context.Context, *GetBoScriptRandomlyRequest) (*GetBoScriptRandomlyResponse, error)
+	GetTodaysStore(context.Context, *GetTodaysStoreRequest) (*GetTodaysStoreResponse, error)
+	GetTodaysStoresByDiscordID(context.Context, *GetTodaysStoresByDiscordIDRequest) (*GetTodaysStoresByDiscordIDResponse, error)
+	SetStoreViewer(context.Context, *SetStoreViewerRequest) (*SetStoreViewerResponse, error)
 	mustEmbedUnimplementedGrapevineerServer()
 }
 
@@ -210,6 +246,15 @@ func (UnimplementedGrapevineerServer) SetBoScript(context.Context, *SetBoScriptR
 }
 func (UnimplementedGrapevineerServer) GetBoScriptRandomly(context.Context, *GetBoScriptRandomlyRequest) (*GetBoScriptRandomlyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBoScriptRandomly not implemented")
+}
+func (UnimplementedGrapevineerServer) GetTodaysStore(context.Context, *GetTodaysStoreRequest) (*GetTodaysStoreResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTodaysStore not implemented")
+}
+func (UnimplementedGrapevineerServer) GetTodaysStoresByDiscordID(context.Context, *GetTodaysStoresByDiscordIDRequest) (*GetTodaysStoresByDiscordIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTodaysStoresByDiscordID not implemented")
+}
+func (UnimplementedGrapevineerServer) SetStoreViewer(context.Context, *SetStoreViewerRequest) (*SetStoreViewerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetStoreViewer not implemented")
 }
 func (UnimplementedGrapevineerServer) mustEmbedUnimplementedGrapevineerServer() {}
 
@@ -422,6 +467,60 @@ func _Grapevineer_GetBoScriptRandomly_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Grapevineer_GetTodaysStore_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTodaysStoreRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).GetTodaysStore(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_GetTodaysStore_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).GetTodaysStore(ctx, req.(*GetTodaysStoreRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Grapevineer_GetTodaysStoresByDiscordID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTodaysStoresByDiscordIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).GetTodaysStoresByDiscordID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_GetTodaysStoresByDiscordID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).GetTodaysStoresByDiscordID(ctx, req.(*GetTodaysStoresByDiscordIDRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Grapevineer_SetStoreViewer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetStoreViewerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GrapevineerServer).SetStoreViewer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Grapevineer_SetStoreViewer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GrapevineerServer).SetStoreViewer(ctx, req.(*SetStoreViewerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Grapevineer_ServiceDesc is the grpc.ServiceDesc for Grapevineer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -472,6 +571,18 @@ var Grapevineer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBoScriptRandomly",
 			Handler:    _Grapevineer_GetBoScriptRandomly_Handler,
+		},
+		{
+			MethodName: "GetTodaysStore",
+			Handler:    _Grapevineer_GetTodaysStore_Handler,
+		},
+		{
+			MethodName: "GetTodaysStoresByDiscordID",
+			Handler:    _Grapevineer_GetTodaysStoresByDiscordID_Handler,
+		},
+		{
+			MethodName: "SetStoreViewer",
+			Handler:    _Grapevineer_SetStoreViewer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

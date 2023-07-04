@@ -16,6 +16,8 @@ type Tx struct {
 	Bo *BoClient
 	// Player is the client for interacting with the Player builders.
 	Player *PlayerClient
+	// StoreViewer is the client for interacting with the StoreViewer builders.
+	StoreViewer *StoreViewerClient
 
 	// lazily loaded.
 	client     *Client
@@ -149,6 +151,7 @@ func (tx *Tx) Client() *Client {
 func (tx *Tx) init() {
 	tx.Bo = NewBoClient(tx.config)
 	tx.Player = NewPlayerClient(tx.config)
+	tx.StoreViewer = NewStoreViewerClient(tx.config)
 }
 
 // txDriver wraps the given dialect.Tx with a nop dialect.Driver implementation.

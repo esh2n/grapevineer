@@ -32,6 +32,18 @@ func (f PlayerFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, erro
 	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.PlayerMutation", m)
 }
 
+// The StoreViewerFunc type is an adapter to allow the use of ordinary
+// function as StoreViewer mutator.
+type StoreViewerFunc func(context.Context, *ent.StoreViewerMutation) (ent.Value, error)
+
+// Mutate calls f(ctx, m).
+func (f StoreViewerFunc) Mutate(ctx context.Context, m ent.Mutation) (ent.Value, error) {
+	if mv, ok := m.(*ent.StoreViewerMutation); ok {
+		return f(ctx, mv)
+	}
+	return nil, fmt.Errorf("unexpected mutation type %T. expect *ent.StoreViewerMutation", m)
+}
+
 // Condition is a hook condition function.
 type Condition func(context.Context, ent.Mutation) bool
 

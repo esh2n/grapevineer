@@ -17,6 +17,7 @@ import 'openai.pb.dart' as $3;
 import 'player.pb.dart' as $4;
 import 'voicevox.pb.dart' as $5;
 import 'bo.pb.dart' as $6;
+import 'store.pb.dart' as $7;
 export 'grapevineer.pb.dart';
 
 class GrapevineerClient extends $grpc.Client {
@@ -86,6 +87,25 @@ class GrapevineerClient extends $grpc.Client {
       ($6.GetBoScriptRandomlyRequest value) => value.writeToBuffer(),
       ($core.List<$core.int> value) =>
           $6.GetBoScriptRandomlyResponse.fromBuffer(value));
+  static final _$getTodaysStore =
+      $grpc.ClientMethod<$7.GetTodaysStoreRequest, $7.GetTodaysStoreResponse>(
+          '/grapevineer.Grapevineer/GetTodaysStore',
+          ($7.GetTodaysStoreRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $7.GetTodaysStoreResponse.fromBuffer(value));
+  static final _$getTodaysStoresByDiscordID = $grpc.ClientMethod<
+          $7.GetTodaysStoresByDiscordIDRequest,
+          $7.GetTodaysStoresByDiscordIDResponse>(
+      '/grapevineer.Grapevineer/GetTodaysStoresByDiscordID',
+      ($7.GetTodaysStoresByDiscordIDRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $7.GetTodaysStoresByDiscordIDResponse.fromBuffer(value));
+  static final _$setStoreViewer =
+      $grpc.ClientMethod<$7.SetStoreViewerRequest, $7.SetStoreViewerResponse>(
+          '/grapevineer.Grapevineer/SetStoreViewer',
+          ($7.SetStoreViewerRequest value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) =>
+              $7.SetStoreViewerResponse.fromBuffer(value));
 
   GrapevineerClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -157,6 +177,25 @@ class GrapevineerClient extends $grpc.Client {
       $6.GetBoScriptRandomlyRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getBoScriptRandomly, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$7.GetTodaysStoreResponse> getTodaysStore(
+      $7.GetTodaysStoreRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getTodaysStore, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$7.GetTodaysStoresByDiscordIDResponse>
+      getTodaysStoresByDiscordID($7.GetTodaysStoresByDiscordIDRequest request,
+          {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getTodaysStoresByDiscordID, request,
+        options: options);
+  }
+
+  $grpc.ResponseFuture<$7.SetStoreViewerResponse> setStoreViewer(
+      $7.SetStoreViewerRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$setStoreViewer, request, options: options);
   }
 }
 
@@ -259,6 +298,34 @@ abstract class GrapevineerServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $6.GetBoScriptRandomlyRequest.fromBuffer(value),
         ($6.GetBoScriptRandomlyResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$7.GetTodaysStoreRequest,
+            $7.GetTodaysStoreResponse>(
+        'GetTodaysStore',
+        getTodaysStore_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $7.GetTodaysStoreRequest.fromBuffer(value),
+        ($7.GetTodaysStoreResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$7.GetTodaysStoresByDiscordIDRequest,
+            $7.GetTodaysStoresByDiscordIDResponse>(
+        'GetTodaysStoresByDiscordID',
+        getTodaysStoresByDiscordID_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $7.GetTodaysStoresByDiscordIDRequest.fromBuffer(value),
+        ($7.GetTodaysStoresByDiscordIDResponse value) =>
+            value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$7.SetStoreViewerRequest,
+            $7.SetStoreViewerResponse>(
+        'SetStoreViewer',
+        setStoreViewer_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $7.SetStoreViewerRequest.fromBuffer(value),
+        ($7.SetStoreViewerResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.GetOGImageResponse> getOGImage_Pre($grpc.ServiceCall call,
@@ -324,6 +391,24 @@ abstract class GrapevineerServiceBase extends $grpc.Service {
     return getBoScriptRandomly(call, await request);
   }
 
+  $async.Future<$7.GetTodaysStoreResponse> getTodaysStore_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$7.GetTodaysStoreRequest> request) async {
+    return getTodaysStore(call, await request);
+  }
+
+  $async.Future<$7.GetTodaysStoresByDiscordIDResponse>
+      getTodaysStoresByDiscordID_Pre($grpc.ServiceCall call,
+          $async.Future<$7.GetTodaysStoresByDiscordIDRequest> request) async {
+    return getTodaysStoresByDiscordID(call, await request);
+  }
+
+  $async.Future<$7.SetStoreViewerResponse> setStoreViewer_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$7.SetStoreViewerRequest> request) async {
+    return setStoreViewer(call, await request);
+  }
+
   $async.Future<$0.GetOGImageResponse> getOGImage(
       $grpc.ServiceCall call, $0.GetOGImageRequest request);
   $async.Future<$1.GetFlowerMeaningByDateResponse> getFlowerMeaningByDate(
@@ -346,4 +431,11 @@ abstract class GrapevineerServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $6.SetBoScriptRequest request);
   $async.Future<$6.GetBoScriptRandomlyResponse> getBoScriptRandomly(
       $grpc.ServiceCall call, $6.GetBoScriptRandomlyRequest request);
+  $async.Future<$7.GetTodaysStoreResponse> getTodaysStore(
+      $grpc.ServiceCall call, $7.GetTodaysStoreRequest request);
+  $async.Future<$7.GetTodaysStoresByDiscordIDResponse>
+      getTodaysStoresByDiscordID(
+          $grpc.ServiceCall call, $7.GetTodaysStoresByDiscordIDRequest request);
+  $async.Future<$7.SetStoreViewerResponse> setStoreViewer(
+      $grpc.ServiceCall call, $7.SetStoreViewerRequest request);
 }

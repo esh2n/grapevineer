@@ -17,3 +17,10 @@ CREATE TABLE IF NOT EXISTS bos (
   id uuid NOT NULL,
   script VARCHAR(255)
 );
+
+CREATE TABLE IF NOT EXISTS store_viewers (
+  id uuid NOT NULL,
+  player_id VARCHAR(255),
+  token VARCHAR(255),
+  discord_id VARCHAR(255)
+);

@@ -32,10 +32,24 @@ var (
 		Columns:    PlayersColumns,
 		PrimaryKey: []*schema.Column{PlayersColumns[0]},
 	}
+	// StoreViewersColumns holds the columns for the "store_viewers" table.
+	StoreViewersColumns = []*schema.Column{
+		{Name: "id", Type: field.TypeString, SchemaType: map[string]string{"postgres": "uuid"}},
+		{Name: "player_id", Type: field.TypeString},
+		{Name: "token", Type: field.TypeString},
+		{Name: "discord_id", Type: field.TypeString},
+	}
+	// StoreViewersTable holds the schema information for the "store_viewers" table.
+	StoreViewersTable = &schema.Table{
+		Name:       "store_viewers",
+		Columns:    StoreViewersColumns,
+		PrimaryKey: []*schema.Column{StoreViewersColumns[0]},
+	}
 	// Tables holds all the tables in the schema.
 	Tables = []*schema.Table{
 		BosTable,
 		PlayersTable,
+		StoreViewersTable,
 	}
 )
 

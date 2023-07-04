@@ -101,3 +101,27 @@ func (x *V1) SetBoScript(ctx context.Context, req *grapevineer.SetBoScriptReques
 		return got, nil
 	}
 }
+
+func (x *V1) GetTodaysStore(ctx context.Context, req *grapevineer.GetTodaysStoreRequest) (*grapevineer.GetTodaysStoreResponse, error) {
+	if got, err := x.app.GetTodaysStore(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}
+
+func (x *V1) GetTodaysStoresByDiscordID(ctx context.Context, req *grapevineer.GetTodaysStoresByDiscordIDRequest) (*grapevineer.GetTodaysStoresByDiscordIDResponse, error) {
+	if got, err := x.app.GetTodaysStoresByDiscordID(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}
+
+func (x *V1) SetStoreViewer(ctx context.Context, req *grapevineer.SetStoreViewerRequest) (*grapevineer.SetStoreViewerResponse, error) {
+	if got, err := x.app.SetStoreViewer(ctx, req); err != nil {
+		return nil, err
+	} else {
+		return got, nil
+	}
+}

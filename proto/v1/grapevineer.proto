@@ -10,6 +10,7 @@ import "v1/og_image.proto";
 import "v1/flower_meaning.proto";
 import "v1/line.proto";
 import "v1/openai.proto";
+import "v1/store.proto";
 import "v1/voicevox.proto";
 
 option go_package = "github.com/esh2n/grapevineer/gen/go/grapevineer";
@@ -68,6 +69,21 @@ service Grapevineer {
     rpc GetBoScriptRandomly(GetBoScriptRandomlyRequest) returns (GetBoScriptRandomlyResponse) {
         option (google.api.http) = {
             get: "/v1/bo_script"
+        };
+    }
+    rpc GetTodaysStore(GetTodaysStoreRequest) returns (GetTodaysStoreResponse) {
+        option (google.api.http) = {
+            get: "/v1/todays_store"
+        };
+    }
+    rpc GetTodaysStoresByDiscordID(GetTodaysStoresByDiscordIDRequest) returns (GetTodaysStoresByDiscordIDResponse) {
+        option (google.api.http) = {
+            get: "/v1/todays_stores"
+        };
+    }
+    rpc SetStoreViewer(SetStoreViewerRequest) returns (SetStoreViewerResponse) {
+        option (google.api.http) = {
+            post: "/v1/store_viewer"
         };
     }
 }
